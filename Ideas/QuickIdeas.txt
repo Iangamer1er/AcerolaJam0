@@ -1,0 +1,22 @@
+Game about being in old time warrior cult
+You want to get out of the cult but to get out you have to play a game with the head chief  
+You have been here before
+Your character only has one hand and there are only 3 fingers left on it
+The shief has huge bias when talking about the warrior god
+The chiaf also has huge negative bias when talking about the other god
+Both of these do not affect gameplay
+The game is some kind of table turn base rpg but the chief is the game master
+Fights are told and described by the chief
+You are your character
+The room is lit by candle
+One of them has a knife on top of it
+When you lose a fight the chief cuts one of the fingers with the knife
+Then your character is fully healed
+There is no visual indication for what remaining hp the ennemies have. Only the chief visually describe it
+You know your own health
+You can pray to the gods at some locations
+Praying to the other god restores health. This angers the Warrior god
+Praying to the warrior god gives boons
+You can find armor and weapons on some locations
+THIS IS A ROGUELIKE
+
