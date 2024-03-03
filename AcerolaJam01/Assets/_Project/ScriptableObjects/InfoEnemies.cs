@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Enemie", menuName = "Game Enemies")]
+[CreateAssetMenu(fileName = "Enemie", menuName = "Map/Enemies")]
 public class InfoEnemies : ScriptableObject
 {
     [Header("Infos")]
     [SerializeField] string eName = "";
+    [SerializeField, TextArea] string description = "";
 
     [SerializeField, Range(0, 1)] float armsMaxHealth = 1; 
     [SerializeField, Range(0, 1)] float armsHealthRatio = 0.2f;
