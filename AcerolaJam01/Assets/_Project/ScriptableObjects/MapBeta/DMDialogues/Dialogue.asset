@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   eName: 
-  dialogues: []
+  Act:
+  - dialogue:
+    - 
