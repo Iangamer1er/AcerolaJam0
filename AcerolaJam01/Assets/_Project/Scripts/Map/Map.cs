@@ -23,8 +23,10 @@ public class Map : ValidatedMonoBehaviour
 
     private void MakeMap(){
         for(int e = 0; e < maxTileHeight; e++){
-            if(!CalculateForkChance()) MakeTile(null);
-            currentTileHeight++;
+            if(!CalculateForkChance()){
+                MakeTile(null); 
+                currentTileHeight++;
+            } 
         }
     }
 
@@ -51,7 +53,6 @@ public class Map : ValidatedMonoBehaviour
 
     private bool CalculateForkChance(){
         if(!checkNbTiles()) return false;
-        currentNbForks++;
         int forkSplits = Random.Range(2, maxForkSplits);
         int randLenght = Random.Range(1, maxForkLength);
         int remainingTile = maxTileHeight - currentTileHeight;
@@ -66,6 +67,7 @@ public class Map : ValidatedMonoBehaviour
             }
             currentTileHeight++;
         }
+        currentNbForks++;
         return true;
     }
 
