@@ -13,11 +13,13 @@ public class Map : ValidatedMonoBehaviour
     [SerializeField, Range(2, 4)] int maxForkSplits = 3;
     [SerializeField, Range(1, 4)] int maxForkLength = 2;
     [SerializeField] GameObject tile;
+
+    public Dictionary<int, List<Tile>> tilesArrays 
+        {get; set;} = new Dictionary<int, List<Tile>>();
     
     private int currentTileHeight = 0;
     private int currentNbForks = 0;
     private int nbTiles = 0;
-    private List<Tile> previousTiles = new List<Tile>();
 
     private void Start() {
         MakeMap();
@@ -25,15 +27,14 @@ public class Map : ValidatedMonoBehaviour
 
     private void MakeMap(){
         for(int e = 0; e < maxTileHeight; e++){
-            previousTiles.Clear();
             if(!CalculateForkChance()){
-                MakeTile(null, null); 
+                MakeTile(null); 
                 currentTileHeight++;
             } 
         }
     }
 
-    private TileTypes MakeTile(List<TileTypes> currentlyUsed, Tile previousTile, Transform newFork = null){
+    private TileTypes MakeTile(List<TileTypes> currentlyUsed, Transform newFork = null, int posFork = 0){
         GameObject newTile = Instantiate(tile);
         List<TileTypes> possibilities = TileTypes.GetValues(typeof(TileTypes)).Cast<TileTypes>().ToList();
         if(currentlyUsed != null) possibilities = possibilities.Except(currentlyUsed).ToList();
@@ -41,7 +42,8 @@ public class Map : ValidatedMonoBehaviour
         Tile tileScript = newTile.AddComponent<Tile>();
         tileScript.height = currentTileHeight;
         string forkName = "";
-        if(newFork != null){
+        bool isInFork = newFork != null;
+        if(isInFork){
             newTile.transform.parent = newFork; 
             forkName = " Fork " + currentNbForks + " ";
         } 
@@ -51,9 +53,19 @@ public class Map : ValidatedMonoBehaviour
             "T" + nbTiles
         ;
         nbTiles++;
-        if(previousTile != null) previousTile.possiblePath.Add(tileScript);
-        previousTiles.Add(tileScript);
+        tilesArrays[currentTileHeight].Add(tileScript);
+        AddPossiblePath(tileScript, posFork, isInFork);
         return type;
+    }
+
+    private void AddPossiblePath(Tile tileScript, int posFork, bool isInFork = false){
+        if(currentTileHeight == 0) return;
+        if(isInFork) tilesArrays[currentTileHeight-1][posFork].possiblePath.Add(tileScript);
+        else{
+            for (int i = 0; i < tilesArrays[currentTileHeight-1].Count(); i++){
+                tilesArrays[currentTileHeight-1][i].possiblePath.Add(tileScript);
+            }
+        }
     }
 
     private bool CalculateForkChance(){
@@ -67,7 +79,7 @@ public class Map : ValidatedMonoBehaviour
         for(int e = 0; e < forkLenght; e++){
             List<TileTypes> currentlyUsed = new List<TileTypes>();
             for(int i = 0; i < forkSplits; i++){
-                currentlyUsed.Add(MakeTile(currentlyUsed, previousTiles[i], newFork.transform));
+                currentlyUsed.Add(MakeTile(currentlyUsed, newFork.transform));
                 nbTiles++;
             }
             currentTileHeight++;
