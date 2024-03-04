@@ -4,7 +4,7 @@
 o paum
 
 # material
-mtllib testHand-0-paum.mtl
+mtllib hand-0-paum.mtl
 usemtl palette
 
 # normals
