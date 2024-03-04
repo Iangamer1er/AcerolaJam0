@@ -53,6 +53,7 @@ public class Map : ValidatedMonoBehaviour
             "T" + nbTiles
         ;
         nbTiles++;
+        if(!tilesArrays.ContainsKey(currentTileHeight)) tilesArrays[currentTileHeight] = new List<Tile>();
         tilesArrays[currentTileHeight].Add(tileScript);
         AddPossiblePath(tileScript, posFork, isInFork);
         return type;
@@ -80,7 +81,6 @@ public class Map : ValidatedMonoBehaviour
             List<TileTypes> currentlyUsed = new List<TileTypes>();
             for(int i = 0; i < forkSplits; i++){
                 currentlyUsed.Add(MakeTile(currentlyUsed, newFork.transform));
-                nbTiles++;
             }
             currentTileHeight++;
         }
