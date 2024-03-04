@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using KBCore.Refs;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class Map : ValidatedMonoBehaviour
     private int currentTileHeight = 0;
     private int currentNbForks = 0;
     private int nbTiles = 0;
+    private List<Tile> previousTiles = new List<Tile>();
 
     private void Start() {
         MakeMap();
@@ -23,14 +25,15 @@ public class Map : ValidatedMonoBehaviour
 
     private void MakeMap(){
         for(int e = 0; e < maxTileHeight; e++){
+            previousTiles.Clear();
             if(!CalculateForkChance()){
-                MakeTile(null); 
+                MakeTile(null, null); 
                 currentTileHeight++;
             } 
         }
     }
 
-    private TileTypes MakeTile(List<TileTypes> currentlyUsed, Transform newFork = null){
+    private TileTypes MakeTile(List<TileTypes> currentlyUsed, Tile previousTile, Transform newFork = null){
         GameObject newTile = Instantiate(tile);
         List<TileTypes> possibilities = TileTypes.GetValues(typeof(TileTypes)).Cast<TileTypes>().ToList();
         if(currentlyUsed != null) possibilities = possibilities.Except(currentlyUsed).ToList();
@@ -48,6 +51,8 @@ public class Map : ValidatedMonoBehaviour
             "T" + nbTiles
         ;
         nbTiles++;
+        if(previousTile != null) previousTile.possiblePath.Add(tileScript);
+        previousTiles.Add(tileScript);
         return type;
     }
 
@@ -62,7 +67,7 @@ public class Map : ValidatedMonoBehaviour
         for(int e = 0; e < forkLenght; e++){
             List<TileTypes> currentlyUsed = new List<TileTypes>();
             for(int i = 0; i < forkSplits; i++){
-                currentlyUsed.Add(MakeTile(currentlyUsed, newFork.transform));
+                currentlyUsed.Add(MakeTile(currentlyUsed, previousTiles[i], newFork.transform));
                 nbTiles++;
             }
             currentTileHeight++;
