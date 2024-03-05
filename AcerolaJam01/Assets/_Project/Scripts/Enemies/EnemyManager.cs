@@ -7,16 +7,11 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public string altMapName = "Beta";
+    private EnemyBase currentState;
 
     private void Start() {
-        List<InfoEnemies> infos;
-        Debug.Log(GameManager.instance.level.ToString());
-        infos = ResoucesScript(GameManager.instance.level.ToString());
-        if(infos.Count == 0){
-            infos = ResoucesScript(altMapName);
-        }
-
-        Debug.Log(infos);
+        InfoEnemies info = ChoseEnemy();
+        Debug.Log(info);
     }
  
     private List<InfoEnemies> ResoucesScript(string mapNumber){
@@ -25,5 +20,19 @@ public class EnemyManager : MonoBehaviour
             mapNumber +
             "/Enemies"
         ).Cast<InfoEnemies>().ToList();
+    }
+
+    private InfoEnemies ChoseEnemy(){
+        List<InfoEnemies> infos;
+        infos = ResoucesScript(GameManager.instance.level.ToString());
+        if(infos.Count == 0){
+            infos = ResoucesScript(altMapName);
+        }
+        return infos[Random.Range(0, infos.Count)];
+    }
+
+    public void ChangeState(EnemyBase state, InfoEnemies infos){
+        currentState = state;
+        currentState.InitState(this, infos);
     }
 }
