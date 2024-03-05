@@ -8,7 +8,7 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField] private LayerMask maskInteractable;
     [SerializeField] private Transform defaultArmPos;
     [SerializeField, Self] Rigidbody rb;
-    [SerializeField, Range(0.01f,1)] float handSpeed;
+    [SerializeField, Range(5, 50)] float handSpeed;
 
     private Coroutine coroutineDisableMouseForFrame;
     private Coroutine mouveHandToPoint;
@@ -51,7 +51,6 @@ public class Player : ValidatedMonoBehaviour
         Vector3 mousePos = new Vector3();
         if(Physics.Raycast(ray, out RaycastHit raycastHit, 999f, maskInteractable)){
             mousePos = raycastHit.point;
-            Debug.Log(mousePos);
             if(mouveHandToPoint != null) StopCoroutine(mouveHandToPoint);
             mouveHandToPoint = StartCoroutine(CoroutineMove(transform.position, mousePos));
         }
@@ -59,23 +58,20 @@ public class Player : ValidatedMonoBehaviour
 
     private IEnumerator CoroutineMove(Vector3 posIni , Vector3 posDest){
         bool isThere = false; 
-        float actionTime = 0; 
-        Vector3 posInit = transform.position; 
         while (!isThere){
-            isThere = MouveWithLerp(posIni, posDest, actionTime);
-            actionTime += Time.fixedDeltaTime; 
+            isThere = MouveWithMoveTowards(posDest);
             yield return new WaitForFixedUpdate(); 
         }
     }
 
-    private bool MouveWithLerp(Vector3 posIni, Vector3 posDest, float actionTime){
-        float t = Mathf.SmoothStep(0, 1, actionTime/handSpeed);
-        Vector3 newPos = Vector3.Lerp(posIni, posDest, t);
-        float distance = Vector3.Distance(transform.position, newPos);
-        Vector3 roudedPos = new Vector3(Round(newPos.x, 2), Round(newPos.y, 2), Round(newPos.z, 2)); 
-        Vector3 roudedDestPos = new Vector3(Round(posDest.x, 2), Round(posDest.y, 2), Round(posDest.z, 2));
+    private bool MouveWithMoveTowards(Vector3 posDest){
+        float maxDistance = handSpeed * Time.fixedDeltaTime; 
+        Vector3 newPos = Vector3.MoveTowards(transform.position, posDest, maxDistance); 
         rb.MovePosition(newPos);
-        return (roudedPos == roudedDestPos);
+        Vector3 roundedPos = new Vector3(Round(newPos.x, 2), Round(newPos.y, 2), Round(newPos.z, 2));
+        Vector3 roudedDestPos = new Vector3(Round(posDest.x, 2), Round(posDest.y, 2), Round(posDest.z, 2));
+        return (roundedPos == roudedDestPos); 
+
     }
 
     private float Round(float valeur, int decimale){
