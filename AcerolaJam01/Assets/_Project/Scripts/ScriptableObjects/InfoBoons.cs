@@ -6,9 +6,9 @@ using UnityEngine;
 public class InfoBoons : ScriptableObject
 {
     [Header("Infos")]
-    [SerializeField, TextArea] string DMDescription = "";
-    [SerializeField, Range(0, 1)] float chanceWarriorGod = 0.1f;
-    [SerializeField, TextArea] string DMDescriptionFail = "Failed";
-    [SerializeField, TextArea] string DMDescriptionSuccess = "Success";
-    [SerializeField, TextArea] string DMDescriptionOtherGod = "Shameful";
+    [SerializeField, TextArea] public string DMDescription = "";
+    [SerializeField, Range(0, 1)] public float chanceWarriorGod = 0.1f;
+    [SerializeField, TextArea] public string DMDescriptionFail = "Failed";
+    [SerializeField, TextArea] public string DMDescriptionSuccess = "Success";
+    [SerializeField, TextArea] public string DMDescriptionOtherGod = "Shameful";
 }

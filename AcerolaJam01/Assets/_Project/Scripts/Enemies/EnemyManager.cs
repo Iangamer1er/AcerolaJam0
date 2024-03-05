@@ -7,11 +7,19 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public string altMapName = "Beta";
+
+    [Header("Current Stats")]
+    public float armsHealth;
+    public float legsHealth;
+    public float headHealth;
+    public float torsoHealth;
+    
+
     private EnemyBase currentState;
 
     private void Start() {
         InfoEnemies info = ChoseEnemy();
-        Debug.Log(info);
+        InitialiseStats(info);
     }
  
     private List<InfoEnemies> ResoucesScript(string mapNumber){
@@ -31,8 +39,17 @@ public class EnemyManager : MonoBehaviour
         return infos[Random.Range(0, infos.Count)];
     }
 
+    private void InitialiseStats(InfoEnemies info){
+        armsHealth = info.armsMaxHealth;
+        legsHealth = info.legsMaxHealth;
+        headHealth = info.headMaxHealth;
+        torsoHealth = info.torsoMaxHealth;
+    }
+
     public void ChangeState(EnemyBase state, InfoEnemies infos){
         currentState = state;
         currentState.InitState(this, infos);
     }
+
+    
 }

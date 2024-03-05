@@ -6,15 +6,15 @@ using UnityEngine;
 public class InfoEnemies : ScriptableObject
 {
     [Header("Infos")]
-    [SerializeField] string eName = "";
-    [SerializeField, TextArea] string description = "";
+    [SerializeField] public string eName = "";
+    [SerializeField, TextArea] public string description = "";
 
-    [SerializeField, Range(0, 1)] float armsMaxHealth = 1; 
-    [SerializeField, Range(0, 1)] float armsHealthRatio = 0.2f;
-    [SerializeField, Range(0, 1)] float legsMaxHealth = 1; 
-    [SerializeField, Range(0, 1)] float legsHealthRatio = 0.2f;
-    [SerializeField, Range(0, 1)] float HeadMaxHealth = 1;
-    [SerializeField, Range(0, 3)] float HeadModif = 1;
-    [SerializeField, Range(0, 1)] float TorsoMaxHealth = 1f;
-    [SerializeField, Range(0,1)] float spareAskChance = 0;
+    [SerializeField, Range(0, 1)] public float armsMaxHealth = 1; 
+    [SerializeField, Range(0, 1)] public float armsHealthRatio = 0.2f;
+    [SerializeField, Range(0, 1)] public float legsMaxHealth = 1; 
+    [SerializeField, Range(0, 1)] public float legsHealthRatio = 0.2f;
+    [SerializeField, Range(0, 1)] public float headMaxHealth = 1;
+    [SerializeField, Range(0, 3)] public float headModif = 1;
+    [SerializeField, Range(0, 1)] public float torsoMaxHealth = 1f;
+    [SerializeField, Range(0,1)] public float spareAskChance = 0;
 }
