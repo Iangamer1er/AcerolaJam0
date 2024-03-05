@@ -18,7 +18,15 @@ MonoBehaviour:
   armsHealthRatio: 0.2
   legsMaxHealth: 1
   legsHealthRatio: 0.2
-  HeadMaxHealth: 1
-  HeadModif: 1
-  TorsoMaxHealth: 1
+  headMaxHealth: 1
+  headModif: 1
+  torsoMaxHealth: 1
   spareAskChance: 0
+  behavoir:
+    rid: 4380223548809019392
+  references:
+    version: 2
+    RefIds:
+    - rid: 4380223548809019392
+      type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
+      data: 

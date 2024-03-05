@@ -4,19 +4,39 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    private Coroutine coroutineDisableMouseForFrame;
+    private bool canLook = true;
+    
+
+    private void Start() {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void Update() {
         
     }
 
     private void MoveHand(){
+        Vector2 mousePos = Input.mousePosition;
         
+    }
+
+    private void OnEnableMouseControl(){
+        Cursor.lockState= CursorLockMode.Locked;
+        Cursor.visible = false;
+        coroutineDisableMouseForFrame = StartCoroutine(DisableMouseForFrame());
+    }
+
+    private void OndisableMouseControl(){
+        Cursor.lockState= CursorLockMode.None;
+        Cursor.visible = true;
+        StopCoroutine(coroutineDisableMouseForFrame);
+        canLook = true;
+    }
+
+    private IEnumerator DisableMouseForFrame(){
+        canLook = true;
+        yield return new WaitForEndOfFrame();
+        canLook = false;
     }
 }
