@@ -14,7 +14,6 @@ public class EnemyManager : MonoBehaviour
     public float headHealth;
     public float torsoHealth;
     
-
     private EnemyBase currentState;
 
     private void Start() {
