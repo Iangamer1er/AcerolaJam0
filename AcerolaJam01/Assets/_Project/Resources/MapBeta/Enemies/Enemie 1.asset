@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
+  m_Name: Enemie 1
+  m_EditorClassIdentifier: 
+  eName: 
+  description: 
+  armsMaxHealth: 1
+  armsHealthRatio: 0.2
+  legsMaxHealth: 1
+  legsHealthRatio: 0.2
+  HeadMaxHealth: 1
+  HeadModif: 1
+  TorsoMaxHealth: 1
+  spareAskChance: 0

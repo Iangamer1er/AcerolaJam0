@@ -8,6 +8,7 @@ public class GameManager : ValidatedMonoBehaviour
     private static GameManager _instance; 
     public static GameManager instance => _instance;
     public bool normalTime = false;
+    public int level = 0;
 
     public float fixedDeltaTime;
 
