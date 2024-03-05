@@ -50,5 +50,11 @@ public class EnemyManager : MonoBehaviour
         currentState.InitState(this, infos);
     }
 
-    
+    public void TakeDamage(EnemyBase state, InfoEnemies info, float damage){
+        currentState.TakeDamage(this, info, damage);
+    }
+
+    public void Attack(EnemyBase state, InfoEnemies info, float damage){
+        currentState.TakeDamage(this, info, damage);
+    }
 }

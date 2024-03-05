@@ -25,3 +25,8 @@ Praying to the warrior god gives boons
 You can find armor and weapons on some locations
 THIS IS A ROGUELIKE
 
+
+
+Idea for combat if time allows me : 
+When an enemy attacks, the DM hits a part of the table to plunge a stick towards the player's figurine. 
+The player can then hit his part of the table on the block button to make a piece of wood block the attack
