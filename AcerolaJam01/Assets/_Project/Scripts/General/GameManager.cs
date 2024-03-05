@@ -23,6 +23,10 @@ public class GameManager : ValidatedMonoBehaviour
         fixedDeltaTime = Time.fixedDeltaTime;
     }
 
+    private void Start() {
+        
+    }
+
     // Update is called once per frame
     void Update()
     {

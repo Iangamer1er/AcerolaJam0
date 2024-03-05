@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,24 +8,22 @@ public class EnemyManager : MonoBehaviour
 {
     public string altMapName = "Beta";
 
-    private void Awake() {
-        List<InfoEnemies> infos = new List<InfoEnemies>();
-        var resources = ResoucesScript(GameManager.instance.level.ToString());
-        if(resources.Length == null || resources.Length == 0){
-            resources = ResoucesScript(altMapName);
-        }
-        foreach (InfoEnemies info in resources){
-            infos.Add(info);
+    private void Start() {
+        List<InfoEnemies> infos;
+        Debug.Log(GameManager.instance.level.ToString());
+        infos = ResoucesScript(GameManager.instance.level.ToString());
+        if(infos.Count == 0){
+            infos = ResoucesScript(altMapName);
         }
 
         Debug.Log(infos);
     }
  
-    private dynamic ResoucesScript(string mapNumber){
+    private List<InfoEnemies> ResoucesScript(string mapNumber){
         return Resources.LoadAll(
             "Map" +
             mapNumber +
             "/Enemies"
-        );
+        ).Cast<InfoEnemies>().ToList();
     }
 }
