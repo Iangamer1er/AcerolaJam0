@@ -21,8 +21,7 @@ public class LightFlicker : ValidatedMonoBehaviour
     private Vector3 lastPosition;
     private Vector3 origin;
 
-    private void Start()
-    {
+    private void Awake() {
         origin = transform.position;
         lastPosition = origin;
         startingIntensity = myLight.intensity;

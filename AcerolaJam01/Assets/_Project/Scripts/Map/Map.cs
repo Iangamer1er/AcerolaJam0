@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class Map : ValidatedMonoBehaviour
 {
+    
     [Header("Initializing Tiles")]
     [SerializeField, Range(0, 50)] int maxTileHeight = 10;
     [SerializeField, Range(0, 10)] int nbForks = 1;
@@ -18,7 +19,8 @@ public class Map : ValidatedMonoBehaviour
     [SerializeField, Range(1, 5)] int maxMapHeight = 3;
     [SerializeField, Anywhere] Transform startingPoint;
     [SerializeField, Range(0, 1)] float timeNextPoint;
-    [SerializeField, Range(2, 20)] float mapWidth;
+    [SerializeField, Range(0.01f, 3)] float mapWidth; //currentrly 2.457
+    [SerializeField, Range(0.01f, 3)] float heightBetweenSpaces;
 
     public Dictionary<int, List<Tile>> tilesArrays 
         {get; set;} = new Dictionary<int, List<Tile>>();
@@ -30,7 +32,7 @@ public class Map : ValidatedMonoBehaviour
 
     private void Start() {
         MakeMap();
-        currentTileHeight = 0;
+        CoCreateMap();
     }
 
     private void MakeMap(){
@@ -44,26 +46,25 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private TileTypes MakeTile(List<TileTypes> currentlyUsed, Transform newFork = null, int posFork = 0){
-        // GameObject newTile = Instantiate(tile);
+        GameObject newTile = new GameObject();
         List<TileTypes> possibilities = TileTypes.GetValues(typeof(TileTypes)).Cast<TileTypes>().ToList();
         if(currentlyUsed != null) possibilities = possibilities.Except(currentlyUsed).ToList();
         TileTypes type = possibilities[Random.Range(0, possibilities.Count())];
-        // Tile tileScript = newTile.AddComponent<Tile>();
-        Tile tileScript = new Tile();
+        Tile tileScript = newTile.AddComponent<Tile>();
         tileScript.height = currentTileHeight;
         string forkName = "";
         bool isInFork = newFork != null;
         if(isInFork){
             tileScript.forkParent = newFork;
-            // newTile.transform.parent = newFork; 
+            newTile.transform.parent = newFork; 
             forkName = " Fork " + currentNbForks + " ";
         } 
-        // else newTile.transform.parent = transform; 
-        // newTile.name = "H" + currentTileHeight +
-        //     forkName +
-        //     "T" + nbTiles
-        // ;
-        // nbTiles++;
+        else newTile.transform.parent = transform; 
+        newTile.name = "H" + currentTileHeight +
+            forkName +
+            "T" + nbTiles
+        ;
+        nbTiles++;
         if(!tilesArrays.ContainsKey(currentTileHeight)) tilesArrays[currentTileHeight] = new List<Tile>();
         tilesArrays[currentTileHeight].Add(tileScript);
         AddPossiblePath(tileScript, posFork, isInFork);
@@ -111,19 +112,9 @@ public class Map : ValidatedMonoBehaviour
 
     private IEnumerator CoInstantiateTile(Vector3 StartingPos){
         for (int e = 0; e < tilesArrays[currentTileHeight].Count; e++){
-            string forkName = "";
             Tile currentTileScript = tilesArrays[currentTileHeight][e];
-            GameObject currentTile = new GameObject();
-            if(currentTileScript.forkParent != null){
-                currentTile.transform.parent = currentTileScript.forkParent; 
-                forkName = " Fork " + currentNbForks + " ";
-            } 
-            else currentTile.transform.parent = transform; 
-            currentTile.name = "H" + currentTileHeight +
-                forkName +
-                "T" + nbTiles
-            ;
-            nbTiles++;
+            currentTileScript.gameObject.transform.position = StartingPos;
+
             yield return new WaitForSeconds(timeNextPoint);
         }
     }
