@@ -72,7 +72,7 @@ public class PlayerMove : ValidatedMonoBehaviour
             Mathf.Clamp(lookRotation.x, -lookXClamp, lookXClamp),
             Mathf.Clamp(lookRotation.y, -lookYClamp, lookYClamp)
         );
-        Vector3 targetRotation = new Vector3(lookRotation.y, cam.transform.localEulerAngles.z, lookRotation.x);
+        Vector3 targetRotation = new Vector3(lookRotation.y, -lookRotation.x, cam.transform.localEulerAngles.z);
         Debug.Log(targetRotation);
         cam.transform.localEulerAngles = targetRotation;
         // Debug.Log("LookX : " + lookX + " LookY : " + lookY + "\n " + Input.mousePosition);
