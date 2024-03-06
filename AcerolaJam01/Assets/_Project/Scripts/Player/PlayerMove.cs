@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using KBCore.Refs;
+using Cinemachine;
 
 public class PlayerMove : ValidatedMonoBehaviour
 {
@@ -16,7 +17,7 @@ public class PlayerMove : ValidatedMonoBehaviour
     [SerializeField] private float lookXClamp = 85f;
     [SerializeField, Min(0)] private float lookSpeed;
     [SerializeField, Range(0.01f, 1)] private float screenWidthPercent = 0.1f;
-    [SerializeField, Scene] private Camera cam;
+    [SerializeField, Scene] private CinemachineVirtualCamera cam;
 
 
     private Coroutine coroutineDisableMouseForFrame;
@@ -61,14 +62,21 @@ public class PlayerMove : ValidatedMonoBehaviour
     private void Look(){
         if(!controlsCam) return;
         float lookX = 0;
-        
         if(Input.mousePosition.x < Screen.width * screenWidthPercent) lookX = -1;
         else if(Input.mousePosition.x > Screen.width - Screen.width * screenWidthPercent) lookX = 1;
         float lookY = 0;
         if(Input.mousePosition.y < Screen.height * screenWidthPercent) lookY = -1;
         else if(Input.mousePosition.y > Screen.height - Screen.height * screenWidthPercent) lookY = 1;
-        // lookRotation -= new Vector2(lookSpeed * Time.deltaTime, );
-        Debug.Log("LookX : " + lookX + " LookY : " + lookY + "\n " + Input.mousePosition);
+        lookRotation -= new Vector2(lookX, lookY) * lookSpeed * Time.deltaTime;
+        lookRotation = new Vector2(
+            Mathf.Clamp(lookRotation.x, -lookXClamp, lookXClamp),
+            Mathf.Clamp(lookRotation.y, -lookYClamp, lookYClamp)
+        );
+        Vector3 targetRotation = new Vector3(lookRotation.y, cam.transform.localEulerAngles.z, lookRotation.x);
+        Debug.Log(targetRotation);
+        cam.transform.localEulerAngles = targetRotation;
+        // Debug.Log("LookX : " + lookX + " LookY : " + lookY + "\n " + Input.mousePosition);
+
     }
 
     private void MoveHand(){

@@ -1226,7 +1226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.0000000018626451, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1671,15 +1671,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285747583}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023132097, y: 0.9850682, z: -0.15766102, w: -0.06518063}
-  m_LocalPosition: {x: 0.082, y: 5.718, z: 4.413}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1921136523}
   - {fileID: 963194228}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 17.915, y: 188.2, z: 3.985}
+  m_Father: {fileID: 1801467951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1519638177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,11 +1835,11 @@ MonoBehaviour:
   defaultArmPos: {fileID: 1519638181}
   rb: {fileID: 1519638182}
   handSpeed: 50
-  lookYClamp: 35
+  lookYClamp: 85
   lookXClamp: 85
-  lookSpeed: 0
+  lookSpeed: 5
   screenWidthPercent: 0.2
-  cam: {fileID: 963194227}
+  cam: {fileID: 1285747584}
 --- !u!114 &1519638184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2021,6 +2021,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b36b97e8d63d1a44ba01f5a0afa3682, type: 3}
+--- !u!1 &1801467950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1801467951}
+  m_Layer: 0
+  m_Name: ParentCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1801467951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801467950}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0012943854, y: -0.99585736, z: 0.089780204, w: -0.014357545}
+  m_LocalPosition: {x: -0.05, y: 5.73, z: 4.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1285747585}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 10.303, y: -181.652, z: 0}
 --- !u!1001 &1862580348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2829,7 +2861,6 @@ SceneRoots:
   - {fileID: 1876625308}
   - {fileID: 1519638181}
   - {fileID: 635970075}
-  - {fileID: 1285747585}
   - {fileID: 613754885}
   - {fileID: 690507831}
   - {fileID: 939419477}
@@ -2851,3 +2882,4 @@ SceneRoots:
   - {fileID: 541313271}
   - {fileID: 2090861714}
   - {fileID: 1890510017}
+  - {fileID: 1801467951}
