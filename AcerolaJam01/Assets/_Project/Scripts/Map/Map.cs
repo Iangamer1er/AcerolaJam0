@@ -13,6 +13,8 @@ public class Map : ValidatedMonoBehaviour
     [SerializeField, Range(2, 4)] int maxForkSplits = 3;
     [SerializeField, Range(1, 4)] int maxForkLength = 2;
     [SerializeField] GameObject tile;
+    [SerializeField, Range(1, 5)] int maxMapHeight = 3;
+    [SerializeField] Transform startingPoint;
 
     public Dictionary<int, List<Tile>> tilesArrays 
         {get; set;} = new Dictionary<int, List<Tile>>();
@@ -24,6 +26,7 @@ public class Map : ValidatedMonoBehaviour
 
     private void Start() {
         MakeMap();
+        currentTileHeight = 0;
     }
 
     private void MakeMap(){
@@ -37,23 +40,24 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private TileTypes MakeTile(List<TileTypes> currentlyUsed, Transform newFork = null, int posFork = 0){
-        GameObject newTile = Instantiate(tile);
+        // GameObject newTile = Instantiate(tile);
         List<TileTypes> possibilities = TileTypes.GetValues(typeof(TileTypes)).Cast<TileTypes>().ToList();
         if(currentlyUsed != null) possibilities = possibilities.Except(currentlyUsed).ToList();
         TileTypes type = possibilities[Random.Range(0, possibilities.Count())];
-        Tile tileScript = newTile.AddComponent<Tile>();
+        // Tile tileScript = newTile.AddComponent<Tile>();
+        Tile tileScript = new Tile();
         tileScript.height = currentTileHeight;
         string forkName = "";
         bool isInFork = newFork != null;
         if(isInFork){
-            newTile.transform.parent = newFork; 
+            // newTile.transform.parent = newFork; 
             forkName = " Fork " + currentNbForks + " ";
         } 
-        else newTile.transform.parent = transform; 
-        newTile.name = "H" + currentTileHeight +
-            forkName +
-            "T" + nbTiles
-        ;
+        // else newTile.transform.parent = transform; 
+        // newTile.name = "H" + currentTileHeight +
+        //     forkName +
+        //     "T" + nbTiles
+        // ;
         nbTiles++;
         if(!tilesArrays.ContainsKey(currentTileHeight)) tilesArrays[currentTileHeight] = new List<Tile>();
         tilesArrays[currentTileHeight].Add(tileScript);
@@ -90,6 +94,19 @@ public class Map : ValidatedMonoBehaviour
         }
         currentNbForks++;
         return true;
+    }
+
+    private IEnumerator CoroutineCreateMap(){
+        for (int i = 0; i < maxMapHeight; i++){
+            InstantiateTile()
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
+    private void InstantiateTile(Vector3 StartingPos){
+            for (int e = 0; e < tilesArrays[currentTileHeight].Count; e++){
+                
+            }
     }
 
     private bool checkNbTiles(){
