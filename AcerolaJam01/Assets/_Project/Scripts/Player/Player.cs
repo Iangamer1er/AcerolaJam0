@@ -13,6 +13,7 @@ public class Player : ValidatedMonoBehaviour
     private Coroutine coroutineDisableMouseForFrame;
     private Coroutine mouveHandToPoint;
     private bool canLook = true;
+    private bool wannaMove = false;
     
 
     private void Start() {
@@ -20,11 +21,11 @@ public class Player : ValidatedMonoBehaviour
     }
 
     private void Update() {
-        
+        wannaMove = Input.GetMouseButton(0);
     }
 
     private void FixedUpdate() {
-        MoveHand();    
+       if(wannaMove) MoveHand();    
     }
 
     private void OnEnableMouseControl(){
@@ -51,6 +52,7 @@ public class Player : ValidatedMonoBehaviour
         Vector3 mousePos = new Vector3();
         if(Physics.Raycast(ray, out RaycastHit raycastHit, 999f, maskInteractable)){
             mousePos = raycastHit.point;
+            mousePos = new Vector3(mousePos.x, mousePos.y + transform.localScale.y * 0.5f, mousePos.z);
             if(mouveHandToPoint != null) StopCoroutine(mouveHandToPoint);
             mouveHandToPoint = StartCoroutine(CoroutineMove(transform.position, mousePos));
         }

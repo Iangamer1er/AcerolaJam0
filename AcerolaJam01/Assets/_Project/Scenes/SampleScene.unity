@@ -726,7 +726,7 @@ MonoBehaviour:
     m_Bits: 64
   defaultArmPos: {fileID: 1519638181}
   rb: {fileID: 1519638182}
-  handSpeed: 0.1
+  handSpeed: 50
 --- !u!1 &1865072744
 GameObject:
   m_ObjectHideFlags: 0
