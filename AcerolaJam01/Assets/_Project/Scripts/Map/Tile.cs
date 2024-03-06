@@ -10,6 +10,7 @@ public class Tile : MonoBehaviour
     public TileTypes type = TileTypes.Random;
     public List<Tile> possiblePath = new List<Tile>();
     public bool isForked = false;
+    public Transform forkParent;
 
     private dynamic tileObject;
 
