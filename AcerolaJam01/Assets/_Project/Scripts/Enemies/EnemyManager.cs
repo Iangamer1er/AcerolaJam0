@@ -9,12 +9,10 @@ public class EnemyManager : MonoBehaviour
     public string altMapName = "Beta";
 
     [Header("Current Stats")]
-    public float armsHealth;
-    public float legsHealth;
-    public float headHealth;
-    public float torsoHealth;
+    public float armsHealth, legsHealth, torsoHealth;
     
     private EnemyBase currentState;
+    private bool brokenLegs, brokenArms, brokenHead = false;
 
     private void Start() {
         InfoEnemies info = ChoseEnemy();
@@ -41,7 +39,6 @@ public class EnemyManager : MonoBehaviour
     private void InitialiseStats(InfoEnemies info){
         armsHealth = info.armsMaxHealth;
         legsHealth = info.legsMaxHealth;
-        headHealth = info.headMaxHealth;
         torsoHealth = info.torsoMaxHealth;
     }
 
@@ -50,11 +47,11 @@ public class EnemyManager : MonoBehaviour
         currentState.InitState(this, infos);
     }
 
-    public void TakeDamage(EnemyBase state, InfoEnemies info, float damage){
-        currentState.TakeDamage(this, info, damage);
+    public void TakeDamage(EnemyBase state, InfoEnemies info, float damage, BodyParts part){
+        currentState.TakeDamage(this, info, damage, part);
     }
 
-    public void Attack(EnemyBase state, InfoEnemies info, float damage){
-        currentState.TakeDamage(this, info, damage);
+    public void Attack(EnemyBase state, InfoEnemies info, float damage, BodyParts part){
+        currentState.TakeDamage(this, info, damage, part);
     }
 }
