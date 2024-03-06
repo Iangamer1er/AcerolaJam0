@@ -15,8 +15,6 @@ public class Tile : MonoBehaviour
     public bool isForked = false;
     public Transform forkParent;
 
-    private dynamic tileObject;
-
     public void AddTile(){
         GameObject prefabTile;
         switch(type){
@@ -37,17 +35,16 @@ public class Tile : MonoBehaviour
                 break;
         }
         Instantiate(prefabTile, transform);
-        Debug.Log(possiblePath[0].GetComponent<Transform>().position);
-        MakePath();
     }
 
-    private void MakePath(){
+    public IEnumerator CoMakePath(float waitTime){
         foreach (GameObject path in possiblePath){
             GameObject lineObj = new GameObject("Line");
             lineObj.transform.position = transform.position;
             lineObj.transform.rotation = transform.rotation;
             lineObj.transform.parent = transform;
             LineRenderer line = lineObj.AddComponent<LineRenderer>();
+            line.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
             line.startWidth = lineRendererWidth;
             line.endWidth = lineRendererWidth;
             line.positionCount = 2;
@@ -55,6 +52,7 @@ public class Tile : MonoBehaviour
             line.endColor = lineColor;
             line.SetPosition(0, transform.position);
             line.SetPosition(1, path.transform.position);
+            yield return new WaitForSeconds(waitTime);
         }
     }
 

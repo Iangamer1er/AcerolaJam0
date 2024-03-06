@@ -22,7 +22,7 @@ public class Map : ValidatedMonoBehaviour
     [SerializeField, Range(0.01f, 3)] float heightBetweenSpaces;
 
     [Header("Line Renderer")]
-    [SerializeField, Min(0)] float lineRendererWidth = 0.2f;
+    [SerializeField, Min(0)] float lineRendererWidth = 0.02f;
     [SerializeField] Color lineColor = Color.black;
 
     public Dictionary<int, List<Tile>> tilesArrays 
@@ -31,7 +31,8 @@ public class Map : ValidatedMonoBehaviour
     private int currentTileHeight = 0;
     private int currentNbForks = 0;
     private int nbTiles = 0;
-    bool hadFork = false;
+    private bool hadFork = false;
+    private bool canContinueRoutine = true;
 
     private void Start() {
         MakeMap();
@@ -112,11 +113,14 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private IEnumerator CoCreateMap(){
-        for (int i = 0; i < maxMapHeight; i++){
+        for(int i = 0; i < maxMapHeight; i++){
+            canContinueRoutine = false;
             StartCoroutine(CoInstantiateTile(startingPoint, i));
-            yield return new WaitForSeconds(timeNextPoint);
+            yield return new WaitUntil(()=>canContinueRoutine);
             currentTileHeight++;
         }
+        currentTileHeight = 0;
+        StartCoroutine(CoMakePaths());
         yield return new WaitForEndOfFrame();
     }
 
@@ -125,7 +129,7 @@ public class Map : ValidatedMonoBehaviour
             mapWidth /
             (tilesArrays[currentTileHeight].Count + 1)
         ;
-        for (int i = 0; i < tilesArrays[currentTileHeight].Count; i++){
+        for(int i = 0; i < tilesArrays[currentTileHeight].Count; i++){
             Tile currentTileScript = tilesArrays[currentTileHeight][i];
             float tilePosX = -mapWidth * 0.5f;
             tilePosX += spaceBetween * (i+1);
@@ -137,12 +141,31 @@ public class Map : ValidatedMonoBehaviour
             currentTileScript.AddTile();
             yield return new WaitForSeconds(timeNextPoint);
         }
+        canContinueRoutine = true;
+    }
+
+    private IEnumerator CoMakePaths(){
+        canContinueRoutine = false;
+        for(int i = 0; i < maxMapHeight - 1; i++){
+            canContinueRoutine = false;
+            StartCoroutine(CoInstantiatePaths());
+            yield return new WaitUntil(()=>canContinueRoutine);
+            currentTileHeight++;
+        }
+    }
+
+    private IEnumerator CoInstantiatePaths(){
+        for(int e = 0; e < tilesArrays[currentTileHeight].Count; e++){
+            StartCoroutine(tilesArrays[currentTileHeight][e].CoMakePath(timeNextPoint));
+            yield return new WaitForSeconds(timeNextPoint);
+        }
+        canContinueRoutine = true;
     }
 
     private bool checkNbTiles(){
         float random = Random.Range(0f, 1f);
         return ((float)currentTileHeight/(float)maxTileHeight >= random ||
-            maxTileHeight - currentTileHeight < 2) &&
+            maxTileHeight - currentTileHeight <= maxForkLength * nbForks) &&
             nbForks - currentNbForks > 0
             && !hadFork
         ;

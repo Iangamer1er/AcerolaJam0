@@ -1389,16 +1389,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc365f749ede67b498bf9bf5759e9aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTileHeight: 16
-  nbForks: 2
+  maxTileHeight: 5
+  nbForks: 5
   maxForkSplits: 4
   maxForkLength: 3
-  maxMapHeight: 5
+  maxMapHeight: 4
   startingPoint: {fileID: 551274921}
-  timeNextPoint: 0.03
+  timeNextPoint: 0.32
   mapWidth: 2.4
   heightBetweenSpaces: 0.89
-  lineRendererWidth: 0.2
+  lineRendererWidth: 0.02
   lineColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &2090861710
 GameObject:
