@@ -1500,6 +1500,7 @@ GameObject:
   - component: {fileID: 1247187932}
   - component: {fileID: 1247187934}
   - component: {fileID: 1247187933}
+  - component: {fileID: 1247187935}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -1516,7 +1517,7 @@ Transform:
   m_GameObject: {fileID: 1247187931}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.48170525, z: 0}
+  m_LocalPosition: {x: 0, y: 0.537, z: 0}
   m_LocalScale: {x: 4.020909, y: 4.020909, z: 4.020909}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1607,6 +1608,22 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1247187935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247187931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebae6600c8ee9e48925a5094bd94443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLight: {fileID: 1247187934}
+  maxDisplacement: 0.25
+  intensityMaxFlicker: 1
+  maxInterval: 1
 --- !u!1 &1285747583
 GameObject:
   m_ObjectHideFlags: 0
