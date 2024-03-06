@@ -22,6 +22,10 @@ public class Map : ValidatedMonoBehaviour
     [SerializeField, Range(0.01f, 3)] float mapWidth; //currentrly 2.457
     [SerializeField, Range(0.01f, 3)] float heightBetweenSpaces;
 
+    [Header("Line Renderer")]
+    [SerializeField, Min(0)] float lineRendererWidth = 0.2f;
+    [SerializeField] Color lineColor = Color.black;
+
     public Dictionary<int, List<Tile>> tilesArrays 
         {get; set;} = new Dictionary<int, List<Tile>>();
     
@@ -52,7 +56,10 @@ public class Map : ValidatedMonoBehaviour
         if(currentlyUsed != null) possibilities = possibilities.Except(currentlyUsed).ToList();
         TileTypes type = possibilities[Random.Range(0, possibilities.Count())];
         Tile tileScript = newTile.AddComponent<Tile>();
+        tileScript.type = type;
         tileScript.height = currentTileHeight;
+        tileScript.lineRendererWidth = lineRendererWidth;
+        tileScript.lineColor = lineColor;
         string forkName = "";
         bool isInFork = newFork != null;
         if(isInFork){
@@ -126,6 +133,7 @@ public class Map : ValidatedMonoBehaviour
             currentTileScript.gameObject.transform.localPosition = new Vector3(
                 tilePosX, 0, (heightOnMap + 1)*heightBetweenSpaces
             );
+            currentTileScript.AddTile();
             yield return new WaitForSeconds(timeNextPoint);
         }
     }
