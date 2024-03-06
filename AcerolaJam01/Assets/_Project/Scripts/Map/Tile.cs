@@ -11,7 +11,7 @@ public class Tile : MonoBehaviour
     public Color lineColor = Color.black;
     public int height;
     public TileTypes type = TileTypes.Random;
-    public List<Tile> possiblePath = new List<Tile>();
+    public List<GameObject> possiblePath = new List<GameObject>();
     public bool isForked = false;
     public Transform forkParent;
 
@@ -41,7 +41,7 @@ public class Tile : MonoBehaviour
     }
 
     private void MakePath(){
-        foreach (Tile path in possiblePath){
+        foreach (GameObject path in possiblePath){
             GameObject lineObj = new GameObject("Line");
             lineObj.transform.position = transform.position;
             lineObj.transform.rotation = transform.rotation;
@@ -54,6 +54,7 @@ public class Tile : MonoBehaviour
             line.endColor = lineColor;
             line.SetPosition(0, transform.position);
             line.SetPosition(1, path.transform.position);
+            Debug.Log(path.gameObject.name);
         }
     }
 

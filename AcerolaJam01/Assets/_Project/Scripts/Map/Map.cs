@@ -75,17 +75,17 @@ public class Map : ValidatedMonoBehaviour
         nbTiles++;
         if(!tilesArrays.ContainsKey(currentTileHeight)) tilesArrays[currentTileHeight] = new List<Tile>();
         tilesArrays[currentTileHeight].Add(tileScript);
-        AddPossiblePath(tileScript, posFork, isInFork);
+        AddPossiblePath(newTile, posFork, isInFork);
         return type;
     }
 
-    private void AddPossiblePath(Tile tileScript, int posFork, bool isInFork = false){
+    private void AddPossiblePath(GameObject tile, int posFork, bool isInFork = false){
         if(currentTileHeight == 0) return;
-        if(isInFork && tilesArrays[currentTileHeight-1].Count > 1) tilesArrays[currentTileHeight-1][posFork].possiblePath.Add(tileScript);
-        else if(isInFork) tilesArrays[currentTileHeight-1][0].possiblePath.Add(tileScript);
+        if(isInFork && tilesArrays[currentTileHeight-1].Count > 1) tilesArrays[currentTileHeight-1][posFork].possiblePath.Add(tile);
+        else if(isInFork) tilesArrays[currentTileHeight-1][0].possiblePath.Add(tile);
         else{
             for (int i = 0; i < tilesArrays[currentTileHeight-1].Count(); i++){
-                tilesArrays[currentTileHeight-1][i].possiblePath.Add(tileScript);
+                tilesArrays[currentTileHeight-1][i].possiblePath.Add(tile);
             }
         }
     }
