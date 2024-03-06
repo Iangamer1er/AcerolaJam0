@@ -1621,9 +1621,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myLight: {fileID: 1247187934}
-  maxDisplacement: 0.25
+  maxDisplacement: 0.025
   intensityMaxFlicker: 1
-  maxInterval: 1
+  maxInterval: 0.275
+  minInterval: 0.095
 --- !u!1 &1285747583
 GameObject:
   m_ObjectHideFlags: 0
