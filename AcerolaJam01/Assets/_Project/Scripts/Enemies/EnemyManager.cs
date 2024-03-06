@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour
     private void Start() {
         info = ChoseEnemy();
         InitialiseStats(info);
+        ChangeState(info.behavoir);
     }
  
     private List<InfoEnemies> ResoucesScript(string mapNumber){
@@ -48,12 +49,12 @@ public class EnemyManager : MonoBehaviour
         currentState.InitState(this);
     }
 
-    public void TakeDamage(EnemyBase state, float damage, BodyParts part){
+    public void TakeDamage(float damage, BodyParts part){
         currentState.TakeDamage(this, damage, part);
         if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
     }
 
-    public void Attack(EnemyBase state, float damage, BodyParts part){
+    public void Attack(float damage, BodyParts part){
         currentState.TakeDamage(this, damage, part);
     }
 }
