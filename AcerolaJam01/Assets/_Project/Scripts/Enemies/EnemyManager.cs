@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
     
     private EnemyBase currentState;
     private bool brokenLegs, brokenArms, brokenHead = false;
-    public InfoEnemies info {get; set;}
+    public InfoEnemies info;
 
     private void Start() {
         info = ChoseEnemy();
