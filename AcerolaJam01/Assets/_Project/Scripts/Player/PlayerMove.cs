@@ -5,16 +5,26 @@ using KBCore.Refs;
 
 public class PlayerMove : ValidatedMonoBehaviour
 {
+    [Header("Hand controls")]
     [SerializeField] private LayerMask maskInteractable;
     [SerializeField] private Transform defaultArmPos;
     [SerializeField, Self] Rigidbody rb;
     [SerializeField, Range(5, 50)] float handSpeed;
 
+    [Header("Camera controls")]
+    [SerializeField] private float lookYClamp = 35f;
+    [SerializeField] private float lookXClamp = 85f;
+    [SerializeField, Min(0)] private float lookSpeed;
+    [SerializeField, Range(0.01f, 1)] private float screenWidthPercent = 0.1f;
+    [SerializeField, Scene] private Camera cam;
+
+
     private Coroutine coroutineDisableMouseForFrame;
     private Coroutine mouveHandToPoint;
     private bool canLook = true;
     private bool wannaMove = false;
-    
+    private bool controlsCam = true;
+    private Vector2 lookRotation = Vector2.zero;
 
     private void Start() {
         OnEnableMouseControl();
@@ -22,6 +32,7 @@ public class PlayerMove : ValidatedMonoBehaviour
 
     private void Update() {
         wannaMove = Input.GetMouseButton(0);
+        Look();
     }
 
     private void FixedUpdate() {
@@ -45,6 +56,19 @@ public class PlayerMove : ValidatedMonoBehaviour
         canLook = true;
         yield return new WaitForEndOfFrame();
         canLook = false;
+    }
+
+    private void Look(){
+        if(!controlsCam) return;
+        float lookX = 0;
+        
+        if(Input.mousePosition.x < Screen.width * screenWidthPercent) lookX = -1;
+        else if(Input.mousePosition.x > Screen.width - Screen.width * screenWidthPercent) lookX = 1;
+        float lookY = 0;
+        if(Input.mousePosition.y < Screen.height * screenWidthPercent) lookY = -1;
+        else if(Input.mousePosition.y > Screen.height - Screen.height * screenWidthPercent) lookY = 1;
+        // lookRotation -= new Vector2(lookSpeed * Time.deltaTime, );
+        Debug.Log("LookX : " + lookX + " LookY : " + lookY + "\n " + Input.mousePosition);
     }
 
     private void MoveHand(){

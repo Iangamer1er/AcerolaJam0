@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : ValidatedMonoBehaviour
 {
+    [Header("Player stats")]
     [SerializeField, Range(0, 1)] public float maxHealth = 1;
     [SerializeField, Range(0, 1)] public float attackPower = 0.2f;
     [SerializeField] private EnemyManager targetEnemy;
