@@ -37,11 +37,16 @@ public class Tile : MonoBehaviour
                 break;
         }
         Instantiate(prefabTile, transform);
+        MakePath();
     }
 
     private void MakePath(){
         foreach (Tile path in possiblePath){
-            LineRenderer line = gameObject.AddComponent<LineRenderer>();
+            GameObject lineObj = new GameObject("Line");
+            lineObj.transform.position = transform.position;
+            lineObj.transform.rotation = transform.rotation;
+            lineObj.transform.parent = transform;
+            LineRenderer line = lineObj.AddComponent<LineRenderer>();
             line.startWidth = lineRendererWidth;
             line.endWidth = lineRendererWidth;
             line.positionCount = 2;
