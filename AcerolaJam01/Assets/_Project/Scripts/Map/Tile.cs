@@ -37,6 +37,7 @@ public class Tile : MonoBehaviour
                 break;
         }
         Instantiate(prefabTile, transform);
+        Debug.Log(possiblePath[0].GetComponent<Transform>().position);
         MakePath();
     }
 
@@ -54,7 +55,6 @@ public class Tile : MonoBehaviour
             line.endColor = lineColor;
             line.SetPosition(0, transform.position);
             line.SetPosition(1, path.transform.position);
-            Debug.Log(path.gameObject.name);
         }
     }
 
