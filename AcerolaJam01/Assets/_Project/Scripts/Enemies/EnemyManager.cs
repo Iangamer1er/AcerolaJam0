@@ -49,8 +49,8 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void TakeDamage(EnemyBase state, float damage, BodyParts part){
-        if(info.behavoirLowHealth != null && torsoHealth <= 0.33f) ChangeState(info.behavoirLowHealth);
         currentState.TakeDamage(this, damage, part);
+        if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
     }
 
     public void Attack(EnemyBase state, float damage, BodyParts part){
