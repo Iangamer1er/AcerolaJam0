@@ -19,5 +19,6 @@ public class InfoEnemies : ScriptableObject
     [SerializeField, Range(0, 1)] public float torsoMaxHealth = 1f;
     [SerializeField, Range(0, 1)] public float spareAskChance = 0;
 
-    [SerializeReference, SubclassPicker] EnemyBase behavoir;
+    [SerializeReference, SubclassPicker] public EnemyBase behavoir;
+    [SerializeReference, SubclassPicker] public EnemyBase behavoirLowHealth;
 }

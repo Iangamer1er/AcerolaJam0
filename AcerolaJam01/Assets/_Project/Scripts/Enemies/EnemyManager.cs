@@ -13,9 +13,10 @@ public class EnemyManager : MonoBehaviour
     
     private EnemyBase currentState;
     private bool brokenLegs, brokenArms, brokenHead = false;
+    public InfoEnemies info {get; set;}
 
     private void Start() {
-        InfoEnemies info = ChoseEnemy();
+        info = ChoseEnemy();
         InitialiseStats(info);
     }
  
@@ -42,16 +43,17 @@ public class EnemyManager : MonoBehaviour
         torsoHealth = info.torsoMaxHealth;
     }
 
-    public void ChangeState(EnemyBase state, InfoEnemies infos){
+    public void ChangeState(EnemyBase state){
         currentState = state;
-        currentState.InitState(this, infos);
+        currentState.InitState(this);
     }
 
-    public void TakeDamage(EnemyBase state, InfoEnemies info, float damage, BodyParts part){
-        currentState.TakeDamage(this, info, damage, part);
+    public void TakeDamage(EnemyBase state, float damage, BodyParts part){
+        if(info.behavoirLowHealth != null && torsoHealth <= 0.33f) ChangeState(info.behavoirLowHealth);
+        currentState.TakeDamage(this, damage, part);
     }
 
-    public void Attack(EnemyBase state, InfoEnemies info, float damage, BodyParts part){
-        currentState.TakeDamage(this, info, damage, part);
+    public void Attack(EnemyBase state, float damage, BodyParts part){
+        currentState.TakeDamage(this, damage, part);
     }
 }
