@@ -32,7 +32,8 @@ public class Map : ValidatedMonoBehaviour
 
     private void Start() {
         MakeMap();
-        CoCreateMap();
+        currentTileHeight = 0;
+        StartCoroutine(CoCreateMap());
     }
 
     private void MakeMap(){
@@ -104,17 +105,27 @@ public class Map : ValidatedMonoBehaviour
 
     private IEnumerator CoCreateMap(){
         for (int i = 0; i < maxMapHeight; i++){
-            StartCoroutine(CoInstantiateTile(startingPoint.position));
+            StartCoroutine(CoInstantiateTile(startingPoint, i));
             yield return new WaitForSeconds(timeNextPoint);
+            currentTileHeight++;
         }
         yield return new WaitForEndOfFrame();
     }
 
-    private IEnumerator CoInstantiateTile(Vector3 StartingPos){
-        for (int e = 0; e < tilesArrays[currentTileHeight].Count; e++){
-            Tile currentTileScript = tilesArrays[currentTileHeight][e];
-            currentTileScript.gameObject.transform.position = StartingPos;
-
+    private IEnumerator CoInstantiateTile(Transform StartingPos, float heightOnMap){
+        float spaceBetween = 
+            mapWidth /
+            (tilesArrays[currentTileHeight].Count + 1)
+        ;
+        for (int i = 0; i < tilesArrays[currentTileHeight].Count; i++){
+            Tile currentTileScript = tilesArrays[currentTileHeight][i];
+            float tilePosX = -mapWidth * 0.5f;
+            tilePosX += spaceBetween * (i+1);
+            currentTileScript.gameObject.transform.position = StartingPos.position;
+            currentTileScript.gameObject.transform.rotation = startingPoint.rotation;
+            currentTileScript.gameObject.transform.localPosition = new Vector3(
+                tilePosX, 0, (heightOnMap + 1)*heightBetweenSpaces
+            );
             yield return new WaitForSeconds(timeNextPoint);
         }
     }
