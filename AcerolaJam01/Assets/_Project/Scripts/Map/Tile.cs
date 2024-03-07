@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public LayerMask maskInteractable;
+    public int maskInteractable;
     public float lineRendererWidth = 0.2f;
     public Color lineColor = Color.black;
     public int height;
@@ -17,29 +17,17 @@ public class Tile : MonoBehaviour
     public List<GameObject> lines = new List<GameObject>();
     public bool isForked = false;
     public Transform forkParent;
+    public bool touched = false;
 
     public void AddTile(){
         GameObject prefabTile;
         prefabTile = (GameObject)Resources.Load("Spaces/" + type.ToString());
-        // switch(type){
-        //     case TileTypes.Encounter : 
-        //         prefabTile = (GameObject)Resources.Load("Spaces/encounter");
-        //         break;
-        //     case TileTypes.Enemy : 
-        //         prefabTile = (GameObject)Resources.Load("Spaces/enemy");
-        //         break;
-        //     case TileTypes.Boon : 
-        //         prefabTile = (GameObject)Resources.Load("Spaces/boon");
-        //         break;
-        //     case TileTypes.Random : 
-        //         prefabTile = (GameObject)Resources.Load("Spaces/random");
-        //         break;
-        //     default :
-        //         prefabTile = (GameObject)Resources.Load("Spaces/random");
-        //         break;
-        // }
         prefabTile = Instantiate(prefabTile, transform);
         prefabTile.layer = maskInteractable;
+        foreach (Transform child in prefabTile.GetComponentsInChildren<Transform>()){
+            child.gameObject.layer = maskInteractable;
+            child.gameObject.tag = type.ToString();
+        }
         prefabTile.tag = type.ToString();
     }
 

@@ -16,7 +16,7 @@ public class Encounter : MonoBehaviour
         ).Cast<InfoEncounters>().ToList();
     }
 
-    private InfoEncounters ChoseEncounter(){
+    public InfoEncounters ChoseEncounter(){
         List<InfoEncounters> infos;
         infos = ResoucesScript(GameManager.instance.level.ToString());
         if(infos.Count == 0){

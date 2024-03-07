@@ -1594,9 +1594,7 @@ MonoBehaviour:
   nbForks: 10
   maxForkSplits: 4
   maxForkLength: 3
-  maskInteractable:
-    serializedVersion: 2
-    m_Bits: 64
+  maskInteractable: 6
   maxMapHeight: 4
   startingPoint: {fileID: 551274921}
   timeNextPoint: 0.32

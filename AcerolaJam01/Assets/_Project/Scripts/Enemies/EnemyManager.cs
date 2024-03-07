@@ -29,7 +29,7 @@ public class EnemyManager : MonoBehaviour
         ).Cast<InfoEnemies>().ToList();
     }
 
-    private InfoEnemies ChoseEnemy(){
+    public InfoEnemies ChoseEnemy(){
         List<InfoEnemies> infos;
         infos = ResoucesScript(GameManager.instance.level.ToString());
         if(infos.Count == 0){

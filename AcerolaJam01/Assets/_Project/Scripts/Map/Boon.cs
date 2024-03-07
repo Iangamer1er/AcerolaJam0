@@ -9,7 +9,6 @@ public class Boon : MonoBehaviour
     public InfoBoons info;
     public string altMapName = "Beta";
 
-
     private List<InfoBoons> ResoucesScript(string mapNumber){
         return Resources.LoadAll(
             "Map" +
@@ -18,7 +17,7 @@ public class Boon : MonoBehaviour
         ).Cast<InfoBoons>().ToList();
     }
 
-    private InfoBoons ChoseBoon(){
+    public InfoBoons ChoseBoon(){
         List<InfoBoons> infos;
         infos = ResoucesScript(GameManager.instance.level.ToString());
         if(infos.Count == 0){

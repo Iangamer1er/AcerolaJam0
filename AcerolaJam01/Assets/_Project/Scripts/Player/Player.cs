@@ -28,4 +28,40 @@ public class Player : ValidatedMonoBehaviour
         if(enemy == null) enemy = targetEnemy;
         targetEnemy.TakeDamage(attackPower, part);
     }
+
+    public void ClickCase(GameObject objHit){
+        Tile objTile;
+        switch(objHit.tag){
+            case "encounter": 
+                objTile = objHit.gameObject.GetComponent<Tile>();
+                if(objTile) break;
+                Encounter scriptEncounter = objHit.AddComponent<Encounter>();
+                scriptEncounter.ChoseEncounter();
+                objTile.touched = true;
+                break;
+            case "enemy": 
+                objTile = objHit.gameObject.GetComponent<Tile>();
+                if(objTile) break;
+                EnemyManager scriptEnemy = objHit.AddComponent<EnemyManager>();
+                scriptEnemy.ChoseEnemy();
+                objTile.touched = true;
+                break;
+            case "boon": 
+                objTile = objHit.gameObject.GetComponent<Tile>();
+                if(objTile) break;
+                Boon scriptBoon = objHit.AddComponent<Boon>();
+                scriptBoon.ChoseBoon();
+                objTile.touched = true;
+                break;
+            case "random": 
+                objTile = objHit.gameObject.GetComponent<Tile>();
+                if(objTile) break;
+                RandomTile scriptRandom = objHit.AddComponent<RandomTile>();
+                objTile.touched = true;
+                break;
+            default :
+                Debug.Log("Nothing");
+                break;
+        }
+    }
 }
