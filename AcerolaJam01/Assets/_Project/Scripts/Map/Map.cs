@@ -168,9 +168,9 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private IEnumerator CoAdvanceOneTile(){
-        int targetMapHeight = currentTileHeight - maxMapHeight;
+        int targetMapHeight = currentTileHeight - maxMapHeight + 1;
         for (int i = 0; i < tilesArrays[targetMapHeight].Count; i++){
-            Destroy(tilesArrays[targetMapHeight][i]);
+            Destroy(tilesArrays[targetMapHeight][i].gameObject);
             yield return new WaitForSeconds(timeNextPoint);
         }
 
