@@ -12,7 +12,7 @@ public class Tile : MonoBehaviour
     public float lineRendererWidth = 0.2f;
     public Color lineColor = Color.black;
     public int height;
-    public TileTypes type = TileTypes.random;
+    public TileTypes type = TileTypes.Random;
     public List<GameObject> possiblePath = new List<GameObject>();
     public List<GameObject> lines = new List<GameObject>();
     public bool isForked = false;
@@ -58,4 +58,4 @@ public class Tile : MonoBehaviour
     }
 }
 
-public enum TileTypes{encounter, enemy, boon, random}
+public enum TileTypes{Encounter, Enemy, Boon, Random}

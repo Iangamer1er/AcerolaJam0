@@ -9,7 +9,9 @@ public class EnemyManager : MonoBehaviour
     public string altMapName = "Beta";
 
     [Header("Current Stats")]
-    public float armsHealth, legsHealth, torsoHealth;
+    public float armsHealth;
+    public float legsHealth;
+    public float torsoHealth;
     
     private EnemyBase currentState;
     private bool brokenLegs, brokenArms, brokenHead = false;

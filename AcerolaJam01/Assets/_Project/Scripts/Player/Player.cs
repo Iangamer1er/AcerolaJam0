@@ -32,30 +32,30 @@ public class Player : ValidatedMonoBehaviour
     public void ClickCase(GameObject objHit){
         Tile objTile;
         switch(objHit.tag){
-            case "encounter": 
-                objTile = objHit.gameObject.GetComponent<Tile>();
-                if(objTile) break;
+            case "Encounter": 
+                objTile = objHit.gameObject.GetComponentInParent<Tile>();
+                if(objTile.touched) break;
                 Encounter scriptEncounter = objHit.AddComponent<Encounter>();
-                scriptEncounter.ChoseEncounter();
+                scriptEncounter.info = scriptEncounter.ChoseEncounter();
                 objTile.touched = true;
                 break;
-            case "enemy": 
-                objTile = objHit.gameObject.GetComponent<Tile>();
-                if(objTile) break;
+            case "Enemy": 
+                objTile = objHit.gameObject.GetComponentInParent<Tile>();
+                if(objTile.touched) break;
                 EnemyManager scriptEnemy = objHit.AddComponent<EnemyManager>();
-                scriptEnemy.ChoseEnemy();
+                scriptEnemy.info = scriptEnemy.ChoseEnemy();
                 objTile.touched = true;
                 break;
-            case "boon": 
-                objTile = objHit.gameObject.GetComponent<Tile>();
-                if(objTile) break;
+            case "Boon": 
+                objTile = objHit.gameObject.GetComponentInParent<Tile>();
+                if(objTile.touched) break;
                 Boon scriptBoon = objHit.AddComponent<Boon>();
-                scriptBoon.ChoseBoon();
+                scriptBoon.info = scriptBoon.ChoseBoon();
                 objTile.touched = true;
                 break;
-            case "random": 
-                objTile = objHit.gameObject.GetComponent<Tile>();
-                if(objTile) break;
+            case "Random": 
+                objTile = objHit.gameObject.GetComponentInParent<Tile>();
+                if(objTile.touched) break;
                 RandomTile scriptRandom = objHit.AddComponent<RandomTile>();
                 objTile.touched = true;
                 break;
