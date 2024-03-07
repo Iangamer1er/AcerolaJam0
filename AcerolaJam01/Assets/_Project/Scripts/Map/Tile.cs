@@ -12,6 +12,7 @@ public class Tile : MonoBehaviour
     public int height;
     public TileTypes type = TileTypes.Random;
     public List<GameObject> possiblePath = new List<GameObject>();
+    public List<GameObject> lines = new List<GameObject>();
     public bool isForked = false;
     public Transform forkParent;
 
@@ -52,11 +53,16 @@ public class Tile : MonoBehaviour
             line.endColor = lineColor;
             line.SetPosition(0, transform.position);
             line.SetPosition(1, path.transform.position);
+            lines.Add(lineObj);
             yield return new WaitForSeconds(waitTime);
         }
     }
 
-
+    public void ClearPaths(){
+        foreach (GameObject line in lines){
+            Destroy(line);
+        }
+    }
 }
 
 public enum TileTypes{Encounter, Enemy, Boon, Random}

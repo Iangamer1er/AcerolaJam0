@@ -24,6 +24,7 @@ public class Map : ValidatedMonoBehaviour
     [Header("Line Renderer")]
     [SerializeField, Min(0)] float lineRendererWidth = 0.02f;
     [SerializeField] Color lineColor = Color.black;
+    [SerializeField, Min(0)] float timeDoLine = 0.1f;
 
     public Dictionary<int, List<Tile>> tilesArrays 
         {get; set;} = new Dictionary<int, List<Tile>>();
@@ -154,10 +155,26 @@ public class Map : ValidatedMonoBehaviour
         }
     }
 
+    private IEnumerator CoMakePaths(int height){
+        for(int i = 0; i < maxMapHeight - 1; i++){
+            canContinueRoutine = false;
+            StartCoroutine(CoInstantiatePaths(height + i));
+            yield return new WaitUntil(()=>canContinueRoutine);
+        }
+    }
+
     private IEnumerator CoInstantiatePaths(){
         for(int e = 0; e < tilesArrays[currentTileHeight].Count; e++){
             StartCoroutine(tilesArrays[currentTileHeight][e].CoMakePath(timeNextPoint));
-            yield return new WaitForSeconds(timeNextPoint);
+            yield return new WaitForSeconds(timeDoLine);
+        }
+        canContinueRoutine = true;
+    }
+
+    private IEnumerator CoInstantiatePaths(int height){
+        for(int e = 0; e < tilesArrays[height].Count; e++){
+            StartCoroutine(tilesArrays[height][e].CoMakePath(timeNextPoint));
+            yield return new WaitForSeconds(timeDoLine);
         }
         canContinueRoutine = true;
     }
@@ -174,20 +191,37 @@ public class Map : ValidatedMonoBehaviour
             yield return new WaitForSeconds(timeNextPoint);
         }
 
-        for (int i = 0; i < maxMapHeight - 1; i++){
+        for (int i = 1; i < maxMapHeight; i++){
+            canContinueRoutine = false;
             foreach (Tile currentTileScript in tilesArrays[targetMapHeight + i]){
                 currentTileScript.transform.position = new Vector3(
                     currentTileScript.transform.position.x,
                     currentTileScript.transform.position.y,
-                    currentTileScript.transform.position.z - heightBetweenSpaces
+                    currentTileScript.transform.position.z + heightBetweenSpaces
                 );
+                if(i  >= maxMapHeight - 1){
+                    canContinueRoutine = true;
+                    continue;
+                }
+                StartCoroutine(CoRemovePaths(targetMapHeight + i));
             }
+            yield return new WaitUntil(()=>canContinueRoutine);
         }
         currentTileHeight++;
-        canContinueRoutine = false;
-        StartCoroutine(CoInstantiateTile(startingPoint, maxMapHeight - 1));
-        yield return new WaitUntil(()=>canContinueRoutine);
-        StartCoroutine(CoMakePaths());
+        if(currentTileHeight < maxTileHeight){
+            canContinueRoutine = false;
+            StartCoroutine(CoInstantiateTile(startingPoint, maxMapHeight - 1));
+            yield return new WaitUntil(()=>canContinueRoutine);
+        }
+        StartCoroutine(CoMakePaths(targetMapHeight + 1));
+    }
+
+    private IEnumerator CoRemovePaths(int tileHeight){
+        for(int e = 0; e < tilesArrays[tileHeight].Count; e++){
+            tilesArrays[tileHeight][e].ClearPaths();
+            yield return new WaitForSeconds(timeDoLine);
+        }
+        canContinueRoutine = true;
     }
 
     private bool checkNbTiles(){
