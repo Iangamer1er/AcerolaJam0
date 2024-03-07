@@ -162,6 +162,34 @@ public class Map : ValidatedMonoBehaviour
         canContinueRoutine = true;
     }
 
+    [ContextMenu("Advance Tile")]
+    public void ContextMenu(){
+        StartCoroutine(CoAdvanceOneTile());
+    }
+
+    private IEnumerator CoAdvanceOneTile(){
+        int targetMapHeight = currentTileHeight - maxMapHeight;
+        for (int i = 0; i < tilesArrays[targetMapHeight].Count; i++){
+            Destroy(tilesArrays[targetMapHeight][i]);
+            yield return new WaitForSeconds(timeNextPoint);
+        }
+
+        for (int i = 0; i < maxMapHeight - 1; i++){
+            foreach (Tile currentTileScript in tilesArrays[targetMapHeight + i]){
+                currentTileScript.transform.position = new Vector3(
+                    currentTileScript.transform.position.x,
+                    currentTileScript.transform.position.y,
+                    currentTileScript.transform.position.z - heightBetweenSpaces
+                );
+            }
+        }
+        currentTileHeight++;
+        canContinueRoutine = false;
+        StartCoroutine(CoInstantiateTile(startingPoint, maxMapHeight - 1));
+        yield return new WaitUntil(()=>canContinueRoutine);
+        StartCoroutine(CoMakePaths());
+    }
+
     private bool checkNbTiles(){
         float random = Random.Range(0f, 1f);
         return ((float)currentTileHeight/(float)maxTileHeight >= random ||
