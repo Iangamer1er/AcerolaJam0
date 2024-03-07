@@ -10,10 +10,12 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Range(0, 1)] public float attackPower = 0.2f;
     [SerializeField] private EnemyManager targetEnemy;
 
-
+    private static Player _instance; 
+    public static Player instance => _instance;
     private float currentHealth;
 
     private void Awake() {
+        _instance = this;
         currentHealth = maxHealth;
     }
 

@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public LayerMask maskInteractable;
     public float lineRendererWidth = 0.2f;
     public Color lineColor = Color.black;
     public int height;
-    public TileTypes type = TileTypes.Random;
+    public TileTypes type = TileTypes.random;
     public List<GameObject> possiblePath = new List<GameObject>();
     public List<GameObject> lines = new List<GameObject>();
     public bool isForked = false;
@@ -18,24 +20,27 @@ public class Tile : MonoBehaviour
 
     public void AddTile(){
         GameObject prefabTile;
-        switch(type){
-            case TileTypes.Encounter : 
-                prefabTile = (GameObject)Resources.Load("Spaces/encounter");
-                break;
-            case TileTypes.Enemy : 
-                prefabTile = (GameObject)Resources.Load("Spaces/enemy");
-                break;
-            case TileTypes.Boon : 
-                prefabTile = (GameObject)Resources.Load("Spaces/boon");
-                break;
-            case TileTypes.Random : 
-                prefabTile = (GameObject)Resources.Load("Spaces/random");
-                break;
-            default :
-                prefabTile = (GameObject)Resources.Load("Spaces/random");
-                break;
-        }
-        Instantiate(prefabTile, transform);
+        prefabTile = (GameObject)Resources.Load("Spaces/" + type.ToString());
+        // switch(type){
+        //     case TileTypes.Encounter : 
+        //         prefabTile = (GameObject)Resources.Load("Spaces/encounter");
+        //         break;
+        //     case TileTypes.Enemy : 
+        //         prefabTile = (GameObject)Resources.Load("Spaces/enemy");
+        //         break;
+        //     case TileTypes.Boon : 
+        //         prefabTile = (GameObject)Resources.Load("Spaces/boon");
+        //         break;
+        //     case TileTypes.Random : 
+        //         prefabTile = (GameObject)Resources.Load("Spaces/random");
+        //         break;
+        //     default :
+        //         prefabTile = (GameObject)Resources.Load("Spaces/random");
+        //         break;
+        // }
+        prefabTile = Instantiate(prefabTile, transform);
+        prefabTile.layer = maskInteractable;
+        prefabTile.tag = type.ToString();
     }
 
     public IEnumerator CoMakePath(float waitTime){
@@ -65,4 +70,4 @@ public class Tile : MonoBehaviour
     }
 }
 
-public enum TileTypes{Encounter, Enemy, Boon, Random}
+public enum TileTypes{encounter, enemy, boon, random}

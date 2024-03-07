@@ -732,6 +732,37 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 1801467951}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1417425504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1417425505}
+  m_Layer: 0
+  m_Name: ReturnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1417425505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417425504}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.36, y: 4.26, z: 2.264}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1519638177
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +867,7 @@ Transform:
   m_GameObject: {fileID: 1519638177}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.704088, w: 0.71011275}
-  m_LocalPosition: {x: -2.62, y: 4.13, z: 3.555}
+  m_LocalPosition: {x: -1.36, y: 4.26, z: 2.264}
   m_LocalScale: {x: 0.53154, y: 0.53154, z: 0.53154}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -884,12 +915,13 @@ MonoBehaviour:
   maskInteractable:
     serializedVersion: 2
     m_Bits: 64
-  defaultArmPos: {fileID: 1519638181}
-  rb: {fileID: 1519638182}
+  defaultArmPos: {fileID: 1417425505}
+  timeBeforeHandReturns: 1
   handSpeed: 50
-  lookYClamp: 85
-  lookXClamp: 85
-  lookSpeed: 5
+  rb: {fileID: 1519638182}
+  lookYClamp: 20
+  lookXClamp: 20
+  lookSpeed: 10
   screenWidthPercent: 0.2
   cam: {fileID: 1285747584}
 --- !u!114 &1519638184
@@ -1562,6 +1594,9 @@ MonoBehaviour:
   nbForks: 10
   maxForkSplits: 4
   maxForkLength: 3
+  maskInteractable:
+    serializedVersion: 2
+    m_Bits: 64
   maxMapHeight: 4
   startingPoint: {fileID: 551274921}
   timeNextPoint: 0.32
@@ -2153,3 +2188,4 @@ SceneRoots:
   - {fileID: 566271047}
   - {fileID: 370413205}
   - {fileID: 1578743533}
+  - {fileID: 1417425505}

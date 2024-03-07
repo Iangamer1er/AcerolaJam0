@@ -14,6 +14,7 @@ public class Map : ValidatedMonoBehaviour
     [SerializeField, Range(0, 10)] int nbForks = 1;
     [SerializeField, Range(2, 4)] int maxForkSplits = 3;
     [SerializeField, Range(1, 4)] int maxForkLength = 2;
+    [SerializeField] private LayerMask maskInteractable;
     [Header("Making Map")]
     [SerializeField, Range(1, 5)] int maxMapHeight = 3;
     [SerializeField, Anywhere] Transform startingPoint;
@@ -61,6 +62,7 @@ public class Map : ValidatedMonoBehaviour
         tileScript.height = currentTileHeight;
         tileScript.lineRendererWidth = lineRendererWidth;
         tileScript.lineColor = lineColor;
+        tileScript.maskInteractable = maskInteractable;
         string forkName = "";
         bool isInFork = newFork != null;
         if(isInFork){

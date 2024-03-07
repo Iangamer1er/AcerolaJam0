@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using KBCore.Refs;
 using Cinemachine;
+using System.Threading;
+using Utilities;
 
 public class PlayerMove : ValidatedMonoBehaviour
 {
     [Header("Hand controls")]
     [SerializeField] private LayerMask maskInteractable;
     [SerializeField] private Transform defaultArmPos;
-    [SerializeField, Self] Rigidbody rb;
+    [SerializeField, Range(0, 10)] private float timeBeforeHandReturns = 2;
     [SerializeField, Range(5, 50)] float handSpeed;
+    [SerializeField, Self] Rigidbody rb;
 
     [Header("Camera controls")]
     [SerializeField] private float lookYClamp = 35f;
@@ -19,7 +22,7 @@ public class PlayerMove : ValidatedMonoBehaviour
     [SerializeField, Range(0.01f, 1)] private float screenWidthPercent = 0.1f;
     [SerializeField, Scene] private CinemachineVirtualCamera cam;
 
-
+    private CountdownTimer returnTimer;
     private Coroutine coroutineDisableMouseForFrame;
     private Coroutine mouveHandToPoint;
     private bool canLook = true;
@@ -29,11 +32,14 @@ public class PlayerMove : ValidatedMonoBehaviour
 
     private void Start() {
         OnEnableMouseControl();
+        returnTimer = new CountdownTimer(timeBeforeHandReturns);
+        returnTimer.OnTimerStop = ReturnPosition;
     }
 
     private void Update() {
         wannaMove = Input.GetMouseButton(0);
         Look();
+        returnTimer.Tick(Time.deltaTime);
     }
 
     private void FixedUpdate() {
@@ -74,7 +80,6 @@ public class PlayerMove : ValidatedMonoBehaviour
         );
         Vector3 targetRotation = new Vector3(lookRotation.y, -lookRotation.x, cam.transform.localEulerAngles.z);
         cam.transform.localEulerAngles = targetRotation;
-        // Debug.Log("LookX : " + lookX + " LookY : " + lookY + "\n " + Input.mousePosition);
 
     }
 
@@ -87,7 +92,10 @@ public class PlayerMove : ValidatedMonoBehaviour
             if(mouveHandToPoint != null) StopCoroutine(mouveHandToPoint);
             mouveHandToPoint = StartCoroutine(CoroutineMove(transform.position, mousePos));
         }
+        returnTimer.Start();
     }
+
+    private void ReturnPosition() => StartCoroutine(CoroutineMove(transform.position, defaultArmPos.position));
 
     private IEnumerator CoroutineMove(Vector3 posIni , Vector3 posDest){
         bool isThere = false; 
