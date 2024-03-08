@@ -8,6 +8,9 @@ TagManager:
   - Encounter
   - Enemy
   - Random
+  - Yes_Attack
+  - No_Spare
+  - Skip
   layers:
   - Default
   - TransparentFX
