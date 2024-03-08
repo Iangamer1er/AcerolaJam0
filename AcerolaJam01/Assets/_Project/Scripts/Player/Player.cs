@@ -14,9 +14,12 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Range(0, 1)] public float armor = 0f;
     [SerializeField] private EnemyManager targetEnemy;
 
+    private int levelHeight = 0;
+    public float currentHealth;
+    public bool canChoseMap = false;
+
     private static Player _instance; 
     public static Player instance => _instance;
-    public float currentHealth;
 
     private void Awake() {
         _instance = this;
@@ -46,38 +49,40 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public void ClickCase(GameObject objHit){
-        Tile objTile;
+        Tile objTile = objHit.gameObject.GetComponentInParent<Tile>();
+        if(objTile == null || !canChoseMap) return;
+        bool verifyHeight = objTile.height == levelHeight;
+        if(!verifyHeight) return;
         switch(objHit.tag){
             case "Encounter": 
-                objTile = objHit.gameObject.GetComponentInParent<Tile>();
                 if(objTile.touched) break;
                 Encounter scriptEncounter = objHit.AddComponent<Encounter>();
                 scriptEncounter.info = scriptEncounter.ChoseEncounter();
                 objTile.touched = true;
                 break;
             case "Enemy": 
-                objTile = objHit.gameObject.GetComponentInParent<Tile>();
                 if(objTile.touched) break;
                 EnemyManager scriptEnemy = objHit.AddComponent<EnemyManager>();
                 scriptEnemy.info = scriptEnemy.ChoseEnemy();
                 objTile.touched = true;
                 break;
             case "Boon": 
-                objTile = objHit.gameObject.GetComponentInParent<Tile>();
                 if(objTile.touched) break;
                 Boon scriptBoon = objHit.AddComponent<Boon>();
                 scriptBoon.info = scriptBoon.ChoseBoon();
                 objTile.touched = true;
                 break;
             case "Random": 
-                objTile = objHit.gameObject.GetComponentInParent<Tile>();
                 if(objTile.touched) break;
                 RandomTile scriptRandom = objHit.AddComponent<RandomTile>();
                 objTile.touched = true;
                 break;
             default :
-                Debug.Log("Nothing");
                 break;
         }
+
+        levelHeight++;
+        canChoseMap = false;
+        StartCoroutine(Map.instance.CoAdvanceOneTile());
     }
 }

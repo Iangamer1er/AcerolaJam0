@@ -37,6 +37,13 @@ public class Map : ValidatedMonoBehaviour
     private bool hadFork = false;
     private bool canContinueRoutine = true;
 
+    private static Map _instance; 
+    public static Map instance => _instance;
+
+    private void Awake() {
+        _instance = this;
+    }
+
     private void Start() {
         MakeMap();
         currentTileHeight = 0;
@@ -156,6 +163,7 @@ public class Map : ValidatedMonoBehaviour
             yield return new WaitUntil(()=>canContinueRoutine);
             currentTileHeight++;
         }
+        Player.instance.canChoseMap = true;
     }
 
     private IEnumerator CoMakePaths(int height){
@@ -164,6 +172,7 @@ public class Map : ValidatedMonoBehaviour
             StartCoroutine(CoInstantiatePaths(height + i));
             yield return new WaitUntil(()=>canContinueRoutine);
         }
+        Player.instance.canChoseMap = true;
     }
 
     private IEnumerator CoInstantiatePaths(){
@@ -187,7 +196,7 @@ public class Map : ValidatedMonoBehaviour
         StartCoroutine(CoAdvanceOneTile());
     }
 
-    private IEnumerator CoAdvanceOneTile(){
+    public IEnumerator CoAdvanceOneTile(){
         int targetMapHeight = currentTileHeight - maxMapHeight + 1;
         for (int i = 0; i < tilesArrays[targetMapHeight].Count; i++){
             Destroy(tilesArrays[targetMapHeight][i].gameObject);
