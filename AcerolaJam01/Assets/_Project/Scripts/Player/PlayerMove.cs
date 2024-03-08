@@ -37,7 +37,7 @@ public class PlayerMove : ValidatedMonoBehaviour
     }
 
     private void Update() {
-        wannaMove = Input.GetMouseButton(0);
+        wannaMove |= Input.GetMouseButtonDown(0);
         Look();
         returnTimer.Tick(Time.deltaTime);
     }
@@ -92,6 +92,7 @@ public class PlayerMove : ValidatedMonoBehaviour
             if(mouveHandToPoint != null) StopCoroutine(mouveHandToPoint);
             mouveHandToPoint = StartCoroutine(CoroutineMove(transform.position, mousePos, raycastHit));
         }
+        wannaMove = false;
         returnTimer.Start();
     }
 
@@ -111,7 +112,7 @@ public class PlayerMove : ValidatedMonoBehaviour
             isThere = MouveWithMoveTowards(posDest);
             yield return new WaitForFixedUpdate(); 
         }
-        Player.instance.ClickCase(raycastHit.transform.gameObject);
+        Player.instance.ClickedInteractable(raycastHit.transform.gameObject);
     }
 
     private bool MouveWithMoveTowards(Vector3 posDest){

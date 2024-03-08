@@ -34,8 +34,6 @@ public class DM : ValidatedMonoBehaviour
         StartCoroutine(Talk(introDialogue));
     }
 
-    
-
     private void Update() {
         timerSentences.Tick(Time.deltaTime);
     }

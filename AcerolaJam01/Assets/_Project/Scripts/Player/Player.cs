@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using KBCore.Refs;
+using OpenCover.Framework.Model;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -48,11 +49,15 @@ public class Player : ValidatedMonoBehaviour
         dodgeChance = Mathf.Clamp(maxHealth + dodgeChange, 0, 1);
     }
 
-    public void ClickCase(GameObject objHit){
+    public void ClickedInteractable(GameObject objHit){
+        if(!ClickCase(objHit)) ClickAnswer(objHit);
+    }
+
+    private bool ClickCase(GameObject objHit){
         Tile objTile = objHit.gameObject.GetComponentInParent<Tile>();
-        if(objTile == null || !canChoseMap) return;
+        if(objTile == null || !canChoseMap) return false;
         bool verifyHeight = objTile.height == levelHeight;
-        if(!verifyHeight) return;
+        if(!verifyHeight) return false;
         switch(objHit.tag){
             case "Encounter": 
                 if(objTile.touched) break;
@@ -79,9 +84,27 @@ public class Player : ValidatedMonoBehaviour
                 break;
             default :
                 Debug.Log("Something went wrong");
-                break;
+                return false;
         }
         canChoseMap = false;
+        return true;
+    }
+
+    private void ClickAnswer(GameObject objHit){
+        switch(objHit.tag){
+            case "Skip" :
+                Debug.Log("Skip");
+                break;
+            case "Yes_Attack" :
+                Debug.Log("Attack");
+                break;
+            case "No_Spare" :
+                Debug.Log("Spare");
+                break;
+            default :
+                Debug.Log("Nothing");
+                break;
+        }
     }
 
     public void FinishEncounter(){
