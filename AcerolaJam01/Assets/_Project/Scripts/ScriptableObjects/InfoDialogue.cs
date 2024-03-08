@@ -7,8 +7,8 @@ using UnityEngine;
 public class InfoDialogue : ScriptableObject
 {
     [Header("Infos")]
-    [SerializeField] string eName = "";
-    [SerializeField] MyListDialogues[] Act;
+    [SerializeField] public string eName = "";
+    [SerializeField] public MyListDialogues[] Act;
 }
 
 [System.Serializable]
