@@ -1902,7 +1902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myLight: {fileID: 2045116924}
   maxDisplacement: 0.025
-  intensityMaxFlicker: 1
+  intensityMaxFlicker: 3
   maxInterval: 0.275
   minInterval: 0.095
 --- !u!114 &2045116923
@@ -2842,6 +2842,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1578743533}
     m_Modifications:
+    - target: {fileID: 304048928425751497, guid: dd701fe19f219444db19ffa22eb2bce3, type: 3}
+      propertyPath: intensityMaxFlicker
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5212005140119564050, guid: dd701fe19f219444db19ffa22eb2bce3, type: 3}
       propertyPath: m_Range
       value: 20
