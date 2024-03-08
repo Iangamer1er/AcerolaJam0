@@ -45,6 +45,7 @@ public class DM : ValidatedMonoBehaviour
             foreach (string text in listDialogue.dialogue){
                 StartCoroutine(WriteText(text));
                 yield return new WaitUntil(()=>goNext);
+                goNext = false;
             }
         }
     }
@@ -58,7 +59,9 @@ public class DM : ValidatedMonoBehaviour
         }
         wannaSkip = false;
         timerSentences.Start();
-        yield return new WaitUntil(()=>timerDone);
+        yield return new WaitUntil(()=>timerDone || wannaSkip);
+        timerSentences.Stop();
+        timerDone = false;
         goNext = true;
     }
 }
