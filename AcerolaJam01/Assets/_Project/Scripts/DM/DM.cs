@@ -12,13 +12,13 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, Anywhere] private TextMeshProUGUI dialogue;
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
-    [SerializeField] private InfoDialogue textStart;
 
-    public bool wannaSkip = true;
+    public bool wannaSkip = false;
 
     private bool goNext = false;
     private string currentTxt = "";
     private CountdownTimer timerSentences; 
+    private bool timerDone = false;
     
     private static DM _instance; 
     public static DM instance => _instance;
@@ -30,9 +30,11 @@ public class DM : ValidatedMonoBehaviour
 
     private void Start() {
         timerSentences = new CountdownTimer(timeBetweenSentences);
-        timerSentences.OnTimerStop = ()=> wannaSkip = true;
-        Talk(textStart);
+        timerSentences.OnTimerStop = ()=> timerDone = true;
+        StartCoroutine(Talk(introDialogue));
     }
+
+    
 
     private void Update() {
         timerSentences.Tick(Time.deltaTime);
@@ -56,7 +58,7 @@ public class DM : ValidatedMonoBehaviour
         }
         wannaSkip = false;
         timerSentences.Start();
-        yield return new WaitUntil(()=>wannaSkip);
+        yield return new WaitUntil(()=>timerDone);
         goNext = true;
     }
 }
