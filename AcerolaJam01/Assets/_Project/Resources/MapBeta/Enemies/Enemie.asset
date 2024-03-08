@@ -29,6 +29,7 @@ MonoBehaviour:
     rid: -2
   lowHealthThreshhold: 0.33
   descriptionLowHealthChange: 
+  combatReward: {fileID: 11400000, guid: 911174e3468760c4eb5e66bccb5115ee, type: 2}
   references:
     version: 2
     RefIds:

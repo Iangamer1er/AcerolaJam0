@@ -25,4 +25,7 @@ public class InfoEnemies : ScriptableObject
     [SerializeReference, SubclassPicker] public EnemyBase behavoirLowHealth;
     [SerializeField,Range(0, 1)] public float lowHealthThreshhold = 0.33f;
     [SerializeField, TextArea] public string descriptionLowHealthChange = "";
+
+    [Header("Reward")]
+    [SerializeField] public InfoEncounters combatReward;
 }

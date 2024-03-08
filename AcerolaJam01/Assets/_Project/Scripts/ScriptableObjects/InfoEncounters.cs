@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,4 +11,7 @@ public class InfoEncounters : ScriptableObject
     [SerializeField, Range(0, 1)] public float chance = 0.1f;
     [SerializeField, TextArea] public string DMDescriptionFail = "Failed";
     [SerializeField, TextArea] public string DMDescriptionSuccess = "Success";
+
+    [Header("Event")]
+    [SerializeReference, SubclassPicker] public BaseEvent baseEvent;
 }
