@@ -78,11 +78,14 @@ public class Player : ValidatedMonoBehaviour
                 objTile.touched = true;
                 break;
             default :
+                Debug.Log("Something went wrong");
                 break;
         }
-
-        levelHeight++;
         canChoseMap = false;
+    }
+
+    public void FinishEncounter(){
+        levelHeight++;
         StartCoroutine(Map.instance.CoAdvanceOneTile());
     }
 }
