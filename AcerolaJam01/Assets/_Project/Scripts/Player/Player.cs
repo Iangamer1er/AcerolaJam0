@@ -15,9 +15,11 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Range(0, 1)] public float armor = 0f;
     [SerializeField] private EnemyManager targetEnemy;
 
-    private int levelHeight = 0;
     public float currentHealth;
     public bool canChoseMap = false;
+
+    private int levelHeight = 0;
+    private Choose lastChosen;
 
     private static Player _instance; 
     public static Player instance => _instance;
@@ -54,6 +56,7 @@ public class Player : ValidatedMonoBehaviour
     }
 
     private bool ClickCase(GameObject objHit){
+        if(lastChosen != null) lastChosen.isSupended = false;
         Tile objTile = objHit.gameObject.GetComponentInParent<Tile>();
         if(objTile == null || !canChoseMap) return false;
         bool verifyHeight = objTile.height == levelHeight;
@@ -91,11 +94,14 @@ public class Player : ValidatedMonoBehaviour
     }
 
     private void ClickAnswer(GameObject objHit){
+        if(lastChosen != null) lastChosen.isSupended = false;
         switch(objHit.tag){
             case "Skip" :
                 Debug.Log("Skip");
                 break;
             case "Yes_Attack" :
+                lastChosen = objHit.GetComponent<Choose>();
+                lastChosen.AnimateFloat();
                 Debug.Log("Attack");
                 break;
             case "No_Spare" :

@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ChoseType {Attack, Yes, Spare, No}
+
 public class Choose : ValidatedMonoBehaviour{
     public int roundPrecision = 4;
+    [SerializeField] public ChoseType type = ChoseType.Attack;
 
     [Header("Rotation")]
     [SerializeField, Min(0)] private float rotationSpeed = 4f;
@@ -12,11 +15,13 @@ public class Choose : ValidatedMonoBehaviour{
     [Header("Suspended")]
     [SerializeField, Min(0)] private float elevatedSpeed = 4f;
     [SerializeField, Min(0)] private float elevatedStartingSpeed = 4f;
+    [SerializeField, Min(0)] private float elevatedEndingSpeed = 3f;
     [SerializeField, Range(0, 2)] private float elevatedHight = 0.5f;
     [SerializeField, Min(0)] private float animationHightChange = 0.1f;
     [Header("Suspended Lerp")]
     [SerializeField, Min(0)] private float elevationTime = 0.5f;
     [SerializeField, Min(0)] private float elevationStartingTime = 0.5f;
+    [SerializeField, Min(0)] private float elevationEndingTime = 0.5f;
     [SerializeField] bool useLerp = false;
 
     public bool isSupended = false;
@@ -29,36 +34,46 @@ public class Choose : ValidatedMonoBehaviour{
 
     private void Start() {
         startingPos = transform.position;
-        StartCoroutine(CoAnimateFlip());
+        // StartCoroutine(CoAnimateFloat());
+    }
+
+    public void AnimateFloat(){
+        isSupended = true;
+        coAnimMouve = StartCoroutine(CoAnimateFloat());
+    }
+
+    public void StopAnimateFloat(){
+        isThere = false;
+        isSupended = false;
     }
 
     private IEnumerator CoAnimateFloat(){
-
-        yield return null;
-    }
-
-    private IEnumerator CoAnimateFlip(){
         float direction = 1;
-        if(coFlip != null) StopCoroutine(coFlip);
-        coFlip = StartCoroutine(CoroutineMove(
+        if(coMouveTowards != null) StopCoroutine(coMouveTowards);
+        coMouveTowards = StartCoroutine(CoroutineMove(
             startingPos,
             startingPos + Vector3.up * elevatedHight,
             true
             ));
         yield return new WaitUntil(()=>isThere);
         while (isSupended){
-            StopCoroutine(coFlip);
-            coFlip = StartCoroutine(CoroutineMove(
+            StopCoroutine(coMouveTowards);
+            coMouveTowards = StartCoroutine(CoroutineMove(
                 startingPos + Vector3.up * elevatedHight + Vector3.up * animationHightChange * direction, 
                 startingPos + Vector3.up * elevatedHight - Vector3.up * animationHightChange * direction
             ));
             direction *= -1;
             yield return new WaitUntil(()=>isThere);
         }
-        StopCoroutine(coFlip);
+        StopCoroutine(coMouveTowards);
         isThere = false;
-        Debug.Log("Wrong");
-        coFlip = StartCoroutine(CoroutineMove(transform.position, startingPos));
+        Debug.Log("Here");
+        coMouveTowards = StartCoroutine(CoroutineMoveEnd(transform.position, startingPos));
+        Debug.Log("Also here");
+    }
+
+    private IEnumerator CoAnimateFlip(){
+        yield return null;
     }   
 
     private IEnumerator CoroutineMove(Vector3 posIni , Vector3 posDest, bool startingSpeed = false){
@@ -73,6 +88,20 @@ public class Choose : ValidatedMonoBehaviour{
                 float speed = startingSpeed ? elevatedStartingSpeed : elevatedSpeed;
                 isThere = MouveWithMoveTowards(posDest, speed);
             }
+            yield return new WaitForFixedUpdate(); 
+        }
+        isThere = true;
+    }
+
+    private IEnumerator CoroutineMoveEnd(Vector3 posIni , Vector3 posDest){
+        isThere = false;
+        float actionTime = 0;
+        while (!isThere){
+            actionTime += Time.fixedDeltaTime;
+            isThere = useLerp ? 
+                MoveWithLerp(posIni, posDest, actionTime, elevationEndingTime) : 
+                MouveWithMoveTowards(posDest, elevatedEndingSpeed)
+            ;
             yield return new WaitForFixedUpdate(); 
         }
     }
