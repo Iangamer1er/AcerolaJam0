@@ -2164,13 +2164,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: No_Spare
       objectReference: {fileID: 0}
+    - target: {fileID: 5133625529229442450, guid: a3aa2836ff5ef0d4aaebd2e469963569, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.09
+      objectReference: {fileID: 0}
     - target: {fileID: 5714638063336279242, guid: a3aa2836ff5ef0d4aaebd2e469963569, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.901
+      value: 1.948
       objectReference: {fileID: 0}
     - target: {fileID: 5714638063336279242, guid: a3aa2836ff5ef0d4aaebd2e469963569, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.8270407
+      value: 3.856
       objectReference: {fileID: 0}
     - target: {fileID: 5714638063336279242, guid: a3aa2836ff5ef0d4aaebd2e469963569, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2203,6 +2207,10 @@ PrefabInstance:
     - target: {fileID: 5714638063336279242, guid: a3aa2836ff5ef0d4aaebd2e469963569, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6278752631127176081, guid: a3aa2836ff5ef0d4aaebd2e469963569, type: 3}
+      propertyPath: rotationTime
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2281,17 +2289,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 647876658395385239, guid: 7bf7e028e982bff448b1257b1c3ba0fb, type: 3}
+      propertyPath: canFlip
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 647876658395385239, guid: 7bf7e028e982bff448b1257b1c3ba0fb, type: 3}
+      propertyPath: rotationTime
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381934670697138486, guid: 7bf7e028e982bff448b1257b1c3ba0fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.788
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381934670697138486, guid: 7bf7e028e982bff448b1257b1c3ba0fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.09
+      objectReference: {fileID: 0}
     - target: {fileID: 2465070334616429268, guid: 7bf7e028e982bff448b1257b1c3ba0fb, type: 3}
       propertyPath: m_Name
       value: Skip
       objectReference: {fileID: 0}
     - target: {fileID: 2989933598416189550, guid: 7bf7e028e982bff448b1257b1c3ba0fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.6
+      value: 1.916
       objectReference: {fileID: 0}
     - target: {fileID: 2989933598416189550, guid: 7bf7e028e982bff448b1257b1c3ba0fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.827041
+      value: 3.856
       objectReference: {fileID: 0}
     - target: {fileID: 2989933598416189550, guid: 7bf7e028e982bff448b1257b1c3ba0fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2401,11 +2425,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1216893463541518032, guid: 8e7aefbf0314551429610dc940874037, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.891
+      value: 1.948
       objectReference: {fileID: 0}
     - target: {fileID: 1216893463541518032, guid: 8e7aefbf0314551429610dc940874037, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.8270407
+      value: 3.856
       objectReference: {fileID: 0}
     - target: {fileID: 1216893463541518032, guid: 8e7aefbf0314551429610dc940874037, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2439,9 +2463,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1770884538397769608, guid: 8e7aefbf0314551429610dc940874037, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.09
+      objectReference: {fileID: 0}
     - target: {fileID: 1993008332101866602, guid: 8e7aefbf0314551429610dc940874037, type: 3}
       propertyPath: m_Name
       value: Yes_Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129535617662013527, guid: 8e7aefbf0314551429610dc940874037, type: 3}
+      propertyPath: rotationTime
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

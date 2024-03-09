@@ -5,6 +5,7 @@ using KBCore.Refs;
 using OpenCover.Framework.Model;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : ValidatedMonoBehaviour
 {
@@ -21,6 +22,9 @@ public class Player : ValidatedMonoBehaviour
     private int levelHeight = 0;
     private Choose lastChosen;
 
+    private UnityEvent _inCombatEvent = new UnityEvent();
+    public UnityEvent inCombatEvent => _inCombatEvent;
+
     private static Player _instance; 
     public static Player instance => _instance;
 
@@ -29,10 +33,11 @@ public class Player : ValidatedMonoBehaviour
         currentHealth = maxHealth;
     }
 
-    [ContextMenu("Attack")]
+    [ContextMenu("Flip")]
     public void ContextMenu(){
-        Attack(null);
+        inCombatEvent.Invoke();
     }
+
 
     public void Attack(EnemyManager enemy, BodyParts part = BodyParts.Torso){
         if(enemy == null) enemy = targetEnemy;

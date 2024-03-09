@@ -2,6 +2,7 @@ using KBCore.Refs;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum ChoseType {Attack, Yes, Spare, No}
 
@@ -10,7 +11,9 @@ public class Choose : ValidatedMonoBehaviour{
     [SerializeField] public ChoseType type = ChoseType.Attack;
 
     [Header("Rotation")]
-    [SerializeField, Min(0)] private float rotationSpeed = 4f;
+    [SerializeField, Min(0)] private float rotationTime = 0.5f;
+    [SerializeField, Range(0, 360)] private float flipAmount = 180;
+    [SerializeField] private bool canFlip = true;
 
     [Header("Suspended")]
     [SerializeField, Min(0)] private float elevatedSpeed = 4f;
@@ -34,7 +37,7 @@ public class Choose : ValidatedMonoBehaviour{
 
     private void Start() {
         startingPos = transform.position;
-        // StartCoroutine(CoAnimateFloat());
+        Player.instance.inCombatEvent.AddListener(AnimateFlip);
     }
 
     public void AnimateFloat(){
@@ -42,9 +45,14 @@ public class Choose : ValidatedMonoBehaviour{
         coAnimMouve = StartCoroutine(CoAnimateFloat());
     }
 
-    public void StopAnimateFloat(){
-        isThere = false;
-        isSupended = false;
+    public void AnimateFlip(){
+        if(!canFlip) return;
+        if(coAnimFlip != null) StopCoroutine(coAnimFlip);
+        coAnimFlip = StartCoroutine(CoAnimateFlip(
+            transform.localEulerAngles,
+            transform.localEulerAngles + Vector3.right * flipAmount,
+            rotationTime
+        ));
     }
 
     private IEnumerator CoAnimateFloat(){
@@ -72,7 +80,14 @@ public class Choose : ValidatedMonoBehaviour{
         Debug.Log("Also here");
     }
 
-    private IEnumerator CoAnimateFlip(){
+    private IEnumerator CoAnimateFlip(Vector3 rotIni , Vector3 rotEnd, float animeTime){
+        bool isRotated = false;
+        float actionTime = 0;
+        while (!isRotated){
+            actionTime += Time.fixedDeltaTime;
+            isRotated = FlipWithLerp(rotIni, rotEnd, actionTime, animeTime);
+            yield return new WaitForFixedUpdate();
+        }
         yield return null;
     }   
 
@@ -117,12 +132,20 @@ public class Choose : ValidatedMonoBehaviour{
 
     private bool MoveWithLerp(Vector3 posIni, Vector3 posDest, float actionTime, float speed){
         float t = Mathf.SmoothStep(0, 1, actionTime/speed); 
-        Vector3 nouvPos = Vector3.Lerp(posIni, posDest, t); 
-        float maDistance = Vector3.Distance(transform.position, nouvPos);
-        Vector3 posArrondi = new Vector3(Round(nouvPos.x, roundPrecision), Round(nouvPos.y, roundPrecision), Round(nouvPos.z, roundPrecision));
-        Vector3 posDestArrondi = new Vector3(Round(posDest.x, roundPrecision), Round(posDest.y, roundPrecision), Round(posDest.z, roundPrecision));
-        transform.position = nouvPos;
-        return (posArrondi == posDestArrondi);
+        Vector3 newPos = Vector3.Lerp(posIni, posDest, t); 
+        Vector3 roundedPos = new Vector3(Round(newPos.x, roundPrecision), Round(newPos.y, roundPrecision), Round(newPos.z, roundPrecision));
+        Vector3 roudedDestPos = new Vector3(Round(posDest.x, roundPrecision), Round(posDest.y, roundPrecision), Round(posDest.z, roundPrecision));
+        transform.position = newPos;
+        return (roundedPos == roudedDestPos);
+    }
+
+    private bool FlipWithLerp(Vector3 rotIni, Vector3 rotEnd, float actionTime, float speed){
+        float t = Mathf.SmoothStep(0, 1, actionTime/speed); 
+        Vector3 newPos = Vector3.Lerp(rotIni, rotEnd, t); 
+        Vector3 roundedPos = new Vector3(Round(newPos.x, roundPrecision), Round(newPos.y, roundPrecision), Round(newPos.z, roundPrecision));
+        Vector3 roudedDestPos = new Vector3(Round(rotEnd.x, roundPrecision), Round(rotEnd.y, roundPrecision), Round(rotEnd.z, roundPrecision));
+        transform.localEulerAngles = newPos;
+        return (roundedPos == roudedDestPos);
     }
 
     private float Round(float valeur, int decimale){
