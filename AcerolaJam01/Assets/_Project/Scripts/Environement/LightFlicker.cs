@@ -14,7 +14,7 @@ public class LightFlicker : ValidatedMonoBehaviour
     private float targetIntensity;
     private float lastIntensity;
     private float interval;
-    private float timer;
+    private float timer = 0;
     private float startingIntensity;
 
     private Vector3 targetPosition;

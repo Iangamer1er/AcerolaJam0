@@ -6,6 +6,7 @@ using OpenCover.Framework.Model;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class Player : ValidatedMonoBehaviour
 {
@@ -15,13 +16,25 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Range(0, 1)] public float dodgeChance = 0.01f;
     [SerializeField, Range(0, 1)] public float armor = 0f;
     [SerializeField] private EnemyManager targetEnemy;
-    [SerializeField] private GameObject prefabHand;
+
+    [Header("Stats")]
+    [SerializeField, Anywhere] private TextMeshProUGUI armorTxt;
+    [SerializeField, Anywhere] private TextMeshProUGUI maxHealthTxt;
+    [SerializeField, Anywhere] private TextMeshProUGUI attackPowerTxt;
+    [SerializeField, Anywhere] private TextMeshProUGUI dodgeTxt;
+
+    [Header("HandParts")]
+    [SerializeField, Anywhere] private GameObject currentHand;
+    [SerializeField, Anywhere] private GameObject[] handsStates;
+    [SerializeField, Anywhere] public GameObject[] handsCuts;
 
     public float currentHealth;
     public bool canChoseMap = false;
 
     private int levelHeight = 0;
     private Choose lastChosen;
+
+    private int nbFingerTaken = 0;
 
     private UnityEvent _inCombatEvent = new UnityEvent();
     public UnityEvent inCombatEvent => _inCombatEvent;
@@ -34,16 +47,31 @@ public class Player : ValidatedMonoBehaviour
         currentHealth = maxHealth;
     }
 
-    [ContextMenu("Flip")]
+    [ContextMenu("RemoveFinger")]
     public void ContextMenu(){
-        inCombatEvent.Invoke();
+        RemoveFinger();
     }
 
     private void Start() {
         // Instantiate(prefabHand, transform);
+        UpdateStats();
     }
 
+    public void UpdateStats(){
+        armorTxt.text = (armor * 100) + "";
+        maxHealthTxt.text = (maxHealth/currentHealth * 100) + "";
+        attackPowerTxt.text = (attackPower * 100) + "";
+        dodgeTxt.text = (dodgeChance * 100) + "";
+    }
 
+    public void RemoveFinger(){
+        if(nbFingerTaken >= handsStates.Length){
+          return;  
+        } 
+        Destroy(currentHand);
+        currentHand = Instantiate(handsStates[nbFingerTaken], transform);
+        nbFingerTaken ++;
+    }
 
     public void Attack(EnemyManager enemy, BodyParts part = BodyParts.Torso){
         if(enemy == null) enemy = targetEnemy;
