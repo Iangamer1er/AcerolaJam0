@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using System.Linq;
 
 public class Player : ValidatedMonoBehaviour
 {
@@ -25,8 +26,9 @@ public class Player : ValidatedMonoBehaviour
 
     [Header("HandParts")]
     [SerializeField, Anywhere] private GameObject currentHand;
+    [SerializeField, Anywhere] private GameObject prefabFinger;
     [SerializeField, Anywhere] private GameObject[] handsStates;
-    [SerializeField, Anywhere] public GameObject[] handsCuts;
+    [SerializeField, Anywhere] public Transform[] handsCuts;
 
     public float currentHealth;
     public bool canChoseMap = false;
@@ -69,7 +71,11 @@ public class Player : ValidatedMonoBehaviour
           return;  
         } 
         Destroy(currentHand);
+        Debug.Log("1");
         currentHand = Instantiate(handsStates[nbFingerTaken], transform);
+        Debug.Log("2");
+        Instantiate(prefabFinger, handsCuts[nbFingerTaken].position, prefabFinger.transform.rotation, transform);
+        Debug.Log("3");
         nbFingerTaken ++;
     }
 
