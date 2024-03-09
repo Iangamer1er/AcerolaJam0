@@ -15,6 +15,7 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Range(0, 1)] public float dodgeChance = 0.01f;
     [SerializeField, Range(0, 1)] public float armor = 0f;
     [SerializeField] private EnemyManager targetEnemy;
+    [SerializeField] private GameObject prefabHand;
 
     public float currentHealth;
     public bool canChoseMap = false;
@@ -37,6 +38,11 @@ public class Player : ValidatedMonoBehaviour
     public void ContextMenu(){
         inCombatEvent.Invoke();
     }
+
+    private void Start() {
+        // Instantiate(prefabHand, transform);
+    }
+
 
 
     public void Attack(EnemyManager enemy, BodyParts part = BodyParts.Torso){
