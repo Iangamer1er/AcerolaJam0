@@ -3052,7 +3052,7 @@ PrefabInstance:
     - target: {fileID: 5394440361732775401, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6dcf0efef92687a49a29f9a583e2cd9b, type: 2}
+      objectReference: {fileID: 2100000, guid: d5c6bb812c5c5f3419a01ff1193ff627, type: 2}
     - target: {fileID: 5770684588001127381, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_Name
       value: StartingSpace
@@ -3174,7 +3174,7 @@ PrefabInstance:
     - target: {fileID: 5345694453032912466, guid: 23f5518fd781c7e4c875048852b81f17, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6dcf0efef92687a49a29f9a583e2cd9b, type: 2}
+      objectReference: {fileID: 2100000, guid: d5c6bb812c5c5f3419a01ff1193ff627, type: 2}
     - target: {fileID: 5829567954860241006, guid: 23f5518fd781c7e4c875048852b81f17, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
