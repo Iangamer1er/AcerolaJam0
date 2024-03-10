@@ -39,6 +39,7 @@ public class DM : ValidatedMonoBehaviour
     }
 
     private IEnumerator Talk(InfoDialogue info){
+        Player.instance.canInteract = false;
         foreach (MyListDialogues listDialogue in info.Act){
             foreach (string text in listDialogue.dialogue){
                 StartCoroutine(WriteText(text));
@@ -46,6 +47,7 @@ public class DM : ValidatedMonoBehaviour
                 goNext = false;
             }
         }
+        Player.instance.canInteract = true;
     }
 
     public IEnumerator WriteText(string text){

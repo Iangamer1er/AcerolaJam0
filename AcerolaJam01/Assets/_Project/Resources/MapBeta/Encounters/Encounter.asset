@@ -16,3 +16,26 @@ MonoBehaviour:
   chance: 0.1
   DMDescriptionFail: Failed
   DMDescriptionSuccess: Success
+  eventFail:
+  - baseEvent:
+      rid: 4380223664261169153
+  - baseEvent:
+      rid: 4380223664261169154
+  - baseEvent:
+      rid: 4380223664261169155
+  eventWin: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4380223664261169153
+      type: {class: ChangeArmor, ns: , asm: Assembly-CSharp}
+      data:
+        armorValue: 0.33
+    - rid: 4380223664261169154
+      type: {class: GainMaxHealth, ns: , asm: Assembly-CSharp}
+      data:
+        maxHealthChange: 0.61
+    - rid: 4380223664261169155
+      type: {class: ChangeCurrentHealth, ns: , asm: Assembly-CSharp}
+      data:
+        healthChange: -0.78

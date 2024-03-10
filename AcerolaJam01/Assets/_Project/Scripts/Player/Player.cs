@@ -32,6 +32,8 @@ public class Player : ValidatedMonoBehaviour
 
     public float currentHealth;
     public bool canChoseMap = false;
+    public bool inCombat = false;
+    public bool canInteract = false;
 
     private int levelHeight = 0;
     private Choose lastChosen;
@@ -49,9 +51,9 @@ public class Player : ValidatedMonoBehaviour
         currentHealth = maxHealth;
     }
 
-    [ContextMenu("RemoveFinger")]
+    [ContextMenu("In combat")]
     public void ContextMenu(){
-        RemoveFinger();
+        inCombatEvent.Invoke();
     }
 
     private void Start() {
@@ -86,17 +88,26 @@ public class Player : ValidatedMonoBehaviour
 
     public void ChangeHealth(float healthChange){
         currentHealth = Mathf.Clamp(currentHealth + healthChange, 0, maxHealth);
+        UpdateStats();
     }
 
     public void ChangeMaxHealth(float MaxhealthChange){
         maxHealth = Mathf.Max(maxHealth + MaxhealthChange, 0.01f);
+        UpdateStats();
     }
 
     public void ChangeDodge(float dodgeChange){
         dodgeChance = Mathf.Clamp(maxHealth + dodgeChange, 0, 1);
+        UpdateStats();
+    }
+
+    public void ChangeArmor(float armorChange){
+        armor = armorChange;
+        UpdateStats();
     }
 
     public void ClickedInteractable(GameObject objHit){
+        if(!canInteract) return;
         if(!ClickCase(objHit)) ClickAnswer(objHit);
     }
 

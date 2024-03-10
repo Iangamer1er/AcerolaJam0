@@ -13,5 +13,11 @@ public class InfoEncounters : ScriptableObject
     [SerializeField, TextArea] public string DMDescriptionSuccess = "Success";
 
     [Header("Event")]
-    [SerializeReference, SubclassPicker] public BaseEvent baseEvent;
+    [SerializeField] public List<MyBaseEvent> eventFail;
+    [SerializeField] public List<MyBaseEvent> eventWin;
+}
+
+[System.Serializable]
+public class MyBaseEvent {
+    [SerializeReference, SubclassPicker] BaseEvent baseEvent;
 }

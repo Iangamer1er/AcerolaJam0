@@ -2822,6 +2822,7 @@ MonoBehaviour:
   - {fileID: 1389129551}
   currentHealth: 0
   canChoseMap: 0
+  inCombat: 0
 --- !u!65 &1519638185
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4824,7 +4825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6583778468118442351, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.306861
+      value: 13.2675
       objectReference: {fileID: 0}
     - target: {fileID: 6583778468118442351, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4941,12 +4942,24 @@ PrefabInstance:
       value: PlayerCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 6605964299217251028, guid: 23f5518fd781c7e4c875048852b81f17, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.033927277
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605964299217251028, guid: 23f5518fd781c7e4c875048852b81f17, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.033927277
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605964299217251028, guid: 23f5518fd781c7e4c875048852b81f17, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.033927277
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605964299217251028, guid: 23f5518fd781c7e4c875048852b81f17, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.186
       objectReference: {fileID: 0}
     - target: {fileID: 6605964299217251028, guid: 23f5518fd781c7e4c875048852b81f17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.284
+      value: 4.0636
       objectReference: {fileID: 0}
     - target: {fileID: 6605964299217251028, guid: 23f5518fd781c7e4c875048852b81f17, type: 3}
       propertyPath: m_LocalPosition.z
