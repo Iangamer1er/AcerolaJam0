@@ -10,6 +10,7 @@ public class InfoEnemies : ScriptableObject
     [SerializeField] public string eName = "";
     [SerializeField, Range(0, 1)] public float damage = 0.1f; 
     [SerializeField, Range(0, 1)] public float Brokendamage = 0.05f; 
+    [SerializeField, Range(0, 1)] public float dodgeChance = 0.1f; 
 
     [SerializeField, Range(0, 1)] public float armsMaxHealth = 1; 
     [SerializeField, Range(0, 1)] public float armsHealthRatio = 1f;

@@ -63,10 +63,10 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public void UpdateStats(){
-        armorTxt.text = (armor * 100) + "";
-        maxHealthTxt.text = (maxHealth/currentHealth * 100) + "";
-        attackPowerTxt.text = (attackPower * 100) + "";
-        dodgeTxt.text = (dodgeChance * 100) + "";
+        armorTxt.text = Mathf.RoundToInt(armor * 100) + "";
+        maxHealthTxt.text = Mathf.RoundToInt(maxHealth/currentHealth * 100) + "";
+        attackPowerTxt.text = Mathf.RoundToInt(attackPower * 100) + "";
+        dodgeTxt.text = Mathf.RoundToInt(dodgeChance * 100) + "";
     }
 
     public void RemoveFinger(){
@@ -92,7 +92,7 @@ public class Player : ValidatedMonoBehaviour
         Debug.Log("Gotten Here");
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0, 1) > dodgeChance){
-            ChangeHealth(-damage);
+            ChangeHealth(-damage + armor);
             canInteract = true;
         } else{
             DM.instance.Talk(DM.instance.PdodgeTxt);
@@ -129,7 +129,11 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public void ClickedInteractable(GameObject objHit){
-        if(!canInteract) return;
+        if(objHit.tag == "Skip"){
+            if(lastChosen != null) lastChosen.isSupended = false;
+            Debug.Log("Skip!");
+            DM.instance.wannaSkip = true;
+        }else if(!canInteract) return;
         if(!ClickCase(objHit) && inCombat) ClickAnswer(objHit);
     }
 
@@ -147,8 +151,9 @@ public class Player : ValidatedMonoBehaviour
                 break;
             case "Enemy": 
                 if(objTile.touched) break;
-                EnemyManager scriptEnemy = objHit.AddComponent<EnemyManager>();
-                scriptEnemy.info = scriptEnemy.ChoseEnemy();
+                // EnemyManager scriptEnemy = objHit.AddComponent<EnemyManager>();
+                // scriptEnemy.info = scriptEnemy.ChoseEnemy();
+                targetEnemy.ChoseEnemy();
                 objTile.touched = true;
                 break;
             case "Boon": 
@@ -182,11 +187,6 @@ public class Player : ValidatedMonoBehaviour
 
     private void ClickAnswer(GameObject objHit){
         switch(objHit.tag){
-            case "Skip" :
-                if(lastChosen != null) lastChosen.isSupended = false;
-                Debug.Log("Skip!");
-                DM.instance.wannaSkip = true;
-                break;
             case "Yes_Attack" :
                 if(lastChosen != null) lastChosen.isSupended = false;
                 lastChosen = objHit.GetComponent<Choose>();

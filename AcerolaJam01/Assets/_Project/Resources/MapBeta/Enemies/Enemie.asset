@@ -19,7 +19,7 @@ MonoBehaviour:
   armsHealthRatio: 1
   legsMaxHealth: 1
   legsHealthRatio: 1
-  headChance: 0.2
+  headChance: 0.665
   headModif: 1
   torsoMaxHealth: 1
   torsoModif: 1
@@ -33,7 +33,8 @@ MonoBehaviour:
   behavoirLowHealth:
     rid: -2
   lowHealthThreshhold: 0.33
-  descriptionLowHealthChange: []
+  descriptionLowHealthChange:
+  - Cool
   combatReward: {fileID: 11400000, guid: 911174e3468760c4eb5e66bccb5115ee, type: 2}
   references:
     version: 2

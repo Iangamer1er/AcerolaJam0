@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public enum ChoseType {Attack, Yes, Spare, No}
 
-public class Choose : ValidatedMonoBehaviour{
+public class Choose : MonoBehaviour{
     public int roundPrecision = 4;
     [SerializeField] public ChoseType type = ChoseType.Attack;
 

@@ -69,11 +69,12 @@ public class EnemyManager : MonoBehaviour
     }
 
     public IEnumerator CoTakeDamage(float damage, BodyParts part){
-        Debug.Log("enemy take damage");
         yield return new WaitUntil(()=>DM.instance.doneTalking);
-        Debug.Log("enemy take damage after");
-        if(Random.Range(0f, 1f) < legsHealth/info.legsMaxHealth){
+        Debug.Log("legs health : " + legsHealth + "\n legs max health : " + info.legsMaxHealth);
+        if(Random.Range(0f, legsHealth/info.legsMaxHealth) < info.dodgeChance){
             StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
+            StartCoroutine(DM.instance.Talk(info.attackTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             Attack(info.damage);
         }else{
