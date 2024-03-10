@@ -12,8 +12,12 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, Anywhere] private TextMeshProUGUI dialogue;
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
+    [SerializeField, TextArea] public InfoDialogue EdodgeTXt;
+    [SerializeField, TextArea] public InfoDialogue PdodgeTXt;
+    [SerializeField, TextArea] public InfoDialogue EDeadTxt;
 
     public bool wannaSkip = false;
+    public bool doneTalking = false;
 
     private bool goNext = false;
     private string currentTxt = "";
@@ -38,7 +42,8 @@ public class DM : ValidatedMonoBehaviour
         timerSentences.Tick(Time.deltaTime);
     }
 
-    private IEnumerator Talk(InfoDialogue info){
+    public IEnumerator Talk(InfoDialogue info){
+        doneTalking = false;
         Player.instance.canInteract = false;
         foreach (MyListDialogues listDialogue in info.Act){
             foreach (string text in listDialogue.dialogue){
@@ -47,10 +52,11 @@ public class DM : ValidatedMonoBehaviour
                 goNext = false;
             }
         }
-        Player.instance.canInteract = true;
+        doneTalking = true;
+        dialogue.text = "";
     }
 
-    public IEnumerator WriteText(string text){
+    private IEnumerator WriteText(string text){
         currentTxt = "";
         wannaSkip = false;
         for (int i = 0; i < text.Length; i++){

@@ -84,7 +84,7 @@ public class Player : ValidatedMonoBehaviour
 
     public void Attack(EnemyManager enemy, BodyParts part = BodyParts.Torso){
         if(enemy == null) enemy = targetEnemy;
-        targetEnemy.TakeDamage(attackPower, part);
+        StartCoroutine(targetEnemy.CoTakeDamage(attackPower, part));
     }
 
     public void ChangeHealth(float healthChange){
@@ -208,6 +208,7 @@ public class Player : ValidatedMonoBehaviour
                 Debug.Log("Nothing");
                 break;
         }
+        if(lastChosen == null || partChosen == null) return; 
         if(lastChosen.isSupended && partChosen.isSupended){
            Attack(null, part);
            lastChosen.isSupended = false;

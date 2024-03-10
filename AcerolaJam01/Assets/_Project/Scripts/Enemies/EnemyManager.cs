@@ -12,9 +12,10 @@ public class EnemyManager : MonoBehaviour
     public float armsHealth;
     public float legsHealth;
     public float torsoHealth;
+    public float damage;
     
     private EnemyBase currentState;
-    private bool brokenLegs, brokenArms, brokenHead = false;
+    
     public InfoEnemies info;
 
     private void Start() {
@@ -44,6 +45,17 @@ public class EnemyManager : MonoBehaviour
         armsHealth = info.armsMaxHealth;
         legsHealth = info.legsMaxHealth;
         torsoHealth = info.torsoMaxHealth;
+        damage = info.damage;
+    }
+
+    public void CheckBrokenArms(){
+        if(armsHealth > 0) return;
+        damage = info.Brokendamage;
+    }
+
+    public void CheckBrokenLegs(){
+        if(legsHealth > 0) return;
+
     }
 
     public void ChangeState(EnemyBase state){
@@ -51,9 +63,18 @@ public class EnemyManager : MonoBehaviour
         currentState.InitState(this);
     }
 
-    public void TakeDamage(float damage, BodyParts part){
-        currentState.TakeDamage(this, damage, part);
-        if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
+    public IEnumerator CoTakeDamage(float damage, BodyParts part){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(Random.Range(0f, 1f) < legsHealth/info.legsMaxHealth){
+            StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTXt));
+        }else{
+            currentState.TakeDamage(this, damage, part);
+            if(torsoHealth <= 0){
+                StartCoroutine(DM.instance.Talk(DM.instance.EDeadTxt));
+            }else if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
+            yield return null;
+
+        }
     }
 
     public void Attack(float damage, BodyParts part){

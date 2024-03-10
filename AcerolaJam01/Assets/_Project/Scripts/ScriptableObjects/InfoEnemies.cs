@@ -9,6 +9,8 @@ public class InfoEnemies : ScriptableObject
     [Header("Infos")]
     [SerializeField] public string eName = "";
     [SerializeField, TextArea] public MyListDialogues description;
+    [SerializeField, Range(0, 1)] public float damage = 0.1f; 
+    [SerializeField, Range(0, 1)] public float Brokendamage = 0.05f; 
 
     [SerializeField, Range(0, 1)] public float armsMaxHealth = 1; 
     [SerializeField, Range(0, 1)] public float armsHealthRatio = 0.2f;
