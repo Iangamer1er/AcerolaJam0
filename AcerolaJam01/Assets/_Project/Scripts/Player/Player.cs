@@ -85,11 +85,30 @@ public class Player : ValidatedMonoBehaviour
     public void Attack(EnemyManager enemy, BodyParts part = BodyParts.Torso){
         if(enemy == null) enemy = targetEnemy;
         StartCoroutine(targetEnemy.CoTakeDamage(attackPower, part));
+        canInteract = false;
+    }
+
+    public IEnumerator CoTakeDamage(float damage){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(Random.Range(0, 1) > dodgeChance){
+            ChangeHealth(-damage);
+            canInteract = true;
+        } else{
+            DM.instance.Talk(DM.instance.PdodgeTxt);
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
+        }
+        
+    }
+
+    public IEnumerator CoDies(){
+
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
     }
 
     public void ChangeHealth(float healthChange){
         currentHealth = Mathf.Clamp(currentHealth + healthChange, 0, maxHealth);
         UpdateStats();
+        if(currentHealth <= 0) StartCoroutine(CoDies());
     }
 
     public void ChangeMaxHealth(float MaxhealthChange){

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyNormalState : EnemyBase{
     
     public override void InitState(EnemyManager enemy){
-        
+        enemy.StartCoroutine(DM.instance.Talk(enemy.info.description));
     }
 
     public override void TakeDamage(EnemyManager enemy, float damage, BodyParts part){
@@ -15,6 +15,7 @@ public class EnemyNormalState : EnemyBase{
                 damageInflicted = damage * enemy.info.armsHealthRatio;
                 enemy.armsHealth -= damageInflicted;
                 enemy.torsoHealth -= damageInflicted;
+                // enemy.StartCoroutine(enemy.coche)
                 Debug.Log(part +" health : " + enemy.armsHealth);
                 Debug.Log(BodyParts.Torso +" health : " + enemy.torsoHealth);
                 break;
@@ -26,7 +27,10 @@ public class EnemyNormalState : EnemyBase{
                 Debug.Log(BodyParts.Torso +" health : " + enemy.torsoHealth);
                 break;
             case BodyParts.Head : 
-                if(Random.Range(0, 1) >= enemy.info.headChance) break;
+                if(Random.Range(0, 1) >= enemy.info.headChance){
+                    DM.instance.Talk(DM.instance.EdodgeTxt);
+                    break;
+                }
                 damageInflicted = damage * enemy.info.headModif;
                 enemy.torsoHealth -= damageInflicted;
                 Debug.Log("Damage inflicted : " + damageInflicted);
@@ -45,7 +49,7 @@ public class EnemyNormalState : EnemyBase{
     }
 
     public override void Attack(EnemyManager enemy, float damage){
-        
+        enemy.StartCoroutine(Player.instance.CoTakeDamage(damage));
     }
 
     public override void Spare(EnemyManager enemy){

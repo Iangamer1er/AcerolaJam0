@@ -48,14 +48,19 @@ public class EnemyManager : MonoBehaviour
         damage = info.damage;
     }
 
-    public void CheckBrokenArms(){
-        if(armsHealth > 0) return;
-        damage = info.Brokendamage;
+    public IEnumerator CheckBrokenArms(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(armsHealth <= 0){
+            damage = info.Brokendamage;
+            
+        }
     }
 
-    public void CheckBrokenLegs(){
-        if(legsHealth > 0) return;
-
+    public IEnumerator CheckBrokenLegs(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(legsHealth <= 0){
+            
+        }
     }
 
     public void ChangeState(EnemyBase state){
