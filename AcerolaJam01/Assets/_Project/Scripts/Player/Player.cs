@@ -89,6 +89,7 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public IEnumerator CoTakeDamage(float damage){
+        Debug.Log("Gotten Here");
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0, 1) > dodgeChance){
             ChangeHealth(-damage);
@@ -96,6 +97,7 @@ public class Player : ValidatedMonoBehaviour
         } else{
             DM.instance.Talk(DM.instance.PdodgeTxt);
             yield return new WaitUntil(()=>DM.instance.doneTalking);
+            canInteract = true;
         }
         
     }
@@ -182,17 +184,16 @@ public class Player : ValidatedMonoBehaviour
         switch(objHit.tag){
             case "Skip" :
                 if(lastChosen != null) lastChosen.isSupended = false;
+                Debug.Log("Skip!");
                 DM.instance.wannaSkip = true;
                 break;
             case "Yes_Attack" :
                 if(lastChosen != null) lastChosen.isSupended = false;
                 lastChosen = objHit.GetComponent<Choose>();
                 lastChosen.AnimateFloat();
-                Debug.Log("Attack");
                 break;
             case "No_Spare" :
                 if(lastChosen != null) lastChosen.isSupended = false;
-                Debug.Log("Spare");
                 break;
             case "Head" :
                 if(partChosen != null) partChosen.isSupended = false;
@@ -205,7 +206,6 @@ public class Player : ValidatedMonoBehaviour
                 partChosen = objHit.GetComponent<Choose>();
                 partChosen.AnimateFloat();
                 part = BodyParts.Arms;
-                Debug.Log("Arms");
                 break;
             case "Legs" :
                 Debug.Log("Legs");
@@ -215,7 +215,6 @@ public class Player : ValidatedMonoBehaviour
                 part = BodyParts.Legs;
                 break;
             case "Body" :
-                Debug.Log("Body");
                 if(partChosen != null) partChosen.isSupended = false;
                 partChosen = objHit.GetComponent<Choose>();
                 partChosen.AnimateFloat();
@@ -224,7 +223,6 @@ public class Player : ValidatedMonoBehaviour
             default :
                 if(lastChosen != null) lastChosen.isSupended = false;
                 if(partChosen != null) partChosen.isSupended = false;
-                Debug.Log("Nothing");
                 break;
         }
         if(lastChosen == null || partChosen == null) return; 

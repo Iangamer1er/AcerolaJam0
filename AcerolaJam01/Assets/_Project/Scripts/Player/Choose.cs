@@ -75,9 +75,7 @@ public class Choose : ValidatedMonoBehaviour{
         }
         StopCoroutine(coMouveTowards);
         isThere = false;
-        Debug.Log("Here");
         coMouveTowards = StartCoroutine(CoroutineMoveEnd(transform.position, startingPos));
-        Debug.Log("Also here");
     }
 
     private IEnumerator CoAnimateFlip(Vector3 rotIni , Vector3 rotEnd, float animeTime){

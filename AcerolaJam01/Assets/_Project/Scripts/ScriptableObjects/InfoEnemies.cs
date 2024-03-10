@@ -22,14 +22,14 @@ public class InfoEnemies : ScriptableObject
     [SerializeField, Range(0, 1)] public float spareAskChance = 0;
 
     [Header("Textes")]
-    [SerializeField] public List<string> description;
-    [SerializeField] public List<string> attackTxt;
+    [SerializeField, TextArea] public List<string> description;
+    [SerializeField, TextArea] public List<string> attackTxt;
 
     [Header("States")]
     [SerializeReference, SubclassPicker] public EnemyBase behavoir;
     [SerializeReference, SubclassPicker] public EnemyBase behavoirLowHealth;
     [SerializeField,Range(0, 1)] public float lowHealthThreshhold = 0.33f;
-    [SerializeField] public List<string> descriptionLowHealthChange;
+    [SerializeField, TextArea] public List<string> descriptionLowHealthChange;
 
     [Header("Reward")]
     [SerializeField] public InfoEncounters combatReward;

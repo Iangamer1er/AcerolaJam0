@@ -13,12 +13,12 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
     [Header("Dialogues")]
-    [SerializeField] private List<string> introDialogue;
-    [SerializeField] public List<string> EdodgeTxt;
-    [SerializeField] public List<string> PdodgeTxt;
-    [SerializeField] public List<string> EDeadTxt;
-    [SerializeField] public List<string> ESparedTxt;
-    [SerializeField] public List<string> ESpareFailTxt;
+    [SerializeField, TextArea] private List<string> introDialogue;
+    [SerializeField, TextArea] public List<string> EdodgeTxt;
+    [SerializeField, TextArea] public List<string> PdodgeTxt;
+    [SerializeField, TextArea] public List<string> EDeadTxt;
+    [SerializeField, TextArea] public List<string> ESparedTxt;
+    [SerializeField, TextArea] public List<string> ESpareFailTxt;
 
     public bool wannaSkip = false;
     public bool doneTalking = false;
@@ -81,6 +81,7 @@ public class DM : ValidatedMonoBehaviour
             yield return new WaitForSeconds(wannaSkip ? 0 : timeBetweenLetters);
         }
         timerSentences.Start();
+        wannaSkip = false;
         yield return new WaitUntil(()=>timerDone || wannaSkip);
         timerSentences.Stop();
         timerDone = false;

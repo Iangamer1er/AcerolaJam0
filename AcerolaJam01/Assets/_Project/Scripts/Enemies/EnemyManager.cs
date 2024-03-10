@@ -69,10 +69,13 @@ public class EnemyManager : MonoBehaviour
     }
 
     public IEnumerator CoTakeDamage(float damage, BodyParts part){
+        Debug.Log("enemy take damage");
         yield return new WaitUntil(()=>DM.instance.doneTalking);
+        Debug.Log("enemy take damage after");
         if(Random.Range(0f, 1f) < legsHealth/info.legsMaxHealth){
             StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
+            Attack(info.damage);
         }else{
             currentState.TakeDamage(this, damage, part);
             if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
