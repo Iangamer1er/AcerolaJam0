@@ -66,18 +66,36 @@ public class EnemyManager : MonoBehaviour
     public IEnumerator CoTakeDamage(float damage, BodyParts part){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0f, 1f) < legsHealth/info.legsMaxHealth){
-            StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTXt));
+            StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
         }else{
             currentState.TakeDamage(this, damage, part);
-            if(torsoHealth <= 0){
-                StartCoroutine(DM.instance.Talk(DM.instance.EDeadTxt));
-            }else if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
+            if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
             yield return null;
-
         }
     }
 
-    public void Attack(float damage, BodyParts part){
-        currentState.TakeDamage(this, damage, part);
+    public IEnumerator CoCheckHealth(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(torsoHealth <= 0){
+            StartCoroutine(DM.instance.Talk(DM.instance.EDeadTxt));
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
+            Player.instance.canInteract = true;
+        }else{
+            StartCoroutine(DM.instance.Talk(info.attackTxt));
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
+            Attack(info.damage);
+        }
+    }
+
+    public void Attack(float damage){
+        currentState.Attack(this, damage);
+    }
+
+    public IEnumerator CoSpare(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(Random.Range(0f, legsHealth/info.legsMaxHealth) < info.spareAskChance){
+
+        }
     }
 }

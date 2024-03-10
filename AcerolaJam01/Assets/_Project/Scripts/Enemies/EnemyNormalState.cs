@@ -41,25 +41,14 @@ public class EnemyNormalState : EnemyBase{
                 Debug.Log("Error with parts");
                 break;
         }
+        enemy.StartCoroutine(enemy.CoCheckHealth());
     }
 
-    public override void Attack(EnemyManager enemy, float damage, BodyParts part){
-        switch(part){
-            case BodyParts.Arms : 
+    public override void Attack(EnemyManager enemy, float damage){
+        
+    }
 
-                break;
-            case BodyParts.Legs : 
+    public override void Spare(EnemyManager enemy){
 
-                break;
-            case BodyParts.Head : 
-
-                break;
-            case BodyParts.Torso : 
-
-                break;
-            default:
-                Debug.Log("Error with parts");
-                break;
-        }
     }
 }

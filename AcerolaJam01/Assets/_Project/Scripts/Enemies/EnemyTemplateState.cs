@@ -12,7 +12,11 @@ public class EnemyTemplateState : EnemyBase{
 
     }
 
-    public override void Attack(EnemyManager enemy, float damage, BodyParts part){
+    public override void Attack(EnemyManager enemy, float damage){
+
+    }
+
+    public override void Spare(EnemyManager enemy){
 
     }
 }

@@ -914,7 +914,11 @@ MonoBehaviour:
   dialogue: {fileID: 267916221}
   timeBetweenLetters: 0.1
   timeBetweenSentences: 3
+  EdodgeTXt: {fileID: 0}
+  PdodgeTXt: {fileID: 0}
+  EDeadTxt: {fileID: 0}
   wannaSkip: 0
+  doneTalking: 0
 --- !u!1 &569323421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1276,7 @@ MonoBehaviour:
   armsHealth: 0
   legsHealth: 0
   torsoHealth: 0
+  damage: 0
   info: {fileID: 0}
 --- !u!4 &764885025
 Transform:
@@ -1463,8 +1468,16 @@ PrefabInstance:
       value: HandIcon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c544c42345941a04b8447d2a0b7e6965, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c544c42345941a04b8447d2a0b7e6965, type: 3}
       propertyPath: m_TagString
       value: Legs
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: c544c42345941a04b8447d2a0b7e6965, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2117,8 +2130,16 @@ PrefabInstance:
       value: helmetIcon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f55e8ffa22afef547b4e801b442609fb, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f55e8ffa22afef547b4e801b442609fb, type: 3}
       propertyPath: m_TagString
       value: Head
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: f55e8ffa22afef547b4e801b442609fb, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2471,8 +2492,16 @@ PrefabInstance:
       value: LegsIcon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3bf0287c54552ed4295678822c37a739, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3bf0287c54552ed4295678822c37a739, type: 3}
       propertyPath: m_TagString
       value: Legs
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 3bf0287c54552ed4295678822c37a739, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3212,8 +3241,16 @@ PrefabInstance:
       value: bodyIcon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 26ac441a5db47ef408afd1480ef2418e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 26ac441a5db47ef408afd1480ef2418e, type: 3}
       propertyPath: m_TagString
       value: Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 26ac441a5db47ef408afd1480ef2418e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

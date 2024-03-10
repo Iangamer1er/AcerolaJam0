@@ -8,13 +8,17 @@ using Utilities;
 
 public class DM : ValidatedMonoBehaviour
 {
-    [SerializeField] private InfoDialogue introDialogue;
+    [Header("Talk infos")]
     [SerializeField, Anywhere] private TextMeshProUGUI dialogue;
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
-    [SerializeField, TextArea] public InfoDialogue EdodgeTXt;
-    [SerializeField, TextArea] public InfoDialogue PdodgeTXt;
-    [SerializeField, TextArea] public InfoDialogue EDeadTxt;
+    [Header("Dialogues")]
+    [SerializeField] private List<string> introDialogue;
+    [SerializeField] public List<string> EdodgeTxt;
+    [SerializeField] public List<string> PdodgeTxt;
+    [SerializeField] public List<string> EDeadTxt;
+    [SerializeField] public List<string> ESparedTxt;
+    [SerializeField] public List<string> ESpareFailTxt;
 
     public bool wannaSkip = false;
     public bool doneTalking = false;
@@ -51,6 +55,18 @@ public class DM : ValidatedMonoBehaviour
                 yield return new WaitUntil(()=>goNext);
                 goNext = false;
             }
+        }
+        doneTalking = true;
+        dialogue.text = "";
+    }
+    
+    public IEnumerator Talk(List<string> list){
+        doneTalking = false;
+        Player.instance.canInteract = false;
+        foreach (string text in list){
+            StartCoroutine(WriteText(text));
+            yield return new WaitUntil(()=>goNext);
+            goNext = false;
         }
         doneTalking = true;
         dialogue.text = "";
