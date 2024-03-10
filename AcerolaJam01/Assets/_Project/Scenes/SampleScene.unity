@@ -910,13 +910,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c048dbaf27873dd44bd4cd6fda63f033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introDialogue: {fileID: 11400000, guid: c624412ad0422ed459cc87767e70edf7, type: 2}
   dialogue: {fileID: 267916221}
   timeBetweenLetters: 0.1
   timeBetweenSentences: 3
-  EdodgeTXt: {fileID: 0}
-  PdodgeTXt: {fileID: 0}
-  EDeadTxt: {fileID: 0}
+  introDialogue:
+  - Hi!
+  EdodgeTxt:
+  - E dodged
+  PdodgeTxt:
+  - You dodged
+  EDeadTxt:
+  - Enemy dead
+  ESparedTxt:
+  - Enemy spared
+  ESpareFailTxt:
+  - Enemy laughs
   wannaSkip: 0
   doneTalking: 0
 --- !u!1 &569323421
@@ -1277,7 +1285,7 @@ MonoBehaviour:
   legsHealth: 0
   torsoHealth: 0
   damage: 0
-  info: {fileID: 0}
+  info: {fileID: 11400000, guid: 1db2ffa839aec2f43a15d8d6e8cab499, type: 2}
 --- !u!4 &764885025
 Transform:
   m_ObjectHideFlags: 0

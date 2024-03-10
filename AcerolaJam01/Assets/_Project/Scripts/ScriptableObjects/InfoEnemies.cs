@@ -17,7 +17,7 @@ public class InfoEnemies : ScriptableObject
     [SerializeField, Range(0, 1)] public float legsHealthRatio = 1f;
     [SerializeField, Range(0, 1)] public float headChance = 0.2f;
     [SerializeField, Range(0, 3)] public float headModif = 1.5f;
-    [SerializeField, Range(0, 1)] public float torsoMaxHealth = 1f;
+    [SerializeField, Range(0, 5)] public float torsoMaxHealth = 1f;
     [SerializeField, Range(0, 1)] public float torsoModif = 1f;
     [SerializeField, Range(0, 1)] public float spareAskChance = 0;
 

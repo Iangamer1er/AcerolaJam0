@@ -13,20 +13,31 @@ MonoBehaviour:
   m_Name: Enemie 1
   m_EditorClassIdentifier: 
   eName: 
-  description: 
+  damage: 0.1
+  Brokendamage: 0.05
   armsMaxHealth: 1
   armsHealthRatio: 0.2
   legsMaxHealth: 1
   legsHealthRatio: 0.2
-  headMaxHealth: 1
+  headChance: 0.2
   headModif: 1
   torsoMaxHealth: 1
+  torsoModif: 1
   spareAskChance: 0
+  description: []
+  attackTxt: []
   behavoir:
     rid: 4380223548809019392
+  behavoirLowHealth:
+    rid: -2
+  lowHealthThreshhold: 0.33
+  descriptionLowHealthChange: []
+  combatReward: {fileID: 0}
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4380223548809019392
       type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
       data: 
