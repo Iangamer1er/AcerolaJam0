@@ -11,6 +11,10 @@ TagManager:
   - Yes_Attack
   - No_Spare
   - Skip
+  - Body
+  - Legs
+  - Arms
+  - Head
   layers:
   - Default
   - TransparentFX

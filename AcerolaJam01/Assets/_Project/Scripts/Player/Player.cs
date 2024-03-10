@@ -1,9 +1,8 @@
-using System;
+// using System;
 using System.Collections;
 using System.Collections.Generic;
 using KBCore.Refs;
 using OpenCover.Framework.Model;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
@@ -37,6 +36,8 @@ public class Player : ValidatedMonoBehaviour
 
     private int levelHeight = 0;
     private Choose lastChosen;
+    private Choose partChosen;
+    private BodyParts part;
 
     private int nbFingerTaken = 0;
 
@@ -108,11 +109,10 @@ public class Player : ValidatedMonoBehaviour
 
     public void ClickedInteractable(GameObject objHit){
         if(!canInteract) return;
-        if(!ClickCase(objHit)) ClickAnswer(objHit);
+        if(!ClickCase(objHit) && inCombat) ClickAnswer(objHit);
     }
 
     private bool ClickCase(GameObject objHit){
-        if(lastChosen != null) lastChosen.isSupended = false;
         Tile objTile = objHit.gameObject.GetComponentInParent<Tile>();
         if(objTile == null || !canChoseMap) return false;
         bool verifyHeight = objTile.height == levelHeight;
@@ -138,7 +138,17 @@ public class Player : ValidatedMonoBehaviour
                 break;
             case "Random": 
                 if(objTile.touched) break;
-                RandomTile scriptRandom = objHit.AddComponent<RandomTile>();
+                switch(Random.Range(0, 3)){
+                    case 0 :
+                        objHit.AddComponent<Encounter>().ChoseEncounter();
+                        break;
+                    case 1 :
+                        objHit.AddComponent<EnemyManager>().ChoseEnemy();
+                        break;
+                    case 2 :
+                        objHit.AddComponent<Boon>().ChoseBoon();
+                        break;
+                }
                 objTile.touched = true;
                 break;
             default :
@@ -150,23 +160,59 @@ public class Player : ValidatedMonoBehaviour
     }
 
     private void ClickAnswer(GameObject objHit){
-        if(lastChosen != null) lastChosen.isSupended = false;
         switch(objHit.tag){
             case "Skip" :
-                Debug.Log("Skip");
+                if(lastChosen != null) lastChosen.isSupended = false;
+                DM.instance.wannaSkip = true;
                 break;
             case "Yes_Attack" :
+                if(lastChosen != null) lastChosen.isSupended = false;
                 lastChosen = objHit.GetComponent<Choose>();
                 lastChosen.AnimateFloat();
                 Debug.Log("Attack");
                 break;
             case "No_Spare" :
+                if(lastChosen != null) lastChosen.isSupended = false;
                 Debug.Log("Spare");
                 break;
+            case "Head" :
+                if(partChosen != null) partChosen.isSupended = false;
+                partChosen = objHit.GetComponent<Choose>();
+                partChosen.AnimateFloat();
+                part = BodyParts.Head;
+                break;
+            case "Arms" :
+                if(partChosen != null) partChosen.isSupended = false;
+                partChosen = objHit.GetComponent<Choose>();
+                partChosen.AnimateFloat();
+                part = BodyParts.Arms;
+                Debug.Log("Arms");
+                break;
+            case "Legs" :
+                Debug.Log("Legs");
+                if(partChosen != null) partChosen.isSupended = false;
+                partChosen = objHit.GetComponent<Choose>();
+                partChosen.AnimateFloat();
+                part = BodyParts.Legs;
+                break;
+            case "Body" :
+                Debug.Log("Body");
+                if(partChosen != null) partChosen.isSupended = false;
+                partChosen = objHit.GetComponent<Choose>();
+                partChosen.AnimateFloat();
+                part = BodyParts.Torso;
+                break;
             default :
+                if(lastChosen != null) lastChosen.isSupended = false;
+                if(partChosen != null) partChosen.isSupended = false;
                 Debug.Log("Nothing");
                 break;
         }
+        if(lastChosen.isSupended && partChosen.isSupended){
+           Attack(null, part);
+           lastChosen.isSupended = false;
+           partChosen.isSupended = false;
+        } 
     }
 
     public void FinishEncounter(){

@@ -52,12 +52,12 @@ public class DM : ValidatedMonoBehaviour
 
     public IEnumerator WriteText(string text){
         currentTxt = "";
+        wannaSkip = false;
         for (int i = 0; i < text.Length; i++){
             currentTxt += text[i];
             dialogue.text = currentTxt;
             yield return new WaitForSeconds(wannaSkip ? 0 : timeBetweenLetters);
         }
-        wannaSkip = false;
         timerSentences.Start();
         yield return new WaitUntil(()=>timerDone || wannaSkip);
         timerSentences.Stop();

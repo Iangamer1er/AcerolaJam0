@@ -88,7 +88,7 @@ public class PlayerMove : ValidatedMonoBehaviour
         Vector3 mousePos = new Vector3();
         if(Physics.Raycast(ray, out RaycastHit raycastHit, 999f, maskInteractable)){
             mousePos = raycastHit.point;
-            mousePos = new Vector3(mousePos.x, mousePos.y + transform.localScale.y * 0.5f, mousePos.z);
+            mousePos = new Vector3(mousePos.x, mousePos.y, mousePos.z);
             if(mouveHandToPoint != null) StopCoroutine(mouveHandToPoint);
             mouveHandToPoint = StartCoroutine(CoroutineMove(transform.position, mousePos, raycastHit));
         }
@@ -96,7 +96,7 @@ public class PlayerMove : ValidatedMonoBehaviour
         returnTimer.Start();
     }
 
-    private void ReturnPosition() => StartCoroutine(CoroutineMove(transform.position, defaultArmPos.position));
+    private void ReturnPosition() => mouveHandToPoint = StartCoroutine(CoroutineMove(transform.position, defaultArmPos.position));
 
     private IEnumerator CoroutineMove(Vector3 posIni , Vector3 posDest){
         bool isThere = false; 
@@ -118,7 +118,7 @@ public class PlayerMove : ValidatedMonoBehaviour
     private bool MouveWithMoveTowards(Vector3 posDest){
         float maxDistance = handSpeed * Time.fixedDeltaTime; 
         Vector3 newPos = Vector3.MoveTowards(transform.position, posDest, maxDistance); 
-        rb.MovePosition(newPos);
+        transform.position = newPos;
         Vector3 roundedPos = new Vector3(Round(newPos.x, 2), Round(newPos.y, 2), Round(newPos.z, 2));
         Vector3 roudedDestPos = new Vector3(Round(posDest.x, 2), Round(posDest.y, 2), Round(posDest.z, 2));
         return (roundedPos == roudedDestPos); 
