@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29afd55fa231a7478590a1c405fd31d, type: 3}
   m_Name: Encounter
   m_EditorClassIdentifier: 
-  DMDescription: 
-  chance: 0.1
-  DMDescriptionFail: Failed
-  DMDescriptionSuccess: Success
+  DMDescription:
+    dialogue:
+    - In front of you is a pound illuminated by a strange light
+    - Will you take a sip?
+  chance: 0.9
+  DMDescriptionFail:
+    dialogue:
+    - 
+  DMDescriptionSuccess:
+    dialogue: []
   eventFail:
   - baseEvent:
       rid: 4380223664261169153

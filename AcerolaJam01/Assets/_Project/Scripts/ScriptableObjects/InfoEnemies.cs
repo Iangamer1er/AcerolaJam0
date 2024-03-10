@@ -8,7 +8,7 @@ public class InfoEnemies : ScriptableObject
 {
     [Header("Infos")]
     [SerializeField] public string eName = "";
-    [SerializeField, TextArea] public string description = "";
+    [SerializeField, TextArea] public MyListDialogues description;
 
     [SerializeField, Range(0, 1)] public float armsMaxHealth = 1; 
     [SerializeField, Range(0, 1)] public float armsHealthRatio = 0.2f;
@@ -24,7 +24,7 @@ public class InfoEnemies : ScriptableObject
     [SerializeReference, SubclassPicker] public EnemyBase behavoir;
     [SerializeReference, SubclassPicker] public EnemyBase behavoirLowHealth;
     [SerializeField,Range(0, 1)] public float lowHealthThreshhold = 0.33f;
-    [SerializeField, TextArea] public string descriptionLowHealthChange = "";
+    [SerializeField, TextArea] public MyListDialogues descriptionLowHealthChange;
 
     [Header("Reward")]
     [SerializeField] public InfoEncounters combatReward;

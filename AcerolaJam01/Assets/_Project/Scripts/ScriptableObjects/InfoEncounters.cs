@@ -7,10 +7,10 @@ using UnityEngine;
 public class InfoEncounters : ScriptableObject
 {
     [Header("Infos")]
-    [SerializeField, TextArea] public string DMDescription = "";
+    [SerializeField] public MyListDialogues DMDescription;
     [SerializeField, Range(0, 1)] public float chance = 0.1f;
-    [SerializeField, TextArea] public string DMDescriptionFail = "Failed";
-    [SerializeField, TextArea] public string DMDescriptionSuccess = "Success";
+    [SerializeField] public MyListDialogues DMDescriptionFail;
+    [SerializeField] public MyListDialogues DMDescriptionSuccess;
 
     [Header("Event")]
     [SerializeField] public List<MyBaseEvent> eventFail;
