@@ -38,7 +38,8 @@ public class Player : ValidatedMonoBehaviour
     public bool inCombat = false;
     public bool canInteract = false;
 
-    private int levelHeight = 0;
+    public int levelHeight = 0;
+    
     private Choose lastChosen;
     private Choose partChosen;
     private BodyParts part;
@@ -259,7 +260,6 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public void FinishEncounter(){
-        levelHeight++;
         canChoseMap = true;
         canInteract = true;
         inCombat = false;

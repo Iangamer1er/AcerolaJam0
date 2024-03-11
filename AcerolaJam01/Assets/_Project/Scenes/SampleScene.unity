@@ -876,6 +876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 566271047}
+  - component: {fileID: 566271049}
   - component: {fileID: 566271048}
   m_Layer: 0
   m_Name: DM
@@ -942,6 +943,23 @@ MonoBehaviour:
   EventSkipTxt: []
   wannaSkip: 0
   doneTalking: 0
+--- !u!114 &566271049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566271046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7b2e7dc77639442a8f63c953290b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minEncounters: 3
+  infoEncounter: {fileID: 0}
+  infoBoon: {fileID: 0}
+  altMapName: Beta
+  isBoon: 0
 --- !u!1 &569323421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,7 +1310,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0.8191631, y: 13.2675, z: 18.585722}
-  m_LocalScale: {x: 0.20320119, y: 0.20320119, z: 0.20320119}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 551274921}
@@ -3019,11 +3037,12 @@ MonoBehaviour:
   - {fileID: 1376793825}
   - {fileID: 1389129551}
   targetEnemy: {fileID: 764885024}
-  encounter: {fileID: 0}
+  encounter: {fileID: 566271049}
   currentHealth: 0
   canChoseMap: 0
   inCombat: 0
   canInteract: 0
+  levelHeight: 0
 --- !u!65 &1519638185
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4658,7 +4677,7 @@ MonoBehaviour:
   maxForkLength: 3
   maskInteractable: 6
   maxMapHeight: 4
-  startingPoint: {fileID: 551274921}
+  startingPoint: {fileID: 759454557}
   startingPointObj: {fileID: 368309281}
   timeNextPoint: 0.32
   mapWidth: 2.4
@@ -5223,15 +5242,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6583778468118442351, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.20320119
       objectReference: {fileID: 0}
     - target: {fileID: 6583778468118442351, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.20320119
       objectReference: {fileID: 0}
     - target: {fileID: 6583778468118442351, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.20320119
       objectReference: {fileID: 0}
     - target: {fileID: 6583778468118442351, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_LocalPosition.x
