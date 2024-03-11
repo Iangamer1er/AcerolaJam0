@@ -16,6 +16,7 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Range(1, 10)] public float attackPowerModifier = 1f;
     [SerializeField, Range(0, 1)] public float dodgeChance = 0.01f;
     [SerializeField, Range(0, 1)] public float armor = 0f;
+    [SerializeField, Range(0, 1)] public float vioarrFavor = 0.5f;
 
     [Header("Stats")]
     [SerializeField, Anywhere] private TextMeshProUGUI armorTxt;
@@ -142,6 +143,8 @@ public class Player : ValidatedMonoBehaviour
         attackPower = Mathf.Clamp(attackPowerModifier + damageChange, 0.3f, 10);
         UpdateStats();
     }
+
+    public void ChangeFavor(float favorChange) => Player.instance.vioarrFavor = Mathf.Clamp01(Player.instance.vioarrFavor + favorChange);
 
     private void StartCombat(){
         targetEnemy.ChoseEnemy();

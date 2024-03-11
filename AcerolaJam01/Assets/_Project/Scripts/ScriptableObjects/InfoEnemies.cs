@@ -32,6 +32,8 @@ public class InfoEnemies : ScriptableObject
     [SerializeField,Range(0, 1)] public float lowHealthThreshhold = 0.33f;
     [SerializeField, TextArea] public List<string> descriptionLowHealthChange;
 
-    [Header("Reward")]
-    [SerializeField] public List<MyBaseEvent> combatRewards;
+    [Header("Rewards")]
+    [SerializeField] public List<MyBaseEvent> lowCombatRewards;
+    [SerializeField] public List<MyBaseEvent> midCombatRewards;
+    [SerializeField] public List<MyBaseEvent> hightCombatRewards;
 }

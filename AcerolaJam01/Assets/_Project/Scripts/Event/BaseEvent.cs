@@ -42,6 +42,13 @@ public class ChangeAttackModif : BaseEvent{
     }
 }
 
+public class ChangeVioarrFavor : BaseEvent{
+    [SerializeField, Range(-1, 1)] public float vioarrFavorChange;
+    public override void EventAction(){
+        Player.instance.ChangeFavor(vioarrFavorChange);
+    }
+}
+
 public class ChangeWeapon : BaseEvent{
     [SerializeField, Range(0.1f, 1)] public float weaponChange;
     public override void EventAction(){

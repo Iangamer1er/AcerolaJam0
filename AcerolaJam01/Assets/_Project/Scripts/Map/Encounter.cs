@@ -96,7 +96,7 @@ public class Encounter : MonoBehaviour
         if(choseWarriorGod == false){
             DM.instance.Talk(infoBoon.DMDescriptionOtherGod);
             events = infoBoon.eventOuterGod;
-        }else if(infoBoon.chanceWarriorGod <= Random.Range(0f, 1f)){
+        }else if(infoBoon.chanceWarriorGod <= Random.Range(Player.instance.vioarrFavor, 1f)){
             DM.instance.Talk(infoBoon.DMDescriptionSuccess);
             events = infoBoon.eventWarriorGodSuccess; 
         }else{

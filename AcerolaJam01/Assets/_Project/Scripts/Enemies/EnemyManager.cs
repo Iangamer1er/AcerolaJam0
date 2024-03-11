@@ -89,7 +89,7 @@ public class EnemyManager : MonoBehaviour
         if(torsoHealth <= 0){
             StartCoroutine(DM.instance.Talk(DM.instance.EDeadTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
-            // todo combat reward and spared favorability
+            Player.instance.ChangeFavor(-0.1f);
             Player.instance.canInteract = true;
         }else{
             StartCoroutine(DM.instance.Talk(info.attackTxt));
@@ -110,7 +110,6 @@ public class EnemyManager : MonoBehaviour
         }else{
             StartCoroutine(DM.instance.Talk(DM.instance.ESpareFailTxt));
             spared = false;
-            // todo lose favorability with god
         } 
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         currentState.Spare(this, spared);
