@@ -34,3 +34,10 @@ public class ChangeDodge : BaseEvent{
         Player.instance.ChangeDodge(dodgeChance);
     }
 }
+
+public class Talk : BaseEvent{
+    [SerializeField] public List<string> dialogue;
+    public override void EventAction(){
+        DM.instance.Talk(dialogue);
+    }
+}

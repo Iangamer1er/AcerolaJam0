@@ -89,6 +89,7 @@ public class EnemyManager : MonoBehaviour
         if(torsoHealth <= 0){
             StartCoroutine(DM.instance.Talk(DM.instance.EDeadTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
+            // todo combat reward and 
             Player.instance.canInteract = true;
         }else{
             StartCoroutine(DM.instance.Talk(info.attackTxt));
@@ -102,9 +103,16 @@ public class EnemyManager : MonoBehaviour
     }
 
     public IEnumerator CoSpare(){
+        bool spared;
+        if(Random.Range(0f, torsoHealth/info.torsoMaxHealth) <= info.spareAskChance){
+            StartCoroutine(DM.instance.Talk(DM.instance.ESparedTxt));
+            spared = true;
+        }else{
+            StartCoroutine(DM.instance.Talk(DM.instance.ESpareFailTxt));
+            spared = false;
+            // todo lose favorability with god
+        } 
         yield return new WaitUntil(()=>DM.instance.doneTalking);
-        if(Random.Range(0f, legsHealth/info.legsMaxHealth) < info.spareAskChance){
-
-        }
+        currentState.Spare(this, spared);
     }
 }

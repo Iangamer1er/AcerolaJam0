@@ -52,7 +52,11 @@ public class EnemyNormalState : EnemyBase{
         enemy.StartCoroutine(Player.instance.CoTakeDamage(damage));
     }
 
-    public override void Spare(EnemyManager enemy){
-
+    public override void Spare(EnemyManager enemy, bool spared){
+        if(!spared){
+            Attack(enemy, enemy.info.damage);
+            return;
+        }
+        // todo spared reward and end of combat
     }
 }

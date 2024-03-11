@@ -33,5 +33,5 @@ public class InfoEnemies : ScriptableObject
     [SerializeField, TextArea] public List<string> descriptionLowHealthChange;
 
     [Header("Reward")]
-    [SerializeField] public InfoEncounters combatReward;
+    [SerializeField] public InfoEncounters[] combatRewards;
 }

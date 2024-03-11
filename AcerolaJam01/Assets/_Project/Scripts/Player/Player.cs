@@ -15,7 +15,6 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Range(0, 1)] public float attackPower = 0.2f;
     [SerializeField, Range(0, 1)] public float dodgeChance = 0.01f;
     [SerializeField, Range(0, 1)] public float armor = 0f;
-    [SerializeField] private EnemyManager targetEnemy;
 
     [Header("Stats")]
     [SerializeField, Anywhere] private TextMeshProUGUI armorTxt;
@@ -28,6 +27,12 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Anywhere] private GameObject prefabFinger;
     [SerializeField, Anywhere] private GameObject[] handsStates;
     [SerializeField, Anywhere] public Transform[] handsCuts;
+
+    [Header("Events")]
+    [SerializeField, Anywhere] private EnemyManager targetEnemy;
+    [SerializeField, Anywhere] private Encounter encounter;
+    [SerializeField, Anywhere] private Boon boon;
+
 
     public float currentHealth;
     public bool canChoseMap = false;
@@ -135,6 +140,7 @@ public class Player : ValidatedMonoBehaviour
             DM.instance.wannaSkip = true;
         }else if(!canInteract) return;
         if(!ClickCase(objHit) && inCombat) ClickAnswer(objHit);
+        else if(!inCombat) ClickAnswerOutCombat(objHit);
     }
 
     private bool ClickCase(GameObject objHit){
@@ -194,6 +200,7 @@ public class Player : ValidatedMonoBehaviour
                 break;
             case "No_Spare" :
                 if(lastChosen != null) lastChosen.isSupended = false;
+                StartCoroutine(targetEnemy.CoSpare());
                 break;
             case "Head" :
                 if(partChosen != null) partChosen.isSupended = false;
@@ -231,6 +238,17 @@ public class Player : ValidatedMonoBehaviour
            lastChosen.isSupended = false;
            partChosen.isSupended = false;
         } 
+    }
+
+    private void ClickAnswerOutCombat(GameObject objHit){
+        switch (objHit.tag){
+            case "No_Spare": 
+                break;
+            case "Yes_Attack": 
+                break;
+            default:
+                break;
+        }
     }
 
     public void FinishEncounter(){

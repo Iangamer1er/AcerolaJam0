@@ -16,7 +16,7 @@ public class EnemyTemplateState : EnemyBase{
 
     }
 
-    public override void Spare(EnemyManager enemy){
+    public override void Spare(EnemyManager enemy, bool spared){
 
     }
 }
