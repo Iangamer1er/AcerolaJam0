@@ -38,6 +38,9 @@ public class Map : ValidatedMonoBehaviour
     private bool hadFork = false;
     private bool canContinueRoutine = true;
 
+    public List<GameObject> startPossiblePaths = new List<GameObject>();
+    private List<GameObject> startingLines = new List<GameObject>();
+
     private static Map _instance; 
     public static Map instance => _instance;
 
@@ -255,5 +258,34 @@ public class Map : ValidatedMonoBehaviour
         startingPointObj = prefabTile;
         Player.instance.levelHeight++;
         StartCoroutine(Map.instance.CoAdvanceOneTile());
+    }
+
+    
+    public IEnumerator CoMakeStartingPath(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        foreach (GameObject path in startPossiblePaths){
+            GameObject lineObj = new GameObject("Line");
+            lineObj.transform.position = startingPoint.transform.position;
+            lineObj.transform.rotation = startingPoint.transform.rotation;
+            lineObj.transform.parent = startingPoint.transform;
+            LineRenderer line = lineObj.AddComponent<LineRenderer>();
+            line.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+            line.startWidth = lineRendererWidth;
+            line.endWidth = lineRendererWidth;
+            line.positionCount = 2;
+            line.startColor = lineColor;
+            line.endColor = lineColor;
+            line.SetPosition(0, startingPoint.transform.position);
+            line.SetPosition(1, path.transform.position);
+            startingLines.Add(lineObj);
+            yield return new WaitForSeconds(timeNextPoint);
+        }
+    }
+
+    public void RemoveStartingPath(){
+        foreach (GameObject pastLine in startingLines){
+            startingLines.Clear();
+            Destroy(pastLine);
+        }
     }
 }

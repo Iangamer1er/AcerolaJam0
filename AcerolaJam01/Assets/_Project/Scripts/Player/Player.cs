@@ -168,6 +168,8 @@ public class Player : ValidatedMonoBehaviour
         if(objTile == null || !canChoseMap) return false;
         bool verifyHeight = objTile.height == levelHeight;
         if(!verifyHeight) return false;
+        Map.instance.startPossiblePaths = objTile.GetComponent<Tile>().possiblePath;
+        Map.instance.RemoveStartingPath();
         switch(objHit.tag){
             case "Encounter": 
                 if(objTile.touched) break;
@@ -283,6 +285,6 @@ public class Player : ValidatedMonoBehaviour
         canChoseMap = true;
         canInteract = true;
         inCombat = false;
-        // StartCoroutine(Map.instance.CoAdvanceOneTile());
+        StartCoroutine(Map.instance.CoMakeStartingPath());
     }
 }
