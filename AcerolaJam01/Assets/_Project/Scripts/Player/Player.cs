@@ -132,6 +132,13 @@ public class Player : ValidatedMonoBehaviour
         UpdateStats();
     }
 
+    private void StartCombat(){
+        targetEnemy.ChoseEnemy();
+        Map.instance.ChangeStartingTile(TileTypes.Enemy);
+        inCombat = true;
+        targetEnemy.ChangeState(targetEnemy.info.behavoir);
+    }
+
     public void ClickedInteractable(GameObject objHit){
         if(objHit.tag == "Skip"){
             if(lastChosen != null) lastChosen.isSupended = false;
@@ -157,9 +164,8 @@ public class Player : ValidatedMonoBehaviour
                 break;
             case "Enemy": 
                 if(objTile.touched) break;
-                targetEnemy.ChoseEnemy();
                 objTile.touched = true;
-                Map.instance.ChangeStartingTile(TileTypes.Enemy);
+                StartCombat();
                 break;
             case "Boon": 
                 if(objTile.touched) break;
@@ -176,7 +182,7 @@ public class Player : ValidatedMonoBehaviour
                         StartCoroutine(encounter.StartEncounter());
                         break;
                     case 1 :
-                        targetEnemy.ChoseEnemy();
+                        StartCombat();
                         break;
                     case 2 :
                         encounter.isBoon = true;
@@ -244,6 +250,7 @@ public class Player : ValidatedMonoBehaviour
     }
 
     private void ClickAnswerOutCombat(GameObject objHit){
+        Debug.Log("Worked out of combat");
         switch (objHit.tag){
             case "No_Spare": 
                 if(encounter.isBoon) StartCoroutine(encounter.CoPlayerChoseBoon(false));

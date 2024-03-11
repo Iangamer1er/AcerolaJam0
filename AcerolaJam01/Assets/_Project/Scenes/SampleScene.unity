@@ -878,6 +878,7 @@ GameObject:
   - component: {fileID: 566271047}
   - component: {fileID: 566271049}
   - component: {fileID: 566271048}
+  - component: {fileID: 566271050}
   m_Layer: 0
   m_Name: DM
   m_TagString: Untagged
@@ -963,6 +964,18 @@ MonoBehaviour:
   infoBoon: {fileID: 0}
   altMapName: Beta
   isBoon: 0
+--- !u!114 &566271050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566271046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82be34784b2cf0e48832020df9cde169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &569323421
 GameObject:
   m_ObjectHideFlags: 0
@@ -3042,9 +3055,9 @@ MonoBehaviour:
   targetEnemy: {fileID: 764885024}
   encounter: {fileID: 566271049}
   currentHealth: 0
-  canChoseMap: 0
+  canChoseMap: 1
   inCombat: 0
-  canInteract: 0
+  canInteract: 1
   levelHeight: 0
 --- !u!65 &1519638185
 BoxCollider:

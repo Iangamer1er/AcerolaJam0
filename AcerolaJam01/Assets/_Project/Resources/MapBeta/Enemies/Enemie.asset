@@ -15,6 +15,7 @@ MonoBehaviour:
   eName: Tester
   damage: 0.1
   Brokendamage: 0.05
+  dodgeChance: 0.1
   armsMaxHealth: 0.3
   armsHealthRatio: 1
   legsMaxHealth: 1
@@ -35,7 +36,9 @@ MonoBehaviour:
   lowHealthThreshhold: 0.33
   descriptionLowHealthChange:
   - Cool
-  combatReward: {fileID: 11400000, guid: 911174e3468760c4eb5e66bccb5115ee, type: 2}
+  combatRewards:
+  - baseEvent:
+      rid: 4380223664261169163
   references:
     version: 2
     RefIds:
@@ -44,3 +47,7 @@ MonoBehaviour:
     - rid: 4380223548809019395
       type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 4380223664261169163
+      type: {class: ChangeArmor, ns: , asm: Assembly-CSharp}
+      data:
+        armorValue: 0.387

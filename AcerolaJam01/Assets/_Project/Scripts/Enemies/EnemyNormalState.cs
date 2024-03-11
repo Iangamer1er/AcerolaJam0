@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyNormalState : EnemyBase{
     
     public override void InitState(EnemyManager enemy){
-        // enemy.StartCoroutine(DM.instance.Talk(enemy.info.description));
+        enemy.StartCoroutine(DM.instance.Talk(enemy.info.description));
     }
 
     public override void TakeDamage(EnemyManager enemy, float damage, BodyParts part){

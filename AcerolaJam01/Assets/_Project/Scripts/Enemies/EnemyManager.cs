@@ -18,11 +18,11 @@ public class EnemyManager : MonoBehaviour
     
     public InfoEnemies info;
 
-    private void Start() {
-        info = ChoseEnemy();
-        InitialiseStats(info);
-        ChangeState(info.behavoir);
-    }
+    // private void Start() {
+    //     info = ChoseEnemy();
+    //     InitialiseStats(info);
+    //     ChangeState(info.behavoir);
+    // }
  
     private List<InfoEnemies> ResoucesScript(string mapNumber){
         return Resources.LoadAll(
@@ -89,7 +89,7 @@ public class EnemyManager : MonoBehaviour
         if(torsoHealth <= 0){
             StartCoroutine(DM.instance.Talk(DM.instance.EDeadTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
-            // todo combat reward and 
+            // todo combat reward and spared favorability
             Player.instance.canInteract = true;
         }else{
             StartCoroutine(DM.instance.Talk(info.attackTxt));

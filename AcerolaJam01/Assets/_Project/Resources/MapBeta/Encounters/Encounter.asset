@@ -26,7 +26,9 @@ MonoBehaviour:
       rid: 4380223664261169154
   - baseEvent:
       rid: 4380223664261169155
-  eventWin: []
+  eventWin:
+  - baseEvent:
+      rid: 4380223664261169156
   references:
     version: 2
     RefIds:
@@ -42,3 +44,7 @@ MonoBehaviour:
       type: {class: ChangeCurrentHealth, ns: , asm: Assembly-CSharp}
       data:
         healthChange: -0.78
+    - rid: 4380223664261169156
+      type: {class: ChangeCurrentHealth, ns: , asm: Assembly-CSharp}
+      data:
+        healthChange: 0

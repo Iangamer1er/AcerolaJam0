@@ -21,9 +21,27 @@ MonoBehaviour:
   - test boon succ
   DMDescriptionOtherGod:
   - test outer
-  eventWarriorGodFail: []
-  eventWarriorGodSuccess: []
-  eventOuterGod: []
+  eventWarriorGodFail:
+  - baseEvent:
+      rid: 4380223664261169157
+  eventWarriorGodSuccess:
+  - baseEvent:
+      rid: 4380223664261169158
+  eventOuterGod:
+  - baseEvent:
+      rid: 4380223664261169161
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4380223664261169157
+      type: {class: GainMaxHealth, ns: , asm: Assembly-CSharp}
+      data:
+        maxHealthChange: 0
+    - rid: 4380223664261169158
+      type: {class: ChangeArmor, ns: , asm: Assembly-CSharp}
+      data:
+        armorValue: 0
+    - rid: 4380223664261169161
+      type: {class: GainMaxHealth, ns: , asm: Assembly-CSharp}
+      data:
+        maxHealthChange: 0
