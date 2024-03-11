@@ -938,9 +938,12 @@ MonoBehaviour:
   - Enemy spared
   ESpareFailTxt:
   - Enemy laughs
-  ELegsBrokenTxt: []
-  EArmsBrokenTxt: []
-  EventSkipTxt: []
+  ELegsBrokenTxt:
+  - test broken legs
+  EArmsBrokenTxt:
+  - test broken arms
+  EventSkipTxt:
+  - Shameful
   wannaSkip: 0
   doneTalking: 0
 --- !u!114 &566271049

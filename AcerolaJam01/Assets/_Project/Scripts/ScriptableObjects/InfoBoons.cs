@@ -8,11 +8,11 @@ using System;
 public class InfoBoons : ScriptableObject
 {
     [Header("Infos")]
-    [SerializeField] public List<string> DMDescription;
+    [SerializeField, TextArea] public List<string> DMDescription;
     [SerializeField, Range(0, 1)] public float chanceWarriorGod = 0.1f;
-    [SerializeField] public List<string> DMDescriptionFail;
-    [SerializeField] public List<string> DMDescriptionSuccess;
-    [SerializeField] public List<string> DMDescriptionOtherGod;
+    [SerializeField, TextArea] public List<string> DMDescriptionFail;
+    [SerializeField, TextArea] public List<string> DMDescriptionSuccess;
+    [SerializeField, TextArea] public List<string> DMDescriptionOtherGod;
 
     [Header("Event")]
     [SerializeField] public List<MyBaseEvent> eventWarriorGodFail;

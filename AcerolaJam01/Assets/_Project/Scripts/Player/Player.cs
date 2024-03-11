@@ -39,7 +39,7 @@ public class Player : ValidatedMonoBehaviour
     public bool canInteract = false;
 
     public int levelHeight = 0;
-    
+
     private Choose lastChosen;
     private Choose partChosen;
     private BodyParts part;
@@ -104,11 +104,10 @@ public class Player : ValidatedMonoBehaviour
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             canInteract = true;
         }
-        
     }
 
     public IEnumerator CoDies(){
-
+        // todo
         yield return new WaitUntil(()=>DM.instance.doneTalking);
     }
 
