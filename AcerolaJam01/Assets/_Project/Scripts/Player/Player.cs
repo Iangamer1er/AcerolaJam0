@@ -150,7 +150,8 @@ public class Player : ValidatedMonoBehaviour
         switch(objHit.tag){
             case "Encounter": 
                 if(objTile.touched) break;
-                encounter.CheckEncounters();
+                encounter.isBoon = false;
+                encounter.StartEncounter();
                 objTile.touched = true;
                 break;
             case "Enemy": 
@@ -160,20 +161,23 @@ public class Player : ValidatedMonoBehaviour
                 break;
             case "Boon": 
                 if(objTile.touched) break;
-                encounter.CheckBoons();
+                encounter.isBoon = true;
+                encounter.StartEncounter();
                 objTile.touched = true;
                 break;
             case "Random": 
                 if(objTile.touched) break;
                 switch(Random.Range(0, 3)){
                     case 0 :
-                        encounter.CheckEncounters();
+                        encounter.isBoon = false;
+                        encounter.StartEncounter();
                         break;
                     case 1 :
                         targetEnemy.ChoseEnemy();
                         break;
                     case 2 :
-                        encounter.CheckBoons();
+                        encounter.isBoon = true;
+                        encounter.StartEncounter();
                         break;
                 }
                 objTile.touched = true;
@@ -238,8 +242,12 @@ public class Player : ValidatedMonoBehaviour
     private void ClickAnswerOutCombat(GameObject objHit){
         switch (objHit.tag){
             case "No_Spare": 
+                if(encounter.isBoon) StartCoroutine(encounter.CoPlayerChoseBoon(false));
+                else StartCoroutine(encounter.CoPlayerTakeEncounter(false));
                 break;
             case "Yes_Attack": 
+                if(encounter.isBoon) StartCoroutine(encounter.CoPlayerChoseBoon(true));
+                else StartCoroutine(encounter.CoPlayerTakeEncounter(true));
                 break;
             default:
                 break;

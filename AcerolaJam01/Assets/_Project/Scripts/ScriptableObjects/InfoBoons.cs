@@ -13,5 +13,10 @@ public class InfoBoons : ScriptableObject
     [SerializeField] public List<string> DMDescriptionFail;
     [SerializeField] public List<string> DMDescriptionSuccess;
     [SerializeField] public List<string> DMDescriptionOtherGod;
+
+    [Header("Event")]
+    [SerializeField] public List<MyBaseEvent> eventWarriorGodFail;
+    [SerializeField] public List<MyBaseEvent> eventWarriorGodSuccess;
+    [SerializeField] public List<MyBaseEvent> eventOuterGod;
     
 }
