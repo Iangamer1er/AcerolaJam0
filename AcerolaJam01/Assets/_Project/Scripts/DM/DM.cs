@@ -12,6 +12,7 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, Anywhere] private TextMeshProUGUI dialogue;
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
+
     [Header("Dialogues")]
     [SerializeField, TextArea] private List<string> introDialogue;
     [SerializeField, TextArea] public List<string> EdodgeTxt;
@@ -22,6 +23,10 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, TextArea] public List<string> ELegsBrokenTxt;
     [SerializeField, TextArea] public List<string> EArmsBrokenTxt;
     [SerializeField, TextArea] public List<string> EventSkipTxt;
+
+    [Header("Sounds")]
+    [SerializeField] private bool usePitch = false;
+    [SerializeField] private List<AudioClip> clipsTalk;
 
     public bool wannaSkip = false;
     public bool doneTalking = false;
@@ -81,6 +86,7 @@ public class DM : ValidatedMonoBehaviour
         for (int i = 0; i < text.Length; i++){
             currentTxt += text[i];
             dialogue.text = currentTxt;
+            if(text[i] != ' ') AudioManager.instance.PlayEffect(ChoseSound(), usePitch);
             yield return new WaitForSeconds(wannaSkip ? 0 : timeBetweenLetters);
         }
         timerSentences.Start();
@@ -89,5 +95,10 @@ public class DM : ValidatedMonoBehaviour
         timerSentences.Stop();
         timerDone = false;
         goNext = true;
+    }
+
+    private AudioClip ChoseSound(){
+        int randomInt = Random.Range(0, clipsTalk.Count);
+        return clipsTalk[randomInt];
     }
 }
