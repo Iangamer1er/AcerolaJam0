@@ -19,5 +19,5 @@ public class InfoEncounters : ScriptableObject
 
 [System.Serializable]
 public class MyBaseEvent {
-    [SerializeReference, SubclassPicker] BaseEvent baseEvent;
+    [SerializeReference, SubclassPicker] public BaseEvent baseEvent;
 }

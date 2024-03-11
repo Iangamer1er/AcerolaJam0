@@ -31,7 +31,6 @@ public class Player : ValidatedMonoBehaviour
     [Header("Events")]
     [SerializeField, Anywhere] private EnemyManager targetEnemy;
     [SerializeField, Anywhere] private Encounter encounter;
-    [SerializeField, Anywhere] private Boon boon;
 
 
     public float currentHealth;
@@ -151,34 +150,30 @@ public class Player : ValidatedMonoBehaviour
         switch(objHit.tag){
             case "Encounter": 
                 if(objTile.touched) break;
-                Encounter scriptEncounter = objHit.AddComponent<Encounter>();
-                scriptEncounter.info = scriptEncounter.ChoseEncounter();
+                encounter.CheckEncounters();
                 objTile.touched = true;
                 break;
             case "Enemy": 
                 if(objTile.touched) break;
-                // EnemyManager scriptEnemy = objHit.AddComponent<EnemyManager>();
-                // scriptEnemy.info = scriptEnemy.ChoseEnemy();
                 targetEnemy.ChoseEnemy();
                 objTile.touched = true;
                 break;
             case "Boon": 
                 if(objTile.touched) break;
-                Boon scriptBoon = objHit.AddComponent<Boon>();
-                scriptBoon.info = scriptBoon.ChoseBoon();
+                encounter.CheckBoons();
                 objTile.touched = true;
                 break;
             case "Random": 
                 if(objTile.touched) break;
                 switch(Random.Range(0, 3)){
                     case 0 :
-                        objHit.AddComponent<Encounter>().ChoseEncounter();
+                        encounter.CheckEncounters();
                         break;
                     case 1 :
-                        objHit.AddComponent<EnemyManager>().ChoseEnemy();
+                        targetEnemy.ChoseEnemy();
                         break;
                     case 2 :
-                        objHit.AddComponent<Boon>().ChoseBoon();
+                        encounter.CheckBoons();
                         break;
                 }
                 objTile.touched = true;
