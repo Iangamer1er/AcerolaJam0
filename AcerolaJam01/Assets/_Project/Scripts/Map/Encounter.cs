@@ -107,7 +107,7 @@ public class Encounter : MonoBehaviour
         StartCoroutine(CoGiveEvent(events));
     }
 
-    private IEnumerator CoGiveEvent(List<MyBaseEvent> events){
+    public IEnumerator CoGiveEvent(List<MyBaseEvent> events){
         foreach (MyBaseEvent baseEvent in events){
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             EventManager.instance.ChangeState(baseEvent.baseEvent);

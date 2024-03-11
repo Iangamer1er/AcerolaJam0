@@ -30,3 +30,26 @@ THIS IS A ROGUELIKE
 Idea for combat if time allows me : 
 When an enemy attacks, the DM hits a part of the table to plunge a stick towards the player's figurine. 
 The player can then hit his part of the table on the block button to make a piece of wood block the attack
+
+end the game with DM telling you that :
+	in death :
+	-you were truly a brave warrior
+	-you were the warrior god's best
+	-you went crazy when you got a child
+	-Got out of warrior god's blessing
+	-what a shame
+	-Now, you are deplorable
+	-now you are reprehensible
+	-now you are
+	*Title screen* ABERRANT
+	*Roll credits*
+	in victory:
+	-You can go now
+	-It seems part of the warrior god's favor still resides inside you
+	-I would wish you a good warrior's rest
+	-But we both know that won't happen
+	-Oh warrior god, may you bless this lost soul
+	-May you give him your favor once more
+	*Title screen* Aberrant
+	*Roll credits*
+	

@@ -52,14 +52,14 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(armsHealth <= 0){
             damage = info.Brokendamage;
-            
+            DM.instance.Talk(DM.instance.EArmsBrokenTxt);
         }
     }
 
     public IEnumerator CheckBrokenLegs(){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(legsHealth <= 0){
-            
+            DM.instance.Talk(DM.instance.ELegsBrokenTxt);
         }
     }
 

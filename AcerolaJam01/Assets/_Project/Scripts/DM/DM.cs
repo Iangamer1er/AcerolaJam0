@@ -19,6 +19,8 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, TextArea] public List<string> EDeadTxt;
     [SerializeField, TextArea] public List<string> ESparedTxt;
     [SerializeField, TextArea] public List<string> ESpareFailTxt;
+    [SerializeField, TextArea] public List<string> ELegsBrokenTxt;
+    [SerializeField, TextArea] public List<string> EArmsBrokenTxt;
     [SerializeField, TextArea] public List<string> EventSkipTxt;
 
     public bool wannaSkip = false;
