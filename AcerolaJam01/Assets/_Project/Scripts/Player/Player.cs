@@ -13,6 +13,7 @@ public class Player : ValidatedMonoBehaviour
     [Header("Player stats")]
     [SerializeField, Range(0, 1)] public float maxHealth = 1;
     [SerializeField, Range(0, 1)] public float attackPower = 0.2f;
+    [SerializeField, Range(1, 10)] public float attackPowerModifier = 1f;
     [SerializeField, Range(0, 1)] public float dodgeChance = 0.01f;
     [SerializeField, Range(0, 1)] public float armor = 0f;
 
@@ -89,7 +90,7 @@ public class Player : ValidatedMonoBehaviour
 
     public void Attack(EnemyManager enemy, BodyParts part = BodyParts.Torso){
         if(enemy == null) enemy = targetEnemy;
-        StartCoroutine(targetEnemy.CoTakeDamage(attackPower, part));
+        StartCoroutine(targetEnemy.CoTakeDamage(attackPower * attackPowerModifier, part));
         canInteract = false;
     }
 
@@ -129,6 +130,16 @@ public class Player : ValidatedMonoBehaviour
 
     public void ChangeArmor(float armorChange){
         armor = armorChange;
+        UpdateStats();
+    }
+
+    public void ChangeWeapon(float weaponChange){
+        attackPower = weaponChange;
+        UpdateStats();
+    }
+
+    public void ChangeDamage(float damageChange){
+        attackPower = Mathf.Clamp(attackPowerModifier + damageChange, 0.3f, 10);
         UpdateStats();
     }
 

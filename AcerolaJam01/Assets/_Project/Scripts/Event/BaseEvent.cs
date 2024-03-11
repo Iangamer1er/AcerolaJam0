@@ -35,6 +35,20 @@ public class ChangeDodge : BaseEvent{
     }
 }
 
+public class ChangeAttackModif : BaseEvent{
+    [SerializeField, Range(-1, 1)] public float attackModifChange;
+    public override void EventAction(){
+        Player.instance.ChangeDamage(attackModifChange);
+    }
+}
+
+public class ChangeWeapon : BaseEvent{
+    [SerializeField, Range(0.1f, 1)] public float weaponChange;
+    public override void EventAction(){
+        Player.instance.ChangeWeapon(weaponChange);
+    }
+}
+
 public class Talk : BaseEvent{
     [SerializeField] public List<string> dialogue;
     public override void EventAction(){
