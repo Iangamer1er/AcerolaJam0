@@ -153,16 +153,19 @@ public class Player : ValidatedMonoBehaviour
                 encounter.isBoon = false;
                 encounter.StartEncounter();
                 objTile.touched = true;
+                Map.instance.ChangeStartingTile(TileTypes.Encounter);
                 break;
             case "Enemy": 
                 if(objTile.touched) break;
                 targetEnemy.ChoseEnemy();
                 objTile.touched = true;
+                Map.instance.ChangeStartingTile(TileTypes.Enemy);
                 break;
             case "Boon": 
                 if(objTile.touched) break;
                 encounter.isBoon = true;
                 encounter.StartEncounter();
+                Map.instance.ChangeStartingTile(TileTypes.Boon);
                 objTile.touched = true;
                 break;
             case "Random": 
@@ -180,6 +183,7 @@ public class Player : ValidatedMonoBehaviour
                         encounter.StartEncounter();
                         break;
                 }
+                Map.instance.ChangeStartingTile(TileTypes.Random);
                 objTile.touched = true;
                 break;
             default :
@@ -256,6 +260,9 @@ public class Player : ValidatedMonoBehaviour
 
     public void FinishEncounter(){
         levelHeight++;
-        StartCoroutine(Map.instance.CoAdvanceOneTile());
+        canChoseMap = true;
+        canInteract = true;
+        inCombat = false;
+        // StartCoroutine(Map.instance.CoAdvanceOneTile());
     }
 }

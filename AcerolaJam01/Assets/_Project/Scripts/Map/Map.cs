@@ -19,6 +19,7 @@ public class Map : ValidatedMonoBehaviour
     [Header("Making Map")]
     [SerializeField, Range(1, 5)] int maxMapHeight = 3;
     [SerializeField, Anywhere] Transform startingPoint;
+    [SerializeField, Anywhere] GameObject startingPointObj;
     [SerializeField, Range(0, 1)] float timeNextPoint;
     [SerializeField, Range(0.01f, 3)] float mapWidth; //currentrly 2.457
     [SerializeField, Range(0.01f, 3)] float heightBetweenSpaces;
@@ -102,7 +103,7 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private bool CalculateForkChance(){
-        if(!checkNbTiles()) return false;
+        if(!CheckNbTiles()) return false;
         hadFork = true;
         int forkSplits = Random.Range(2, maxForkSplits);
         int randLenght = Random.Range(1, maxForkLength);
@@ -163,7 +164,7 @@ public class Map : ValidatedMonoBehaviour
             yield return new WaitUntil(()=>canContinueRoutine);
             currentTileHeight++;
         }
-        Player.instance.canChoseMap = true;
+        // Player.instance.canChoseMap = true;
     }
 
     private IEnumerator CoMakePaths(int height){
@@ -172,7 +173,7 @@ public class Map : ValidatedMonoBehaviour
             StartCoroutine(CoInstantiatePaths(height + i));
             yield return new WaitUntil(()=>canContinueRoutine);
         }
-        Player.instance.canChoseMap = true;
+        // Player.instance.canChoseMap = true;
     }
 
     private IEnumerator CoInstantiatePaths(){
@@ -236,12 +237,20 @@ public class Map : ValidatedMonoBehaviour
         canContinueRoutine = true;
     }
 
-    private bool checkNbTiles(){
+    private bool CheckNbTiles(){
         float random = Random.Range(0f, 1f);
         return ((float)currentTileHeight/(float)maxTileHeight >= random ||
             maxTileHeight - currentTileHeight <= maxForkLength * nbForks) &&
             nbForks - currentNbForks > 0
             && !hadFork
         ;
+    }
+
+    public void ChangeStartingTile(TileTypes type){
+        GameObject prefabTile;
+        prefabTile = (GameObject)Resources.Load("Spaces/" + type.ToString());
+        prefabTile = Instantiate(prefabTile, startingPoint);
+        Destroy(startingPointObj);
+        startingPointObj = prefabTile;
     }
 }
