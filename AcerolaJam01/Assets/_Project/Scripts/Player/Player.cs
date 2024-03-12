@@ -143,15 +143,15 @@ public class Player : ValidatedMonoBehaviour
         Debug.Log("Gotten Here");
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0, 1) > dodgeChance){
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);
             StartCoroutine(DM.instance.Talk(DM.instance.PhitTxt));
             ChangeHealth(-damage + armor);
             yield return new WaitUntil(()=>DM.instance.doneTalking);
-            AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);
             canInteract = true;
         } else{
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss);
             StartCoroutine(DM.instance.Talk(DM.instance.PdodgeTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
-            AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss);
             canInteract = true;
         }
     }
