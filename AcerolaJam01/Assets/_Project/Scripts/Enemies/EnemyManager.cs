@@ -41,7 +41,7 @@ public class EnemyManager : MonoBehaviour
         return infos[Random.Range(0, infos.Count)];
     }
 
-    private void InitialiseStats(InfoEnemies info){
+    public void InitialiseStats(InfoEnemies info){
         armsHealth = info.armsMaxHealth;
         legsHealth = info.legsMaxHealth;
         torsoHealth = info.torsoMaxHealth;
@@ -66,12 +66,13 @@ public class EnemyManager : MonoBehaviour
     public void ChangeState(EnemyBase state){
         if(state == null) state = new EnemyNormalState();
         currentState = state;
+        InitialiseStats(info);
         currentState.InitState(this);
     }
 
     public IEnumerator CoTakeDamage(float damage, BodyParts part){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
-        if(Random.Range(0f, legsHealth/info.legsMaxHealth) < info.dodgeChance){
+        if(Random.Range(0f, 1) < info.dodgeChance && legsHealth > 0){
             AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss, true);
             StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);

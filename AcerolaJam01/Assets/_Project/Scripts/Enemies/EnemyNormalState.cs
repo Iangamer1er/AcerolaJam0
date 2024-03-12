@@ -28,7 +28,7 @@ public class EnemyNormalState : EnemyBase{
                 enemy.torsoHealth -= damageInflicted;
                 break;
             case BodyParts.Head : 
-                if(Random.Range(0, 1) >= enemy.info.headChance){
+                if(Random.Range(0, 1) <= enemy.info.headChance){
                     enemy.StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
                     break;
                 }

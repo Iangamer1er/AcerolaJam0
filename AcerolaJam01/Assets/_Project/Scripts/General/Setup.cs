@@ -1,10 +1,10 @@
+#if UNITY_EDITOR
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using static System.IO.Directory;
 using static System.IO.Path;
 using static UnityEditor.AssetDatabase;
-
 public static class Setup{
 
     [MenuItem("Tools/Setup/Create Default Folders")]
@@ -36,3 +36,4 @@ public static class Setup{
         }
     }
 }
+#endif

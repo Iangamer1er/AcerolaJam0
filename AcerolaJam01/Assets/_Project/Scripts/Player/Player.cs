@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using KBCore.Refs;
-using OpenCover.Framework.Model;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
@@ -139,9 +138,9 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public IEnumerator CoTakeDamage(float damage){
-        Debug.Log("Gotten Here");
+        Debug.Log(damage);
         yield return new WaitUntil(()=>DM.instance.doneTalking);
-        if(Random.Range(0, 1) > dodgeChance){
+        if(Random.Range(0, 1) <= dodgeChance){
             AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);
             StartCoroutine(DM.instance.Talk(DM.instance.PhitTxt));
             ChangeHealth(-damage + armor);
@@ -171,6 +170,7 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public void ChangeHealth(float healthChange){
+        Debug.Log("Health change : " + healthChange);
         currentHealth = Mathf.Clamp(currentHealth + healthChange, 0, maxHealth);
         UpdateStats();
         if(currentHealth <= 0) CoRemoveFingerAnim();
@@ -214,7 +214,6 @@ public class Player : ValidatedMonoBehaviour
     public void ClickedInteractable(GameObject objHit){
         if(objHit.tag == "Skip"){
             if(lastChosen != null) lastChosen.isSupended = false;
-            Debug.Log("Skip!");
             DM.instance.wannaSkip = true;
         }else if(!canInteract) return;
         if(!ClickCase(objHit) && inCombat) ClickAnswer(objHit);
@@ -298,7 +297,6 @@ public class Player : ValidatedMonoBehaviour
                 part = BodyParts.Arms;
                 break;
             case "Legs" :
-                Debug.Log("Legs");
                 if(partChosen != null) partChosen.isSupended = false;
                 partChosen = objHit.GetComponent<Choose>();
                 partChosen.AnimateFloat();
@@ -324,7 +322,6 @@ public class Player : ValidatedMonoBehaviour
     }
 
     private void ClickAnswerOutCombat(GameObject objHit){
-        Debug.Log("Worked out of combat");
         switch (objHit.tag){
             case "No_Spare": 
                 if(encounter.isBoon) StartCoroutine(encounter.CoPlayerChoseBoon(false));

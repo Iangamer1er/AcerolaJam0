@@ -272,7 +272,6 @@ public class Map : ValidatedMonoBehaviour
     }
 
     public void ChangeStartingTile(TileTypes type){
-        Debug.Log("Change start");
         GameObject prefabTile;
         prefabTile = (GameObject)Resources.Load("Spaces/" + type.ToString());
         prefabTile = Instantiate(prefabTile, startingPoint);

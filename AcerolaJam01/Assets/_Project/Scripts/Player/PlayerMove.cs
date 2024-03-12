@@ -109,7 +109,6 @@ public class PlayerMove : ValidatedMonoBehaviour
 
     private IEnumerator CoroutineMove(Vector3 posIni , Vector3 posDest, RaycastHit raycastHit){
         bool isThere = false; 
-        Debug.Log("Clicked");
         while (!isThere){
             isThere = MouveWithMoveTowards(posDest);
             yield return new WaitForFixedUpdate(); 
