@@ -29,10 +29,15 @@ public class Player : ValidatedMonoBehaviour
     [SerializeField, Anywhere] private GameObject prefabFinger;
     [SerializeField, Anywhere] private GameObject[] handsStates;
     [SerializeField, Anywhere] public Transform[] handsCuts;
+    [SerializeField, Anywhere] public Transform[] DMSockets;
 
     [Header("Events")]
     [SerializeField, Anywhere] private EnemyManager targetEnemy;
     [SerializeField, Anywhere] private Encounter encounter;
+
+    [Header("Animation")]
+    [SerializeField, Anywhere] private Animator[] DMAnimators;
+    [SerializeField, Self] private Animator animator;
 
 
     public float currentHealth;
@@ -41,6 +46,7 @@ public class Player : ValidatedMonoBehaviour
     public bool canInteract = false;
 
     public int levelHeight = 0;
+    public Transform cutFingerT;
 
     private Choose lastChosen;
     private Choose partChosen;
@@ -59,9 +65,9 @@ public class Player : ValidatedMonoBehaviour
         currentHealth = maxHealth;
     }
 
-    [ContextMenu("In combat")]
+    [ContextMenu("Start anims")]
     public void ContextMenu(){
-        inCombatEvent.Invoke();
+        RemoveFingerAnim();
     }
 
     private void Start() {
@@ -81,13 +87,25 @@ public class Player : ValidatedMonoBehaviour
           return;  
         } 
         Destroy(currentHand);
-        Debug.Log("1");
         currentHand = Instantiate(handsStates[nbFingerTaken], transform);
-        Debug.Log("2");
-        Instantiate(prefabFinger, handsCuts[nbFingerTaken].position, prefabFinger.transform.rotation, transform);
-        Debug.Log("3");
+        cutFingerT = Instantiate(prefabFinger, handsCuts[nbFingerTaken].position, prefabFinger.transform.rotation, transform).transform;
+        cutFingerT.parent = DMSockets[nbFingerTaken];
+        StartCoroutine(cutFingerT.GetComponent<FingerMove>().CoroutineMoveEnd(
+            cutFingerT.position, 
+            cutFingerT.eulerAngles, 
+            DMSockets[nbFingerTaken]
+        ));
         nbFingerTaken ++;
     }
+
+    public void RemoveFingerAnim(){
+        foreach (Animator DMAnimator in DMAnimators){
+            DMAnimator.SetTrigger("StartAnim" + nbFingerTaken);
+        }
+        animator.SetTrigger("StartAnim");
+    }
+
+    
 
     public void Attack(EnemyManager enemy, BodyParts part = BodyParts.Torso){
         if(enemy == null) enemy = targetEnemy;
@@ -151,6 +169,7 @@ public class Player : ValidatedMonoBehaviour
         Map.instance.ChangeStartingTile(TileTypes.Enemy);
         inCombat = true;
         targetEnemy.ChangeState(targetEnemy.info.behavoir);
+        inCombatEvent.Invoke();
     }
 
     public void ClickedInteractable(GameObject objHit){

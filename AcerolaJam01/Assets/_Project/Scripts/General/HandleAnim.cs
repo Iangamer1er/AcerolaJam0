@@ -5,11 +5,22 @@ using UnityEngine.Events;
 
 public class HandleAnim : MonoBehaviour
 {
-    [SerializeField] public UnityEvent[] myEvents;
+    [SerializeField] public UnityEvent myEvent;
+    [SerializeField] private Transform transformChild;
+    [SerializeField] private Transform transformParent;
+    
+    private Transform transFormOriginalParent;
     
     public void StartEvents(){
-        foreach (UnityEvent myEvent in myEvents){
-            myEvent.Invoke();
-        }
+        myEvent.Invoke();
+    }
+
+    public void SetAsParent(){
+        transFormOriginalParent = transformChild.parent;
+        transformChild.parent = transformParent;
+    }
+
+    public void SetOriginalParent(){
+        transformChild.parent = transFormOriginalParent;
     }
 }

@@ -91,6 +91,9 @@ public class EnemyManager : MonoBehaviour
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             Player.instance.ChangeFavor(-0.1f);
             Player.instance.canInteract = true;
+            // todo give the rewards
+            // Player.instance.FinishEncounter();
+            Player.instance.inCombatEvent.Invoke();
         }else{
             StartCoroutine(DM.instance.Talk(info.attackTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);

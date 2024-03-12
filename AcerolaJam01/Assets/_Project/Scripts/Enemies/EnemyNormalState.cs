@@ -51,5 +51,7 @@ public class EnemyNormalState : EnemyBase{
             return;
         }
         Player.instance.ChangeFavor(0.2f);
+        Player.instance.inCombatEvent.Invoke();
+        Player.instance.FinishEncounter();
     }
 }
