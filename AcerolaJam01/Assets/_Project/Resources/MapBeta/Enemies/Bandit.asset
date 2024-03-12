@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
+  m_Name: Bandit
+  m_EditorClassIdentifier: 
+  eName: Bandit
+  damage: 0.1
+  Brokendamage: 0.05
+  dodgeChance: 0.25
+  armsMaxHealth: 0.3
+  armsHealthRatio: 1
+  legsMaxHealth: 0.15
+  legsHealthRatio: 1
+  headChance: 0.665
+  headModif: 3
+  torsoMaxHealth: 0.3
+  torsoModif: 1
+  spareAskChance: 0.5
+  description:
+  - A bandit tries to rob you along the way
+  - Vioarr juges them as a pathetic opponent
+  - Regardless, they are quick on their feet
+  attackTxt:
+  - They brandish a dagger and lunges at you
+  behavoir:
+    rid: 4380223714589671457
+  behavoirLowHealth:
+    rid: -2
+  lowHealthThreshhold: 0.33
+  descriptionLowHealthChange:
+  - Cool
+  lowCombatRewards:
+  - baseEvent:
+      rid: 4380223714589671447
+  - baseEvent:
+      rid: 4380223714589671448
+  midCombatRewards: []
+  highCombatRewards: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4380223714589671447
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0.15
+    - rid: 4380223714589671448
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - You find a small dagger
+        - You honor their death and take it
+    - rid: 4380223714589671457
+      type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
+      data: 

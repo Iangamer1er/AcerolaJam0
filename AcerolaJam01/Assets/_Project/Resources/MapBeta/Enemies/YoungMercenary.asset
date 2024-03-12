@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
+  m_Name: YoungMercenary
+  m_EditorClassIdentifier: 
+  eName: Young  Mercenary
+  damage: 0.08
+  Brokendamage: 0.05
+  dodgeChance: 0
+  armsMaxHealth: 0.4
+  armsHealthRatio: 0.3
+  legsMaxHealth: 0.4
+  legsHealthRatio: 0.3
+  headChance: 0.8
+  headModif: 1.5
+  torsoMaxHealth: 0.6
+  torsoModif: 0.5
+  spareAskChance: 0.3
+  description:
+  - A young mercenary shows a bounty of you
+  - They pulls out their sword
+  - Vioarr judges them worthy
+  - Their skills makes up for their lack of armor
+  - Yet their overconfidence left their head open
+  attackTxt:
+  - They take a quick step and swings
+  behavoir:
+    rid: 4380223714589671459
+  behavoirLowHealth:
+    rid: -2
+  lowHealthThreshhold: 0.33
+  descriptionLowHealthChange: []
+  lowCombatRewards:
+  - baseEvent:
+      rid: 4380223714589671460
+  - baseEvent:
+      rid: 4380223714589671461
+  midCombatRewards:
+  - baseEvent:
+      rid: 4380223714589671462
+  - baseEvent:
+      rid: 4380223714589671464
+  highCombatRewards: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4380223714589671459
+      type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4380223714589671460
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - "Their blade isn\u2019t very sharp"
+        - You honor their death and take it
+    - rid: 4380223714589671461
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0.2
+    - rid: 4380223714589671462
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - Their armor is good
+        - You honor their death and take it
+    - rid: 4380223714589671464
+      type: {class: ChangeArmor, ns: , asm: Assembly-CSharp}
+      data:
+        armorValue: 0.4

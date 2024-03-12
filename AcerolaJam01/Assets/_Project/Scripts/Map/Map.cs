@@ -65,6 +65,15 @@ public class Map : ValidatedMonoBehaviour
         currentTileHeight = 0;
         StartCoroutine(CoCreateMap());
         GameManager.instance.didTuto = true;
+        StartCoroutine(CoMakeFirstPath());
+    }
+
+    private IEnumerator CoMakeFirstPath(){
+        yield return new WaitForSeconds(1);
+        yield return new WaitUntil(()=>canContinueRoutine);
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        startPossiblePaths.AddRange(tilesArrays[0]);
+        StartCoroutine(CoMakeStartingPath());
     }
 
     private void MakeMap(){

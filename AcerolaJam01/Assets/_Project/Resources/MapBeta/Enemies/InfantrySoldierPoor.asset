@@ -10,33 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
-  m_Name: Enemie
+  m_Name: InfantrySoldierPoor
   m_EditorClassIdentifier: 
-  eName: Tester
+  eName: InfantrySoldier
   damage: 0.1
-  Brokendamage: 0.05
+  Brokendamage: 0.01
   dodgeChance: 0.1
-  armsMaxHealth: 0.3
+  armsMaxHealth: 0.05
   armsHealthRatio: 1
-  legsMaxHealth: 1
+  legsMaxHealth: 0.05
   legsHealthRatio: 1
-  headChance: 0.665
-  headModif: 1
-  torsoMaxHealth: 0.08
+  headChance: 0.5
+  headModif: 1.5
+  torsoMaxHealth: 0.2
   torsoModif: 1
-  spareAskChance: 0.2
+  spareAskChance: 0.8
   description:
-  - Test guy looks at you
+  - A lost and malnourished infantry soldier is gorging on a corpse
+  - He glances at you
+  - Vioarr disregards them
+  - They brandish leather armor on all parts
   attackTxt:
-  - Cool text attack
+  - Their sword flashes in your direction
   behavoir:
-    rid: 4380223548809019395
+    rid: 4380223714589671454
   behavoirLowHealth:
     rid: -2
   lowHealthThreshhold: 0.33
-  descriptionLowHealthChange:
-  - Cool
-  lowCombatRewards: []
+  descriptionLowHealthChange: []
+  lowCombatRewards:
+  - baseEvent:
+      rid: 4380223714589671450
   midCombatRewards: []
   highCombatRewards: []
   references:
@@ -44,6 +48,11 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4380223548809019395
+    - rid: 4380223714589671450
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - There is nothing of value in front of you
+    - rid: 4380223714589671454
       type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
       data: 

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce08d7f8ffa6a54f8d16a3e98bda8b7, type: 3}
+  m_Name: DilapidatedChapel
+  m_EditorClassIdentifier: 
+  DMDescription:
+  - 'You stumble across a dilapidated chapel '
+  - You can pray to any gods
+  - Will you pray to almighty Vioarr
+  minChanceWarriorGod: 0.8
+  DMDescriptionFail:
+  - Vioarr has accepted your prayer
+  - You have gained favor
+  DMDescriptionSuccess:
+  - Vioarr acknowledges your bravery
+  - 'Vioarr has blessed you '
+  - You feel stronger
+  DMDescriptionOtherGod:
+  - Reprehensible
+  - You have lost favor with Vioarr
+  - The outer god has healed you
+  eventWarriorGodFail:
+  - baseEvent:
+      rid: 4380223714589671471
+  eventWarriorGodSuccess:
+  - baseEvent:
+      rid: 4380223714589671472
+  eventOuterGod:
+  - baseEvent:
+      rid: 4380223714589671470
+  references:
+    version: 2
+    RefIds:
+    - rid: 4380223714589671470
+      type: {class: ChangeCurrentHealth, ns: , asm: Assembly-CSharp}
+      data:
+        healthChange: 0.5
+    - rid: 4380223714589671471
+      type: {class: ChangeVioarrFavor, ns: , asm: Assembly-CSharp}
+      data:
+        vioarrFavorChange: 0.3
+    - rid: 4380223714589671472
+      type: {class: ChangeAttackModif, ns: , asm: Assembly-CSharp}
+      data:
+        attackModifChange: 0.33

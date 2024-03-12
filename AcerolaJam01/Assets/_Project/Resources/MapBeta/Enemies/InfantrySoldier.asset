@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
+  m_Name: InfantrySoldier
+  m_EditorClassIdentifier: 
+  eName: InfantrySoldier
+  damage: 0.15
+  Brokendamage: 0.05
+  dodgeChance: 0.1
+  armsMaxHealth: 0.05
+  armsHealthRatio: 0.5
+  legsMaxHealth: 0.05
+  legsHealthRatio: 0.5
+  headChance: 0.5
+  headModif: 1.5
+  torsoMaxHealth: 0.2
+  torsoModif: 0.8
+  spareAskChance: 0.6
+  description:
+  - A lost infantry soldier is gorging on a corpse
+  - He glances at you
+  - Vioarr disregards them
+  - They brandish leather armor on all parts
+  attackTxt:
+  - Their sword flashes in your direction
+  behavoir:
+    rid: 4380223714589671455
+  behavoirLowHealth:
+    rid: -2
+  lowHealthThreshhold: 0.33
+  descriptionLowHealthChange: []
+  lowCombatRewards:
+  - baseEvent:
+      rid: 4380223714589671450
+  midCombatRewards:
+  - baseEvent:
+      rid: 4380223714589671451
+  - baseEvent:
+      rid: 4380223714589671452
+  highCombatRewards: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4380223714589671450
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - There is nothing of value in front of you
+    - rid: 4380223714589671451
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - The leather is still good
+        - You honor their death and take it
+    - rid: 4380223714589671452
+      type: {class: ChangeArmor, ns: , asm: Assembly-CSharp}
+      data:
+        armorValue: 0.2
+    - rid: 4380223714589671455
+      type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
+      data: 

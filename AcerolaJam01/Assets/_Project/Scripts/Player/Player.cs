@@ -324,5 +324,6 @@ public class Player : ValidatedMonoBehaviour
         canInteract = true;
         inCombat = false;
         StartCoroutine(Map.instance.CoMakeStartingPath());
+        GameManager.instance.level++;
     }
 }

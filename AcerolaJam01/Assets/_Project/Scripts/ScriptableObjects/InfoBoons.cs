@@ -9,7 +9,7 @@ public class InfoBoons : ScriptableObject
 {
     [Header("Infos")]
     [SerializeField, TextArea] public List<string> DMDescription;
-    [SerializeField, Range(0, 1)] public float chanceWarriorGod = 0.1f;
+    [SerializeField, Range(0, 1)] public float minChanceWarriorGod = 0.1f;
     [SerializeField, TextArea] public List<string> DMDescriptionFail;
     [SerializeField, TextArea] public List<string> DMDescriptionSuccess;
     [SerializeField, TextArea] public List<string> DMDescriptionOtherGod;

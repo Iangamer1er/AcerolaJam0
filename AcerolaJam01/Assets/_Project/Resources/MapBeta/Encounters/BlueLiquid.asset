@@ -10,41 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c29afd55fa231a7478590a1c405fd31d, type: 3}
-  m_Name: Encounter
+  m_Name: BlueLiquid
   m_EditorClassIdentifier: 
-  chance: 0.9
+  chance: 0.5
   DMDescription:
-  - ' test description'
+  - You find a blue liquid in a pouch
+  - Will you drink it
   DMDescriptionFail:
-  - test fail
+  - You feel burnt
+  - That liquid must have been cursed by the outer god
   DMDescriptionSuccess:
-  - test
+  - Vioarr has blessed you
+  - You feel invigorated
   eventFail:
   - baseEvent:
-      rid: 4380223664261169153
-  - baseEvent:
-      rid: 4380223664261169154
-  - baseEvent:
-      rid: 4380223664261169155
+      rid: 4380223714589671436
   eventWin:
   - baseEvent:
-      rid: 4380223664261169156
+      rid: 4380223714589671437
   references:
     version: 2
     RefIds:
-    - rid: 4380223664261169153
-      type: {class: ChangeArmor, ns: , asm: Assembly-CSharp}
-      data:
-        armorValue: 0.33
-    - rid: 4380223664261169154
+    - rid: 4380223714589671436
       type: {class: GainMaxHealth, ns: , asm: Assembly-CSharp}
       data:
-        maxHealthChange: 0.61
-    - rid: 4380223664261169155
+        maxHealthChange: -0.15
+    - rid: 4380223714589671437
       type: {class: ChangeCurrentHealth, ns: , asm: Assembly-CSharp}
       data:
-        healthChange: -0.78
-    - rid: 4380223664261169156
-      type: {class: ChangeCurrentHealth, ns: , asm: Assembly-CSharp}
-      data:
-        healthChange: 0
+        healthChange: 0.2

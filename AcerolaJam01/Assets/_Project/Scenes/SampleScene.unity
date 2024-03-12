@@ -1633,22 +1633,32 @@ MonoBehaviour:
   - "You are Vioarr\u2019s warrior"
   - Never forget that they watch over you
   PdodgeTxt:
-  - You dodged
+  - Vioarr blessed your feet
+  - You dodged their attack
   PhitTxt:
-  - You got hit
-  PFingerRemoved: []
+  - Your lack of focus made you take a hit
+  PFingerRemoved:
+  - "Embarrassing\r \r\n"
+  - "\rFortunately, Vioarr is clement\r"
+  - "\r\rOnly a small offering will be necessary \r\n"
   EdodgeTxt:
-  - E dodged
+  - They are too quick on their feet
+  - Your attack missed
   EDeadTxt:
-  - Enemy dead
+  - They have succumbed to their injuries
   ESparedTxt:
-  - Enemy spared
+  - You have spared their life
+  - "You have gained Vioarr\u2019s favor"
   ESpareFailTxt:
-  - Enemy laughs
+  - The enemy is still willing to fight
+  - You bring shame to Vioarr
+  - You have lost favor with Vioarr
   ELegsBrokenTxt:
-  - test broken legs
+  - Their legs are broken
+  - It is harder for them to evade you
   EArmsBrokenTxt:
-  - test broken arms
+  - Their arms are broken
+  - It is harder for them to put strength into their attacks
   EventSkipTxt:
   - Shameful
   usePitch: 0
@@ -5230,7 +5240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  attackPower: 0.2
+  attackPower: 0.1
   attackPowerModifier: 1
   dodgeChance: 0.01
   armor: 0

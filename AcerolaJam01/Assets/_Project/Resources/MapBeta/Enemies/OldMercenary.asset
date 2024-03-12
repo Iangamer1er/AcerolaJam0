@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
+  m_Name: OldMercenary
+  m_EditorClassIdentifier: 
+  eName: Old  Mercenary
+  damage: 0.3
+  Brokendamage: 0.15
+  dodgeChance: 0.3
+  armsMaxHealth: 0.2
+  armsHealthRatio: 1
+  legsMaxHealth: 0.4
+  legsHealthRatio: 1
+  headChance: 0.7
+  headModif: 3
+  torsoMaxHealth: 0.6
+  torsoModif: 1
+  spareAskChance: 0.9
+  description:
+  - An old mercenary shows a bounty of you
+  - They pulls out their sword
+  - Vioarr judges them worthy
+  - Their skills makes up for their lack of armor
+  attackTxt:
+  - They take a quick step and swings
+  behavoir:
+    rid: 4380223714589671459
+  behavoirLowHealth:
+    rid: -2
+  lowHealthThreshhold: 0.33
+  descriptionLowHealthChange: []
+  lowCombatRewards:
+  - baseEvent:
+      rid: 4380223714589671460
+  - baseEvent:
+      rid: 4380223714589671461
+  midCombatRewards: []
+  highCombatRewards: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4380223714589671459
+      type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4380223714589671460
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - "Their blade isn\u2019t very sharp"
+        - You honor their death and take it
+    - rid: 4380223714589671461
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0.2

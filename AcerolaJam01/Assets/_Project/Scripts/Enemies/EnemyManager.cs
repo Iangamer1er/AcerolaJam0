@@ -64,6 +64,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void ChangeState(EnemyBase state){
+        if(state == null) state = new EnemyNormalState();
         currentState = state;
         currentState.InitState(this);
     }
