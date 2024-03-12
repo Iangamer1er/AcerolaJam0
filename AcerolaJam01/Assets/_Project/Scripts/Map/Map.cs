@@ -52,7 +52,7 @@ public class Map : ValidatedMonoBehaviour
         // MakeMap();
         // currentTileHeight = 0;
         // StartCoroutine(CoCreateMap());
-        StartGame();
+        // StartGame();
     }
 
     public void StartGame(){

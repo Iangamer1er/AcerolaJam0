@@ -1598,19 +1598,44 @@ MonoBehaviour:
   dialogue: {fileID: 267916221}
   timeBetweenLetters: 0.1
   timeBetweenSentences: 3
-  introDialogue:
-  - 'Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
-    Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
-    Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
-    Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
-    Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
-    Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
-    Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
-    Hi! Hi! Hi! Hi! Hi! '
+  introTxt0:
+  - So, the great Vioarr has already judged you, as expected
+  - But just in case do you really need an explanation of the rules
+  - Oh, right, you can't talk. Here
+  introTxt1:
+  - "I still don\u2019t know why almighty Vioarr allows this"
+  - But his will is absolute
+  - Also these are your options
+  introTxt2:
+  - In combat they reveal new intentions
+  - The X is to valiantly fight
+  - The other is to spare the oponent
+  - Remember, sparing an enemy who hasn't lost their pathetic will to fight is necessary
+  - The icons represent yourself
+  - The helmet is your armor
+  - Vioarr protects you
+  - The gauntlet is your power
+  - Never forget Vioarr's blessing
+  - The chestplate is your health
+  - May Vioarr reduce your injuries
+  - The Leggins are your speed
+  - Vioarr's technique is within yourself
+  makingMapTxt:
+  - You are undertaking your journey
+  - Here are your paths
+  firstCombatTxt:
+  - There is only one option
+  - No need to chose
+  - Here you can valiantly fight
+  - But remember, sparing an enemy who hasn't lost their pathetic will to fight is
+    necessary
+  - "You are Vioarr\u2019s warrior"
+  - Never forget that they watch over you
   PdodgeTxt:
   - You dodged
   PhitTxt:
   - You got hit
+  PFingerRemoved: []
   EdodgeTxt:
   - E dodged
   EDeadTxt:

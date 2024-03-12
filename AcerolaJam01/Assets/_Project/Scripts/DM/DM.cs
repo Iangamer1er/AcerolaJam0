@@ -16,6 +16,7 @@ public class DM : ValidatedMonoBehaviour
     [Header("Tuto txt")]
     [SerializeField, TextArea] private List<string> introTxt0;
     [SerializeField, TextArea] private List<string> introTxt1;
+    [SerializeField, TextArea] private List<string> introTxt2;
     [SerializeField, TextArea] private List<string> makingMapTxt;
     [SerializeField, TextArea] private List<string> firstCombatTxt;
 
@@ -56,22 +57,30 @@ public class DM : ValidatedMonoBehaviour
     private void Start() {
         timerSentences = new CountdownTimer(timeBetweenSentences);
         timerSentences.OnTimerStop = ()=> timerDone = true;
+        StartCoroutine(Tuto());
     }
 
     private IEnumerator Tuto(){
+        yield return new WaitForSeconds(1);
         StartCoroutine(Talk(introTxt0));
         yield return new WaitUntil(()=>doneTalking);
         //todo animation of giving skip, and answers
         StartCoroutine(Talk(introTxt1));
         yield return new WaitUntil(()=>doneTalking);
+        StartCoroutine(Talk(introTxt2));
+        yield return new WaitUntil(()=>doneTalking);
+        Player.instance.inCombatEvent.Invoke();
         //todo make the tiles flip and the camera pan to it
         yield return new WaitForSeconds(1);
+        Player.instance.inCombatEvent.Invoke();
         //todo make camera accessible to the player
         StartCoroutine(Talk(makingMapTxt));
         Map.instance.StartGame();
         yield return new WaitUntil(()=>doneTalking);
         StartCoroutine(Talk(firstCombatTxt));
+        yield return new WaitUntil(()=>doneTalking);
         //todo make the player able to interract with the map
+        Player.instance.canChoseMap = true;
         yield return null;
     }
 
