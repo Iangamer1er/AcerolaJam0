@@ -29,7 +29,7 @@ public class EnemyNormalState : EnemyBase{
                 break;
             case BodyParts.Head : 
                 if(Random.Range(0, 1) >= enemy.info.headChance){
-                    DM.instance.Talk(DM.instance.EdodgeTxt);
+                    enemy.StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
                     break;
                 }
                 damageInflicted = damage * enemy.info.headModif;

@@ -74,17 +74,17 @@ public class Encounter : MonoBehaviour
 
     public IEnumerator CoPlayerTakeEncounter(bool choseChance){
         if(choseChance == false){
-            DM.instance.Talk(DM.instance.EventSkipTxt);
+            StartCoroutine(DM.instance.Talk(DM.instance.EventSkipTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             Player.instance.FinishEncounter();
         }else{
             List<MyBaseEvent> events;
             if(infoEncounter.chance <= Random.Range(0f, 1f)){
                 events = infoEncounter.eventWin; 
-                DM.instance.Talk(infoEncounter.DMDescriptionSuccess);
+                StartCoroutine(DM.instance.Talk(infoEncounter.DMDescriptionSuccess));
             }else{
                 events = infoEncounter.eventFail;  
-                DM.instance.Talk(infoEncounter.DMDescriptionFail);
+                StartCoroutine(DM.instance.Talk(infoEncounter.DMDescriptionFail));
             } 
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             StartCoroutine(CoGiveEvent(events));
@@ -94,13 +94,13 @@ public class Encounter : MonoBehaviour
     public IEnumerator CoPlayerChoseBoon(bool choseWarriorGod){
         List<MyBaseEvent> events;
         if(choseWarriorGod == false){
-            DM.instance.Talk(infoBoon.DMDescriptionOtherGod);
+            StartCoroutine(DM.instance.Talk(infoBoon.DMDescriptionOtherGod));
             events = infoBoon.eventOuterGod;
         }else if(infoBoon.minChanceWarriorGod <= Random.Range(Player.instance.vioarrFavor, 1f)){
-            DM.instance.Talk(infoBoon.DMDescriptionSuccess);
+            StartCoroutine(DM.instance.Talk(infoBoon.DMDescriptionSuccess));
             events = infoBoon.eventWarriorGodSuccess; 
         }else{
-            DM.instance.Talk(infoBoon.DMDescriptionFail);
+            StartCoroutine(DM.instance.Talk(infoBoon.DMDescriptionFail));
             events = infoBoon.eventWarriorGodFail; 
         } 
         yield return new WaitUntil(()=>DM.instance.doneTalking);

@@ -12,6 +12,6 @@ public class EventManager : MonoBehaviour{
 
     public void ChangeState(BaseEvent state){
         currentState = state;
-        currentState.EventAction();
+        currentState.EventAction(this);
     }
 }

@@ -306,8 +306,8 @@ public class Map : ValidatedMonoBehaviour
 
     public void RemoveStartingPath(){
         foreach (GameObject pastLine in startingLines){
-            startingLines.Clear();
             Destroy(pastLine);
         }
+        startingLines.Clear();
     }
 }

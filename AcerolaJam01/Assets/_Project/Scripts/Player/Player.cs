@@ -115,7 +115,7 @@ public class Player : ValidatedMonoBehaviour
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         currentHealth = maxHealth;
         UpdateStats();
-        DM.instance.Talk(DM.instance.PFingerRemoved);
+        StartCoroutine(DM.instance.Talk(DM.instance.PFingerRemoved));
     }
 
     public IEnumerator CoRemoveFingerAnim(){
@@ -143,15 +143,15 @@ public class Player : ValidatedMonoBehaviour
         Debug.Log("Gotten Here");
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0, 1) > dodgeChance){
-            DM.instance.Talk(DM.instance.PhitTxt);
+            StartCoroutine(DM.instance.Talk(DM.instance.PhitTxt));
             ChangeHealth(-damage + armor);
-            AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);
             yield return new WaitUntil(()=>DM.instance.doneTalking);
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);
             canInteract = true;
         } else{
-            DM.instance.Talk(DM.instance.PdodgeTxt);
-            AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss);
+            StartCoroutine(DM.instance.Talk(DM.instance.PdodgeTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss);
             canInteract = true;
         }
     }
@@ -159,7 +159,7 @@ public class Player : ValidatedMonoBehaviour
 
 
     public IEnumerator CoDies(){
-        DM.instance.Talk(DM.instance.PDeadTxt);
+        StartCoroutine(DM.instance.Talk(DM.instance.PDeadTxt));
         PlayerMove playerMove = GetComponent<PlayerMove>();
         playerMove.controlsHand = true;
         playerMove.controlsCam = true;
