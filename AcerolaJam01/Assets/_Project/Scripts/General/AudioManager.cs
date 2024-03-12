@@ -1,16 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using KBCore.Refs;
 using UnityEngine;
+
+public enum MusicSources{CombatMusic, AmbianceMusic, BoonsMusic, EventsMusic}
 
 public class AudioManager : ValidatedMonoBehaviour
 {
     [SerializeField, Range(0.5f,1.5f)] private float pitchMin = 1;
     [SerializeField, Range(0.5f,1.5f)] private float pitchMax = 1;
+    [SerializeField, Range(0f,1f)] private float maxVolume = 0.5f;
+    [SerializeField, Range(0f, 5f)] private float transitionTime = 1f;
+    public AudioClip combatMusic;
+    public AudioClip eventMusic;
+    public AudioClip boonsMusic;
+    public AudioClip ambianceMusic;
+    public AudioClip swordHit;
+    public AudioClip swordMiss;
+
+    private AudioSource currentMusic;
+    private AudioSource aSCombatMusic;
+    private AudioSource aSEventMusic;
+    private AudioSource aSBoonsMusic;
+    private AudioSource aSAmbianceMusic;
     private AudioSource _aS; 
     private AudioSource _aSLeft; 
     private AudioSource _aSRight; 
-    public AudioSource _aSMusic; 
     private AudioSource _aSEffects; 
 
 
@@ -25,11 +41,34 @@ public class AudioManager : ValidatedMonoBehaviour
         }
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
         foreach (AudioSource source in sources){
-            if(source.gameObject.name == "Left") _aSLeft = source;
-            else if(source.gameObject.name == "Right") _aSRight = source;
-            else if(source.gameObject.name == "Music") _aSMusic = source;
-            else if(source.gameObject.name == "SoundEffects") _aSEffects = source;
+            switch (source.gameObject.name){
+                case "Left":
+                    _aSLeft = source;
+                    break;
+                case "Right":
+                    _aSRight = source;
+                    break;
+                case "SoundEffects":
+                    _aSEffects = source;
+                    break;
+                case "CombatMusic":
+                    aSCombatMusic = source;
+                    break;
+                case "AmbianceMusic":
+                    aSAmbianceMusic = source;
+                    aSAmbianceMusic.volume = maxVolume;
+                    break;
+                case "BoonsMusic":
+                    aSBoonsMusic = source;
+                    break;
+                case "EventsMusic":
+                    aSEventMusic = source;
+                    break;
+                default:
+                    break;
+            }
         }
+        currentMusic = aSAmbianceMusic;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -87,8 +126,39 @@ public class AudioManager : ValidatedMonoBehaviour
     /// Function to change the music volume
     /// </summary>
     /// <param name="newVolume"></param>
-    public void ChangeVolumeMusic(float newVolume){
-        _aSMusic.volume = newVolume;
+    public void ChangeVolumeMusic(float newVolume, AudioSource music){
+        music.volume = Mathf.Min(newVolume, maxVolume);
+    }
+
+    public void TransitionMusic(MusicSources sourceName){
+        AudioSource toSource = currentMusic;
+        switch(sourceName){
+            case MusicSources.CombatMusic:
+                toSource = aSCombatMusic;
+                break;
+            case MusicSources.AmbianceMusic:
+                toSource = aSAmbianceMusic;
+                break;
+            case MusicSources.BoonsMusic:
+                toSource = aSBoonsMusic;
+                break;
+            case MusicSources.EventsMusic:
+                toSource = aSEventMusic;
+                break;
+        }
+        if(toSource == currentMusic) return;
+        StartCoroutine(CoTransitionMusic(currentMusic, toSource));
+    }
+
+    private IEnumerator CoTransitionMusic(AudioSource fromAs, AudioSource toAs){
+        float actionTime = 0;
+        while (actionTime < transitionTime){
+            actionTime += Time.fixedDeltaTime;
+            float t = Mathf.SmoothStep(0, maxVolume, actionTime/transitionTime);
+            toAs.volume = Mathf.Lerp(0, maxVolume, t);
+            fromAs.volume = Mathf.Lerp(maxVolume, 0, t);
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     /// <summary>
