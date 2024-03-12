@@ -6,6 +6,12 @@ public class EnemyNormalState : EnemyBase{
     
     public override void InitState(EnemyManager enemy){
         enemy.StartCoroutine(DM.instance.Talk(enemy.info.description));
+        enemy.StartCoroutine(WaitUntil());
+    }
+
+    private IEnumerator WaitUntil(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        Player.instance.canInteract = true;
     }
 
     public override void TakeDamage(EnemyManager enemy, float damage, BodyParts part){

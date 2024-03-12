@@ -1606,11 +1606,12 @@ MonoBehaviour:
   - "I still don\u2019t know why almighty Vioarr allows this"
   - But his will is absolute
   - Also these are your options
-  introTxt2:
   - In combat they reveal new intentions
+  introTxt2:
   - The X is to valiantly fight
-  - The other is to spare the oponent
-  - Remember, sparing an enemy who hasn't lost their pathetic will to fight is necessary
+  - In combat the body part to target will be your choice
+  - They represent both you and the opponent
+  - The other is to spare thier life
   - The icons represent yourself
   - The helmet is your armor
   - Vioarr protects you
@@ -5258,9 +5259,9 @@ MonoBehaviour:
   - {fileID: 191029782}
   animator: {fileID: 1519638186}
   currentHealth: 0
-  canChoseMap: 1
+  canChoseMap: 0
   inCombat: 0
-  canInteract: 1
+  canInteract: 0
   levelHeight: 0
   cutFingerT: {fileID: 0}
 --- !u!65 &1519638185

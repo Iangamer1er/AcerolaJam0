@@ -67,12 +67,12 @@ public class DM : ValidatedMonoBehaviour
         //todo animation of giving skip, and answers
         StartCoroutine(Talk(introTxt1));
         yield return new WaitUntil(()=>doneTalking);
+        Player.instance.inCombatEvent.Invoke();
         StartCoroutine(Talk(introTxt2));
         yield return new WaitUntil(()=>doneTalking);
-        Player.instance.inCombatEvent.Invoke();
         //todo make the tiles flip and the camera pan to it
-        yield return new WaitForSeconds(1);
         Player.instance.inCombatEvent.Invoke();
+        yield return new WaitForSeconds(1);
         //todo make camera accessible to the player
         StartCoroutine(Talk(makingMapTxt));
         Map.instance.StartGame();
@@ -81,6 +81,7 @@ public class DM : ValidatedMonoBehaviour
         yield return new WaitUntil(()=>doneTalking);
         //todo make the player able to interract with the map
         Player.instance.canChoseMap = true;
+        Player.instance.canInteract = true;
         yield return null;
     }
 
