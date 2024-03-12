@@ -87,6 +87,7 @@ public class Player : ValidatedMonoBehaviour
           return;  // todo ending sequence
         }
         AudioManager.instance.PlayEffect(AudioManager.instance.playerCutFinger);
+        AudioManager.instance.PlayEffect(AudioManager.instance.fingerFly);
         Destroy(currentHand);
         currentHand = Instantiate(handsStates[nbFingerTaken], transform);
         cutFingerT = Instantiate(prefabFinger, handsCuts[nbFingerTaken].position, prefabFinger.transform.rotation, transform).transform;

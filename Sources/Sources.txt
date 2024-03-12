@@ -1,0 +1,5 @@
+- sound chop finger : https://freesound.org/people/FairCashew/sounds/684856/
+- sound miss attack : https://freesound.org/people/ImATaco/sounds/724527/
+- sound enemy dies : https://freesound.org/people/DylanTheFish/sounds/417994/
+
+- all other sounds and music are from the unity store as free assets

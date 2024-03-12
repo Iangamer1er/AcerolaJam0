@@ -31,6 +31,7 @@ public class AudioManager : ValidatedMonoBehaviour
     [Header("Player sounds")]
     public AudioClip playerCutFinger;
     public AudioClip playerStabbed;
+    public AudioClip fingerFly;
 
     [Header("Enemy sounds")]
     public AudioClip startCombat;
