@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using KBCore.Refs;
+using UnityEngine.SceneManagement;
 
 public class GameManager : ValidatedMonoBehaviour
 {
@@ -37,5 +38,9 @@ public class GameManager : ValidatedMonoBehaviour
     public void ChangeTimeScale(float percent){
         Time.timeScale = percent;
         Time.fixedDeltaTime = fixedDeltaTime * percent;
+    }
+
+    public void ChangeScene(int sceneIndex){
+        SceneManager.LoadScene(sceneIndex);
     }
 }

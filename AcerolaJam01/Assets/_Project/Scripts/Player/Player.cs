@@ -126,7 +126,6 @@ public class Player : ValidatedMonoBehaviour
         playerMove.controlsHand = false;
         playerMove.controlsCam = false;
         cam.LookAt = DMAnimators[0].GetComponent<Transform>();
-        //todo make player look at DM'S hand and not be able to look
         foreach (Animator DMAnimator in DMAnimators){
             DMAnimator.SetTrigger("StartAnim" + nbFingerTaken);
         }

@@ -31,7 +31,12 @@ public class HandleAnim : MonoBehaviour
         AudioManager.instance.PlayEffect(AudioManager.instance.playerStabbed);
     }
 
-    private void ChangeScene(){
+    public void ChangeScene(){
+        GameManager.instance.StartCoroutine(ChangeSceneFixed()); // need to wait for animation to finish to be able to load scene
+    }
+
+    private IEnumerator ChangeSceneFixed(){
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene(1);
     }
 }
