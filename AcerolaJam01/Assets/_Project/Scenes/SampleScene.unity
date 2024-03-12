@@ -663,7 +663,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' Hello :)'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e62100c5b9af9c4796d84d82875450f, type: 2}
   m_sharedMaterial: {fileID: -2521319987471193700, guid: 5e62100c5b9af9c4796d84d82875450f, type: 2}
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: {fileID: 267916221}
-  timeBetweenLetters: 0.1
+  timeBetweenLetters: 0.06
   timeBetweenSentences: 3
   introTxt0:
   - So, the great Vioarr has already judged you, as expected

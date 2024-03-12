@@ -80,9 +80,9 @@ public class Player : ValidatedMonoBehaviour
 
     public void UpdateStats(){
         armorTxt.text = Mathf.RoundToInt(armor * 100) + "";
-        maxHealthTxt.text = Mathf.RoundToInt(maxHealth/currentHealth * 100) + "";
-        attackPowerTxt.text = Mathf.RoundToInt(attackPower * 100) + "";
-        dodgeTxt.text = Mathf.RoundToInt(dodgeChance * 100) + "";
+        maxHealthTxt.text = Mathf.RoundToInt(currentHealth * 100) + "/\n" + Mathf.RoundToInt(maxHealth * 100);
+        attackPowerTxt.text = Mathf.RoundToInt(attackPowerModifier * 100) + "%\n" + Mathf.RoundToInt(attackPower * 100);
+        dodgeTxt.text = Mathf.RoundToInt(dodgeChance * 100) + "%";
     }
 
     public void RemoveFinger(){
@@ -217,7 +217,7 @@ public class Player : ValidatedMonoBehaviour
             DM.instance.wannaSkip = true;
         }else if(!canInteract) return;
         if(!ClickCase(objHit) && inCombat) ClickAnswer(objHit);
-        else if(!inCombat) ClickAnswerOutCombat(objHit);
+        else if(!inCombat && !canChoseMap) ClickAnswerOutCombat(objHit);
     }
 
     private bool ClickCase(GameObject objHit){
