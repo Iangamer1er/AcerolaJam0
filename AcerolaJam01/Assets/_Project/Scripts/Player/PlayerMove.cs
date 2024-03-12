@@ -20,14 +20,15 @@ public class PlayerMove : ValidatedMonoBehaviour
     [SerializeField] private float lookXClamp = 85f;
     [SerializeField, Min(0)] private float lookSpeed;
     [SerializeField, Range(0.01f, 1)] private float screenWidthPercent = 0.1f;
-    [SerializeField, Scene] private CinemachineVirtualCamera cam;
+    [SerializeField, Scene] public CinemachineVirtualCamera cam;
 
     private CountdownTimer returnTimer;
     private Coroutine coroutineDisableMouseForFrame;
     private Coroutine mouveHandToPoint;
     private bool canLook = true;
     private bool wannaMove = false;
-    private bool controlsCam = true;
+    public bool controlsCam = true;
+    public bool controlsHand = true;
     private Vector2 lookRotation = Vector2.zero;
 
     private void Start() {
@@ -43,7 +44,7 @@ public class PlayerMove : ValidatedMonoBehaviour
     }
 
     private void FixedUpdate() {
-       if(wannaMove) MoveHand();    
+       if(wannaMove && controlsHand) MoveHand();    
     }
 
     private void OnEnableMouseControl(){

@@ -5,7 +5,7 @@ using KBCore.Refs;
 using UnityEngine;
 using TMPro;
 using Utilities;
-using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class EndScreen : ValidatedMonoBehaviour
 {
@@ -35,7 +35,8 @@ public class EndScreen : ValidatedMonoBehaviour
     private void Update(){
         timerSentences.Tick(Time.deltaTime); 
         if(canClick && Input.GetMouseButtonDown(0)){
-                
+            GameManager.instance.level = 0;
+            SceneManager.LoadScene(0);
         }
     } 
 

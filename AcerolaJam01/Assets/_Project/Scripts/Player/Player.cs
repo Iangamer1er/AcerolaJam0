@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using System.Linq;
+using Cinemachine;
 
 public class Player : ValidatedMonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Player : ValidatedMonoBehaviour
     [Header("Animation")]
     [SerializeField, Anywhere] private Animator[] DMAnimators;
     [SerializeField, Self] private Animator animator;
+    [SerializeField, Scene] private CinemachineVirtualCamera cam;
 
 
     public float currentHealth;
@@ -53,6 +55,7 @@ public class Player : ValidatedMonoBehaviour
     private BodyParts part;
 
     private int nbFingerTaken = 0;
+    private Vector3 startingLocalEulerAngles;
 
     private UnityEvent _inCombatEvent = new UnityEvent();
     public UnityEvent inCombatEvent => _inCombatEvent;
@@ -73,6 +76,7 @@ public class Player : ValidatedMonoBehaviour
     private void Start() {
         // Instantiate(prefabHand, transform);
         UpdateStats();
+        startingLocalEulerAngles = cam.transform.localEulerAngles;
     }
 
     public void UpdateStats(){
@@ -89,6 +93,7 @@ public class Player : ValidatedMonoBehaviour
         currentHand = Instantiate(handsStates[nbFingerTaken], transform);
         cutFingerT = Instantiate(prefabFinger, handsCuts[nbFingerTaken].position, prefabFinger.transform.rotation, transform).transform;
         cutFingerT.parent = DMSockets[nbFingerTaken];
+        cam.LookAt = cutFingerT;
         StartCoroutine(cutFingerT.GetComponent<FingerMove>().CoroutineMoveEnd(
             cutFingerT.position, 
             cutFingerT.eulerAngles, 
@@ -101,6 +106,12 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public IEnumerator PassEncounter(){
+        yield return new WaitForSeconds(0.5f);
+        PlayerMove playerMove = GetComponent<PlayerMove>();
+        playerMove.controlsHand = true;
+        playerMove.controlsCam = true;
+        cam.LookAt = null;
+        cam.transform.localEulerAngles = startingLocalEulerAngles;
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         currentHealth = maxHealth;
         UpdateStats();
@@ -111,14 +122,16 @@ public class Player : ValidatedMonoBehaviour
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         canInteract = false;
         canChoseMap = false;
+        PlayerMove playerMove = GetComponent<PlayerMove>();
+        playerMove.controlsHand = false;
+        playerMove.controlsCam = false;
+        cam.LookAt = DMAnimators[0].GetComponent<Transform>();
         //todo make player look at DM'S hand and not be able to look
         foreach (Animator DMAnimator in DMAnimators){
             DMAnimator.SetTrigger("StartAnim" + nbFingerTaken);
         }
         animator.SetTrigger("StartAnim");
     }
-
-    
 
     public void Attack(EnemyManager enemy, BodyParts part = BodyParts.Torso){
         if(enemy == null) enemy = targetEnemy;
@@ -146,8 +159,16 @@ public class Player : ValidatedMonoBehaviour
 
 
     public IEnumerator CoDies(){
-        // todo
+        DM.instance.Talk(DM.instance.PDeadTxt);
+        PlayerMove playerMove = GetComponent<PlayerMove>();
+        playerMove.controlsHand = true;
+        playerMove.controlsCam = true;
+        cam.LookAt = null;
+        cam.transform.localEulerAngles = startingLocalEulerAngles;
         yield return new WaitUntil(()=>DM.instance.doneTalking);
+        playerMove.controlsCam = false;
+        cam.LookAt = DMAnimators[0].transform;
+        DMAnimators[0].SetTrigger("Death");
     }
 
     public void ChangeHealth(float healthChange){

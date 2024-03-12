@@ -24,6 +24,7 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, TextArea] public List<string> PdodgeTxt;
     [SerializeField, TextArea] public List<string> PhitTxt;
     [SerializeField, TextArea] public List<string> PFingerRemoved;
+    [SerializeField, TextArea] public List<string> PDeadTxt;
 
     [Header("Enemy txt")]
     [SerializeField, TextArea] public List<string> EdodgeTxt;

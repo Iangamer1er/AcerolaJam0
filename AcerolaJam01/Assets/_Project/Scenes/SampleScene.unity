@@ -1641,6 +1641,16 @@ MonoBehaviour:
   - "Embarrassing\r \r\n"
   - "\rFortunately, Vioarr is clement\r"
   - "\r\rOnly a small offering will be necessary \r\n"
+  PDeadTxt:
+  - you were truly a brave warrior
+  - you were Vioarr's best
+  - you went crazy when you got a child
+  - Got out of Vioarr's blessing
+  - But you are now unfit to even honor Vioarr
+  - What a shame
+  - Now, you are deplorable
+  - Now you are reprehensible
+  - Now you are
   EdodgeTxt:
   - They are too quick on their feet
   - Your attack missed
@@ -3665,6 +3675,7 @@ MonoBehaviour:
   fingerFly: {fileID: 8300000, guid: 0ae140a77ad5c07469c90a70c61a87f6, type: 3}
   startCombat: {fileID: 8300000, guid: ab49a476dca087d4bb35752ecacaff3e, type: 3}
   enemyDead: {fileID: 8300000, guid: 241238bfb719420419978e35c13757ea, type: 3}
+  currentMusic: {fileID: 0}
 --- !u!4 &1084810754
 Transform:
   m_ObjectHideFlags: 0
@@ -5227,6 +5238,8 @@ MonoBehaviour:
   lookSpeed: 10
   screenWidthPercent: 0.2
   cam: {fileID: 1285747584}
+  controlsCam: 1
+  controlsHand: 1
 --- !u!114 &1519638184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5268,6 +5281,7 @@ MonoBehaviour:
   DMAnimators:
   - {fileID: 191029782}
   animator: {fileID: 1519638186}
+  cam: {fileID: 1285747584}
   currentHealth: 0
   canChoseMap: 0
   inCombat: 0

@@ -72,7 +72,6 @@ public class Map : ValidatedMonoBehaviour
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(()=>canContinueRoutine);
         yield return new WaitUntil(()=>DM.instance.doneTalking);
-        startPossiblePaths.AddRange(tilesArrays[0]);
         StartCoroutine(CoMakeStartingPath());
     }
 
@@ -113,6 +112,7 @@ public class Map : ValidatedMonoBehaviour
         if(!tilesArrays.ContainsKey(currentTileHeight)) tilesArrays[currentTileHeight] = new List<Tile>();
         tilesArrays[currentTileHeight].Add(tileScript);
         AddPossiblePath(newTile, posFork, isInFork);
+        if(currentTileHeight == 0) startPossiblePaths.Add(newTile);
         return type;
     }
 

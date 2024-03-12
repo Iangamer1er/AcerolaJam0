@@ -6,7 +6,7 @@ public class FingerMove : MonoBehaviour
 {
     const int roundPrecision = 4;
     public Transform targetSocket;
-    [SerializeField, Min(0)] private float moveTime = 0.5f;
+    [SerializeField, Min(0)] public float moveTime = 0.5f;
 
     public IEnumerator CoroutineMoveEnd(Vector3 posIni, Vector3 rotIni, Transform posDest){
         bool isThere = false;
