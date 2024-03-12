@@ -79,13 +79,15 @@ public class Encounter : MonoBehaviour
             Player.instance.FinishEncounter();
         }else{
             List<MyBaseEvent> events;
-            if(infoEncounter.chance <= Random.Range(0f, 1f)){
+            float chance = Random.Range(0f, 1f);
+            if(infoEncounter.chance <= chance){
                 events = infoEncounter.eventWin; 
                 StartCoroutine(DM.instance.Talk(infoEncounter.DMDescriptionSuccess));
             }else{
                 events = infoEncounter.eventFail;  
                 StartCoroutine(DM.instance.Talk(infoEncounter.DMDescriptionFail));
             } 
+            Debug.Log("EncountterChance : " + infoEncounter.chance + " Random : " +chance);
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             StartCoroutine(CoGiveEvent(events));
         }

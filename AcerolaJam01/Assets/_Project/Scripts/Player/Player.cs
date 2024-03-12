@@ -138,7 +138,8 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public IEnumerator CoTakeDamage(float damage){
-        Debug.Log(damage);
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        StartCoroutine(DM.instance.Talk(DM.instance.PAttackTxt));
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0, 1) <= dodgeChance){
             AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);

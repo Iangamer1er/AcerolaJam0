@@ -23,6 +23,10 @@ public class Map : ValidatedMonoBehaviour
     [SerializeField, Range(0, 1)] float timeNextPoint;
     [SerializeField, Range(0.01f, 3)] float mapWidth; //currentrly 2.457
     [SerializeField, Range(0.01f, 3)] float heightBetweenSpaces;
+    [SerializeField, Range(0, 1f)] float chanceEnemy = 0.5f;
+    [SerializeField, Range(0, 1f)] float chanceRandom= 0.2f;
+    [SerializeField, Range(0, 1f)] float chanceEvent= 0.2f;
+    [SerializeField, Range(0, 1f)] float chanceBoon= 0.1f;
 
     [Header("Line Renderer")]
     [SerializeField, Min(0)] float lineRendererWidth = 0.02f;
@@ -87,9 +91,15 @@ public class Map : ValidatedMonoBehaviour
 
     private TileTypes MakeTile(List<TileTypes> currentlyUsed, Transform newFork = null, int posFork = 0){
         GameObject newTile = new GameObject();
-        List<TileTypes> possibilities = TileTypes.GetValues(typeof(TileTypes)).Cast<TileTypes>().ToList();
-        if(currentlyUsed != null) possibilities = possibilities.Except(currentlyUsed).ToList();
-        TileTypes type = possibilities[Random.Range(0, possibilities.Count())];
+        TileTypes type;
+        float chance = Random.Range(0, 1f);
+        if(chance <= chanceEnemy) type = TileTypes.Enemy;
+        else if(chance <= chanceRandom + chanceEnemy) type = TileTypes.Random;
+        else if(chance <= chanceEvent + chanceRandom +chanceEnemy) type = TileTypes.Random;
+        else type = TileTypes.Boon;
+        // List<TileTypes> possibilities = TileTypes.GetValues(typeof(TileTypes)).Cast<TileTypes>().ToList();
+        // if(currentlyUsed != null) possibilities = possibilities.Except(currentlyUsed).ToList();
+        // type = possibilities[Random.Range(0, possibilities.Count())];
         Tile tileScript = newTile.AddComponent<Tile>();
         tileScript.type = type;
         tileScript.height = currentTileHeight;

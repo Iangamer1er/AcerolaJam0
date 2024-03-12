@@ -1635,6 +1635,8 @@ MonoBehaviour:
   PdodgeTxt:
   - Vioarr blessed your feet
   - You dodged their attack
+  PAttackTxt:
+  - You swing at your opponent
   PhitTxt:
   - Your lack of focus made you take a hit
   PFingerRemoved:
@@ -7225,6 +7227,10 @@ MonoBehaviour:
   timeNextPoint: 0.32
   mapWidth: 2.4
   heightBetweenSpaces: 0.89
+  chanceEnemy: 0.5
+  chanceRandom: 0.2
+  chanceEvent: 0.2
+  chanceBoon: 0.1
   lineRendererWidth: 0.02
   lineColor: {r: 0, g: 0, b: 0, a: 1}
   timeDoLine: 0.1
