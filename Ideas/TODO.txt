@@ -1,10 +1,6 @@
 // TODO 
 - Tutorial
 - implement sound effects
-- implement music for combat
-- implement music for event
-- implement music for boon
-- implement ambiance for map
 - implement ending
 - implement death animation
 - implement tiles fighting animations
@@ -12,3 +8,4 @@
 - Make enemies (9 / 20)
 - Make encounters (9 / 20)
 - Make boons (2 / 3)
+- Balance the game

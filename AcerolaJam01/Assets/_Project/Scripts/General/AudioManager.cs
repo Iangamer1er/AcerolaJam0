@@ -18,6 +18,7 @@ public class AudioManager : ValidatedMonoBehaviour
     public AudioClip ambianceMusic;
     public AudioClip swordHit;
     public AudioClip swordMiss;
+    public AudioClip startCombat;
 
     private AudioSource currentMusic;
     private AudioSource aSCombatMusic;
@@ -53,16 +54,24 @@ public class AudioManager : ValidatedMonoBehaviour
                     break;
                 case "CombatMusic":
                     aSCombatMusic = source;
+                    aSCombatMusic.clip = combatMusic;
+                    aSCombatMusic.Play();
                     break;
                 case "AmbianceMusic":
                     aSAmbianceMusic = source;
                     aSAmbianceMusic.volume = maxVolume;
+                    aSAmbianceMusic.clip = ambianceMusic;
+                    aSAmbianceMusic.Play();
                     break;
                 case "BoonsMusic":
                     aSBoonsMusic = source;
+                    aSBoonsMusic.clip = boonsMusic;
+                    aSBoonsMusic.Play();
                     break;
                 case "EventsMusic":
                     aSEventMusic = source;
+                    aSEventMusic.clip = eventMusic;
+                    aSEventMusic.Play();
                     break;
                 default:
                     break;
@@ -128,6 +137,11 @@ public class AudioManager : ValidatedMonoBehaviour
     /// <param name="newVolume"></param>
     public void ChangeVolumeMusic(float newVolume, AudioSource music){
         music.volume = Mathf.Min(newVolume, maxVolume);
+    }
+
+    [ContextMenu("ChangeMusic to fighting")]
+    public void ContextMenu(){
+        TransitionMusic(MusicSources.CombatMusic);
     }
 
     public void TransitionMusic(MusicSources sourceName){
