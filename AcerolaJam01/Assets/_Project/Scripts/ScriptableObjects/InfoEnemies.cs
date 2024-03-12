@@ -35,5 +35,5 @@ public class InfoEnemies : ScriptableObject
     [Header("Rewards")]
     [SerializeField] public List<MyBaseEvent> lowCombatRewards;
     [SerializeField] public List<MyBaseEvent> midCombatRewards;
-    [SerializeField] public List<MyBaseEvent> hightCombatRewards;
+    [SerializeField] public List<MyBaseEvent> highCombatRewards;
 }

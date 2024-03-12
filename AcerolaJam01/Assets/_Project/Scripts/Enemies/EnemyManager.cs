@@ -92,13 +92,28 @@ public class EnemyManager : MonoBehaviour
             Player.instance.ChangeFavor(-0.1f);
             Player.instance.canInteract = true;
             // todo give the rewards
-            // Player.instance.FinishEncounter();
+            List<List<MyBaseEvent>> possibleRewards = new List<List<MyBaseEvent>>();
+            if(CheckCombatReward(info.lowCombatRewards)) possibleRewards.Add(info.lowCombatRewards);
+            if(CheckCombatReward(info.midCombatRewards)) possibleRewards.Add(info.midCombatRewards);
+            if(CheckCombatReward(info.highCombatRewards)) possibleRewards.Add(info.highCombatRewards);
+            List<MyBaseEvent> chosenReward = possibleRewards[Random.Range(0, possibleRewards.Count)];
+            foreach (MyBaseEvent reward in chosenReward){
+                EventManager.instance.ChangeState(reward.baseEvent);
+            }
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
+            Player.instance.FinishEncounter();
             Player.instance.inCombatEvent.Invoke();
         }else{
             StartCoroutine(DM.instance.Talk(info.attackTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             Attack(info.damage);
         }
+    }
+
+    private bool CheckCombatReward(List<MyBaseEvent> reward){
+        if(reward == null) return false;
+        if(reward.Count == 0) return false;
+        return true;
     }
 
     public void Attack(float damage){
