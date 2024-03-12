@@ -1607,10 +1607,12 @@ MonoBehaviour:
     Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
     Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi! Hi!
     Hi! Hi! Hi! Hi! Hi! '
-  EdodgeTxt:
-  - E dodged
   PdodgeTxt:
   - You dodged
+  PhitTxt:
+  - You got hit
+  EdodgeTxt:
+  - E dodged
   EDeadTxt:
   - Enemy dead
   ESparedTxt:
@@ -3613,6 +3615,7 @@ MonoBehaviour:
   pitchMin: 1
   pitchMax: 1
   maxVolume: 0.5
+  sfxVolume: 0.4
   transitionTime: 2
   combatMusic: {fileID: 8300000, guid: dcaa49c56a6674229829c944cf6ff2f8, type: 3}
   eventMusic: {fileID: 8300000, guid: 3777b5eea1dd3da4395538a32ea30fc5, type: 3}
@@ -3620,7 +3623,11 @@ MonoBehaviour:
   ambianceMusic: {fileID: 8300000, guid: 7a18c70ff8af3e14f828be8b98750dd0, type: 3}
   swordHit: {fileID: 0}
   swordMiss: {fileID: 0}
+  endScreenTump: {fileID: 0}
+  playerCutFinger: {fileID: 0}
+  playerStabbed: {fileID: 0}
   startCombat: {fileID: 8300000, guid: ab49a476dca087d4bb35752ecacaff3e, type: 3}
+  enemyDead: {fileID: 0}
 --- !u!4 &1084810754
 Transform:
   m_ObjectHideFlags: 0

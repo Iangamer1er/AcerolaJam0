@@ -70,8 +70,8 @@ public class EnemyManager : MonoBehaviour
 
     public IEnumerator CoTakeDamage(float damage, BodyParts part){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
-        Debug.Log("legs health : " + legsHealth + "\n legs max health : " + info.legsMaxHealth);
         if(Random.Range(0f, legsHealth/info.legsMaxHealth) < info.dodgeChance){
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss, true);
             StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             StartCoroutine(DM.instance.Talk(info.attackTxt));
@@ -79,6 +79,7 @@ public class EnemyManager : MonoBehaviour
             Attack(info.damage);
         }else{
             currentState.TakeDamage(this, damage, part);
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordHit, true);
             if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
             yield return null;
         }
@@ -87,11 +88,11 @@ public class EnemyManager : MonoBehaviour
     public IEnumerator CoCheckHealth(){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(torsoHealth <= 0){
+            AudioManager.instance.PlayEffect(AudioManager.instance.enemyDead, true);
             StartCoroutine(DM.instance.Talk(DM.instance.EDeadTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             Player.instance.ChangeFavor(-0.1f);
             Player.instance.canInteract = true;
-            // todo give the rewards
             List<List<MyBaseEvent>> possibleRewards = new List<List<MyBaseEvent>>();
             if(CheckCombatReward(info.lowCombatRewards)) possibleRewards.Add(info.lowCombatRewards);
             if(CheckCombatReward(info.midCombatRewards)) possibleRewards.Add(info.midCombatRewards);

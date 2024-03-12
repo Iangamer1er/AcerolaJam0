@@ -15,8 +15,13 @@ public class DM : ValidatedMonoBehaviour
 
     [Header("Dialogues")]
     [SerializeField, TextArea] private List<string> introDialogue;
-    [SerializeField, TextArea] public List<string> EdodgeTxt;
+    
+    [Header("Player txt")]
     [SerializeField, TextArea] public List<string> PdodgeTxt;
+    [SerializeField, TextArea] public List<string> PhitTxt;
+
+    [Header("Enemy txt")]
+    [SerializeField, TextArea] public List<string> EdodgeTxt;
     [SerializeField, TextArea] public List<string> EDeadTxt;
     [SerializeField, TextArea] public List<string> ESparedTxt;
     [SerializeField, TextArea] public List<string> ESpareFailTxt;

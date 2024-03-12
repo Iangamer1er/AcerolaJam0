@@ -1,24 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Threading;
 using KBCore.Refs;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum MusicSources{CombatMusic, AmbianceMusic, BoonsMusic, EventsMusic}
 
 public class AudioManager : ValidatedMonoBehaviour
 {
+    [Header("Sound settings")]
     [SerializeField, Range(0.5f,1.5f)] private float pitchMin = 1;
     [SerializeField, Range(0.5f,1.5f)] private float pitchMax = 1;
     [SerializeField, Range(0f,1f)] private float maxVolume = 0.5f;
+    [SerializeField, Range(0f,1f)] private float sfxVolume = 0.4f;
     [SerializeField, Range(0f, 5f)] private float transitionTime = 1f;
+
+    [Header("Musics")]
     public AudioClip combatMusic;
     public AudioClip eventMusic;
     public AudioClip boonsMusic;
     public AudioClip ambianceMusic;
+
+    [Header("General sounds")]
     public AudioClip swordHit;
     public AudioClip swordMiss;
+    public AudioClip endScreenTump;
+
+    [Header("Player sounds")]
+    public AudioClip playerCutFinger;
+    public AudioClip playerStabbed;
+
+    [Header("Enemy sounds")]
     public AudioClip startCombat;
+    public AudioClip enemyDead;
 
     private AudioSource currentMusic;
     private AudioSource aSCombatMusic;
@@ -45,15 +61,19 @@ public class AudioManager : ValidatedMonoBehaviour
             switch (source.gameObject.name){
                 case "Left":
                     _aSLeft = source;
+                    _aSLeft.volume = sfxVolume;
                     break;
                 case "Right":
                     _aSRight = source;
+                    _aSRight.volume = sfxVolume;
                     break;
                 case "SoundEffects":
                     _aSEffects = source;
+                    _aSEffects.volume = sfxVolume;
                     break;
                 case "CombatMusic":
                     aSCombatMusic = source;
+                    aSCombatMusic.volume = maxVolume;
                     aSCombatMusic.clip = combatMusic;
                     aSCombatMusic.Play();
                     break;
@@ -65,11 +85,13 @@ public class AudioManager : ValidatedMonoBehaviour
                     break;
                 case "BoonsMusic":
                     aSBoonsMusic = source;
+                    aSBoonsMusic.volume = maxVolume;
                     aSBoonsMusic.clip = boonsMusic;
                     aSBoonsMusic.Play();
                     break;
                 case "EventsMusic":
                     aSEventMusic = source;
+                    aSEventMusic.volume = maxVolume;
                     aSEventMusic.clip = eventMusic;
                     aSEventMusic.Play();
                     break;

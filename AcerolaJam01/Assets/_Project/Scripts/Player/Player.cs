@@ -84,8 +84,9 @@ public class Player : ValidatedMonoBehaviour
 
     public void RemoveFinger(){
         if(nbFingerTaken >= handsStates.Length){
-          return;  
-        } 
+          return;  // todo ending sequence
+        }
+        AudioManager.instance.PlayEffect(AudioManager.instance.playerCutFinger);
         Destroy(currentHand);
         currentHand = Instantiate(handsStates[nbFingerTaken], transform);
         cutFingerT = Instantiate(prefabFinger, handsCuts[nbFingerTaken].position, prefabFinger.transform.rotation, transform).transform;
@@ -117,10 +118,14 @@ public class Player : ValidatedMonoBehaviour
         Debug.Log("Gotten Here");
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0, 1) > dodgeChance){
+            DM.instance.Talk(DM.instance.PhitTxt);
             ChangeHealth(-damage + armor);
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
             canInteract = true;
         } else{
             DM.instance.Talk(DM.instance.PdodgeTxt);
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss);
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             canInteract = true;
         }
