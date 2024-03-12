@@ -67,7 +67,7 @@ public class Player : ValidatedMonoBehaviour
 
     [ContextMenu("Start anims")]
     public void ContextMenu(){
-        RemoveFingerAnim();
+        StartCoroutine(CoRemoveFingerAnim());
     }
 
     private void Start() {
@@ -83,9 +83,6 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public void RemoveFinger(){
-        if(nbFingerTaken >= handsStates.Length){
-          return;  // todo ending sequence
-        }
         AudioManager.instance.PlayEffect(AudioManager.instance.playerCutFinger);
         AudioManager.instance.PlayEffect(AudioManager.instance.fingerFly);
         Destroy(currentHand);
@@ -98,9 +95,23 @@ public class Player : ValidatedMonoBehaviour
             DMSockets[nbFingerTaken]
         ));
         nbFingerTaken ++;
+        if(nbFingerTaken >= handsStates.Length){
+          StartCoroutine(CoDies());
+        }else StartCoroutine(PassEncounter());
     }
 
-    public void RemoveFingerAnim(){
+    public IEnumerator PassEncounter(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        currentHealth = maxHealth;
+        UpdateStats();
+        DM.instance.Talk(DM.instance.PFingerRemoved);
+    }
+
+    public IEnumerator CoRemoveFingerAnim(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        canInteract = false;
+        canChoseMap = false;
+        //todo make player look at DM'S hand and not be able to look
         foreach (Animator DMAnimator in DMAnimators){
             DMAnimator.SetTrigger("StartAnim" + nbFingerTaken);
         }
@@ -132,6 +143,8 @@ public class Player : ValidatedMonoBehaviour
         }
     }
 
+
+
     public IEnumerator CoDies(){
         // todo
         yield return new WaitUntil(()=>DM.instance.doneTalking);
@@ -140,7 +153,7 @@ public class Player : ValidatedMonoBehaviour
     public void ChangeHealth(float healthChange){
         currentHealth = Mathf.Clamp(currentHealth + healthChange, 0, maxHealth);
         UpdateStats();
-        if(currentHealth <= 0) StartCoroutine(CoDies());
+        if(currentHealth <= 0) CoRemoveFingerAnim();
     }
 
     public void ChangeMaxHealth(float MaxhealthChange){

@@ -22,7 +22,7 @@ MonoBehaviour:
   legsHealthRatio: 1
   headChance: 0.665
   headModif: 1
-  torsoMaxHealth: 1
+  torsoMaxHealth: 0.08
   torsoModif: 1
   spareAskChance: 0.2
   description:
@@ -36,9 +36,9 @@ MonoBehaviour:
   lowHealthThreshhold: 0.33
   descriptionLowHealthChange:
   - Cool
-  combatRewards:
-  - baseEvent:
-      rid: 4380223664261169163
+  lowCombatRewards: []
+  midCombatRewards: []
+  highCombatRewards: []
   references:
     version: 2
     RefIds:
@@ -47,7 +47,3 @@ MonoBehaviour:
     - rid: 4380223548809019395
       type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 4380223664261169163
-      type: {class: ChangeArmor, ns: , asm: Assembly-CSharp}
-      data:
-        armorValue: 0.387

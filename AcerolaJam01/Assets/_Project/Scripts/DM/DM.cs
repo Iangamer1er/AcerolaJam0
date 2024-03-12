@@ -13,12 +13,16 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
 
-    [Header("Dialogues")]
-    [SerializeField, TextArea] private List<string> introDialogue;
-    
+    [Header("Tuto txt")]
+    [SerializeField, TextArea] private List<string> introTxt0;
+    [SerializeField, TextArea] private List<string> introTxt1;
+    [SerializeField, TextArea] private List<string> makingMapTxt;
+    [SerializeField, TextArea] private List<string> firstCombatTxt;
+
     [Header("Player txt")]
     [SerializeField, TextArea] public List<string> PdodgeTxt;
     [SerializeField, TextArea] public List<string> PhitTxt;
+    [SerializeField, TextArea] public List<string> PFingerRemoved;
 
     [Header("Enemy txt")]
     [SerializeField, TextArea] public List<string> EdodgeTxt;
@@ -52,7 +56,23 @@ public class DM : ValidatedMonoBehaviour
     private void Start() {
         timerSentences = new CountdownTimer(timeBetweenSentences);
         timerSentences.OnTimerStop = ()=> timerDone = true;
-        StartCoroutine(Talk(introDialogue));
+    }
+
+    private IEnumerator Tuto(){
+        StartCoroutine(Talk(introTxt0));
+        yield return new WaitUntil(()=>doneTalking);
+        //todo animation of giving skip, and answers
+        StartCoroutine(Talk(introTxt1));
+        yield return new WaitUntil(()=>doneTalking);
+        //todo make the tiles flip and the camera pan to it
+        yield return new WaitForSeconds(1);
+        //todo make camera accessible to the player
+        StartCoroutine(Talk(makingMapTxt));
+        Map.instance.StartGame();
+        yield return new WaitUntil(()=>doneTalking);
+        StartCoroutine(Talk(firstCombatTxt));
+        //todo make the player able to interract with the map
+        yield return null;
     }
 
     private void Update() {
@@ -91,8 +111,10 @@ public class DM : ValidatedMonoBehaviour
         for (int i = 0; i < text.Length; i++){
             currentTxt += text[i];
             dialogue.text = currentTxt;
-            if(text[i] != ' ') AudioManager.instance.PlayEffect(ChoseSound(), usePitch);
-            yield return new WaitForSeconds(wannaSkip ? 0 : timeBetweenLetters);
+            if(!wannaSkip){
+               if(text[i] != ' ') AudioManager.instance.PlayEffect(ChoseSound(), usePitch);  
+               yield return new WaitForSeconds(timeBetweenLetters); 
+            }
         }
         timerSentences.Start();
         wannaSkip = false;

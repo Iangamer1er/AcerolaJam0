@@ -74,7 +74,6 @@ public class AudioManager : ValidatedMonoBehaviour
                     break;
                 case "CombatMusic":
                     aSCombatMusic = source;
-                    aSCombatMusic.volume = maxVolume;
                     aSCombatMusic.clip = combatMusic;
                     aSCombatMusic.Play();
                     break;
@@ -86,13 +85,11 @@ public class AudioManager : ValidatedMonoBehaviour
                     break;
                 case "BoonsMusic":
                     aSBoonsMusic = source;
-                    aSBoonsMusic.volume = maxVolume;
                     aSBoonsMusic.clip = boonsMusic;
                     aSBoonsMusic.Play();
                     break;
                 case "EventsMusic":
                     aSEventMusic = source;
-                    aSEventMusic.volume = maxVolume;
                     aSEventMusic.clip = eventMusic;
                     aSEventMusic.Play();
                     break;

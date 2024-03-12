@@ -3614,8 +3614,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitchMin: 1
   pitchMax: 1
-  maxVolume: 0.5
-  sfxVolume: 0.4
+  maxVolume: 0.3
+  sfxVolume: 0.175
   transitionTime: 2
   combatMusic: {fileID: 8300000, guid: dcaa49c56a6674229829c944cf6ff2f8, type: 3}
   eventMusic: {fileID: 8300000, guid: 3777b5eea1dd3da4395538a32ea30fc5, type: 3}
@@ -3805,7 +3805,7 @@ MonoBehaviour:
   type: 0
   rotationTime: 0.8
   flipAmount: 180
-  canFlip: 1
+  canFlip: 0
   elevatedSpeed: 0.1
   elevatedStartingSpeed: 0.8
   elevatedEndingSpeed: 2
@@ -5186,7 +5186,6 @@ MonoBehaviour:
   defaultArmPos: {fileID: 1417425505}
   timeBeforeHandReturns: 1
   handSpeed: 18
-  rb: {fileID: 1519638182}
   lookYClamp: 20
   lookXClamp: 20
   lookSpeed: 10
@@ -5273,7 +5272,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 9558fc27396245b499438ed9bf18e533, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -5709,7 +5708,7 @@ MonoBehaviour:
   type: 0
   rotationTime: 0.8
   flipAmount: 180
-  canFlip: 1
+  canFlip: 0
   elevatedSpeed: 0.1
   elevatedStartingSpeed: 0.8
   elevatedEndingSpeed: 2
@@ -5768,7 +5767,7 @@ MonoBehaviour:
   type: 0
   rotationTime: 0.8
   flipAmount: 180
-  canFlip: 1
+  canFlip: 0
   elevatedSpeed: 0.1
   elevatedStartingSpeed: 0.8
   elevatedEndingSpeed: 2
@@ -6200,6 +6199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalTime: 0
   level: 0
+  didTuto: 0
   fixedDeltaTime: 0
 --- !u!4 &1865072746
 Transform:
@@ -6877,7 +6877,7 @@ MonoBehaviour:
   type: 0
   rotationTime: 0.8
   flipAmount: 180
-  canFlip: 1
+  canFlip: 0
   elevatedSpeed: 0.1
   elevatedStartingSpeed: 0.8
   elevatedEndingSpeed: 2

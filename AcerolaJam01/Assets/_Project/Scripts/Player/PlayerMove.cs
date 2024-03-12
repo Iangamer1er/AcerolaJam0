@@ -13,7 +13,7 @@ public class PlayerMove : ValidatedMonoBehaviour
     [SerializeField] private Transform defaultArmPos;
     [SerializeField, Range(0, 10)] private float timeBeforeHandReturns = 2;
     [SerializeField, Range(5, 50)] float handSpeed;
-    [SerializeField, Self] Rigidbody rb;
+    // [SerializeField, Self] Rigidbody rb;
 
     [Header("Camera controls")]
     [SerializeField] private float lookYClamp = 35f;
@@ -108,6 +108,7 @@ public class PlayerMove : ValidatedMonoBehaviour
 
     private IEnumerator CoroutineMove(Vector3 posIni , Vector3 posDest, RaycastHit raycastHit){
         bool isThere = false; 
+        Debug.Log("Clicked");
         while (!isThere){
             isThere = MouveWithMoveTowards(posDest);
             yield return new WaitForFixedUpdate(); 

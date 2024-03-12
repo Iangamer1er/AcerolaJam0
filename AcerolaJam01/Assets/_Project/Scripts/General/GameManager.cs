@@ -9,6 +9,7 @@ public class GameManager : ValidatedMonoBehaviour
     public static GameManager instance => _instance;
     public bool normalTime = false;
     public int level = 0;
+    public bool didTuto = false;
 
     public float fixedDeltaTime;
 
@@ -30,7 +31,7 @@ public class GameManager : ValidatedMonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKey(KeyCode.Escape)) Application.Quit();
     }
 
     public void ChangeTimeScale(float percent){

@@ -49,9 +49,22 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private void Start() {
+        // MakeMap();
+        // currentTileHeight = 0;
+        // StartCoroutine(CoCreateMap());
+        StartGame();
+    }
+
+    public void StartGame(){
+        if(!GameManager.instance.didTuto){
+            List<TileTypes> currentlyUsed = new List<TileTypes>{TileTypes.Random, TileTypes.Encounter, TileTypes.Boon};
+            MakeTile(currentlyUsed);
+            currentTileHeight++;  
+        }
         MakeMap();
         currentTileHeight = 0;
         StartCoroutine(CoCreateMap());
+        GameManager.instance.didTuto = true;
     }
 
     private void MakeMap(){
