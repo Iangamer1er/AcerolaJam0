@@ -1,6 +1,5 @@
 // TODO 
 - Tutorial
-- implement sound effects
 - implement ending
 - implement death animation
 - implement tiles fighting animations
