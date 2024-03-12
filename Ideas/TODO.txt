@@ -5,7 +5,6 @@
 - implement music for event
 - implement music for boon
 - implement ambiance for map
-- implement combat rewards
 - implement ending
 - implement death animation
 - implement tiles fighting animations
