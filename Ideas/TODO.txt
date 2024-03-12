@@ -1,5 +1,4 @@
 // TODO 
-- implement ending
 - implement death animation
 - implement tiles fighting animations
 - implement tile chosing animations

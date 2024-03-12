@@ -37,7 +37,7 @@ public class AudioManager : ValidatedMonoBehaviour
     public AudioClip startCombat;
     public AudioClip enemyDead;
 
-    private AudioSource currentMusic;
+    public AudioSource currentMusic;
     private AudioSource aSCombatMusic;
     private AudioSource aSEventMusic;
     private AudioSource aSBoonsMusic;
@@ -184,6 +184,8 @@ public class AudioManager : ValidatedMonoBehaviour
         StartCoroutine(CoTransitionMusic(currentMusic, toSource));
     }
 
+    
+
     private IEnumerator CoTransitionMusic(AudioSource fromAs, AudioSource toAs){
         float actionTime = 0;
         while (actionTime < transitionTime){
@@ -191,6 +193,16 @@ public class AudioManager : ValidatedMonoBehaviour
             float t = Mathf.SmoothStep(0, maxVolume, actionTime/transitionTime);
             toAs.volume = Mathf.Lerp(0, maxVolume, t);
             fromAs.volume = Mathf.Lerp(maxVolume, 0, t);
+            yield return new WaitForFixedUpdate();
+        }
+    }
+    
+    public IEnumerator CoTransitionInMusic(AudioSource musicSource){
+        float actionTime = 0;
+        while (actionTime < transitionTime){
+            actionTime += Time.fixedDeltaTime;
+            float t = Mathf.SmoothStep(0, maxVolume, actionTime/transitionTime);
+            musicSource.volume = Mathf.Lerp(0, maxVolume, t);
             yield return new WaitForFixedUpdate();
         }
     }

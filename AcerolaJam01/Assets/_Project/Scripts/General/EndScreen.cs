@@ -12,7 +12,7 @@ public class EndScreen : ValidatedMonoBehaviour
     [SerializeField, Self] AudioSource aS;
     [SerializeField, TextArea] List<String> endCredits;
     [SerializeField, Anywhere] private TextMeshProUGUI dialogue;
-    [SerializeField, Anywhere] private GameObject UITile;
+    [SerializeField, Anywhere] private Canvas UITile;
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
     [SerializeField, Min(0)] private float timeBeforeEndScreen = 3f;
@@ -26,20 +26,24 @@ public class EndScreen : ValidatedMonoBehaviour
     private CountdownTimer timerSentences; 
 
     private void Start() {
+        AudioManager.instance.currentMusic.volume = 0;
         timerSentences = new CountdownTimer(timeBetweenSentences);
         timerSentences.OnTimerStop = ()=> timerDone = true;
+        StartCoroutine(CoEndScreen(endCredits));
     }
 
-
-
     private void Update(){
-       timerSentences.Tick(Time.deltaTime); 
-       if(canClick && Input.GetMouseButtonDown(0));
+        timerSentences.Tick(Time.deltaTime); 
+        if(canClick && Input.GetMouseButtonDown(0)){
+                
+        }
     } 
 
     public IEnumerator CoEndScreen(List<string> list){
 
         yield return new WaitForSeconds(timeBeforeEndScreen);
+        StartCoroutine(AudioManager.instance.CoTransitionInMusic(AudioManager.instance.currentMusic));
+        UITile.gameObject.SetActive(false);
         foreach (string text in list){
             StartCoroutine(WriteText(text));
             yield return new WaitUntil(()=>goNext);
