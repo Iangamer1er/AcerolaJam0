@@ -576,15 +576,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1
-    functionName: Dies
+  - time: 1.0166667
+    functionName: ChangeScene
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.3
-    functionName: ChangeScene
+  - time: 1.1
+    functionName: Dies
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

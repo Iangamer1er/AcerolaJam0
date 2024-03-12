@@ -519,7 +519,7 @@ MonoBehaviour:
   endCredits:
   - A Game made by Ian Aubin
   - All assets except sound effects and musics made by me
-  - Big thank you for my friends who tested the game
+  - Big thank you to my friends who tested the game
   - Also big thanks to the people making free to use assets on the assets store
   dialogue: {fileID: 1532907387}
   UITile: {fileID: 1119990386}
