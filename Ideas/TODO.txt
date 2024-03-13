@@ -1,8 +1,8 @@
 // TODO 
 - implement tiles fighting animations
 - implement tile chosing animations
-- Make enemies (9 / 20)
-- Make encounters (9 / 20)
-- Make boons (2 / 3)
+- Make enemies (11 / 20)
+- Make encounters (11 / 20)
+- Make boons (2 / 6)
 - Balance the game
 - Make last boss
