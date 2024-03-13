@@ -1608,8 +1608,10 @@ MonoBehaviour:
   - As expected
   - But just in case do you really need an explanation of the rules
   - Oh, right, you can't talk
-  - Here
+  - Look at your left
+  - You can point to what you want to do
   introTxt1:
+  - You can also skip anything I have to say
   - "I still don\u2019t know why almighty Vioarr allows this"
   - But his will is absolute
   - Also these are your options
@@ -1619,7 +1621,7 @@ MonoBehaviour:
   - In combat remember
   - Point to your own icons
   - They represent the body part you intend to target
-  - They represent both you and the opponent
+  - They also represent both you and the opponent
   - The other icon on the left is to spare their life
   - The icons also represent yourself
   - The helmet is your armor
@@ -6317,7 +6319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalTime: 0
   level: 0
-  didTuto: 1
+  didTuto: 0
   fixedDeltaTime: 0
 --- !u!4 &1865072746
 Transform:

@@ -39,7 +39,7 @@ public class Player : ValidatedMonoBehaviour
     [Header("Animation")]
     [SerializeField, Anywhere] private Animator[] DMAnimators;
     [SerializeField, Self] private Animator animator;
-    [SerializeField, Scene] private CinemachineVirtualCamera cam;
+    [SerializeField, Scene] public CinemachineVirtualCamera cam;
 
 
     public float currentHealth;
