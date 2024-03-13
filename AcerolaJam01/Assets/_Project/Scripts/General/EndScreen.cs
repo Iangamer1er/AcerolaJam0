@@ -13,10 +13,12 @@ public class EndScreen : ValidatedMonoBehaviour
     [SerializeField, TextArea] List<String> endCredits;
     [SerializeField, Anywhere] private TextMeshProUGUI dialogue;
     [SerializeField, Anywhere] private Canvas UITile;
+    [SerializeField] private bool bossBeaten = false;
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
     [SerializeField, Min(0)] private float timeBeforeEndScreen = 3f;
     [SerializeField] string casesText = "You made it through ";
+    [SerializeField] string gameDoneText = "You beat the game, congrats!";
     [SerializeField] string options = "Press escape to quit or left mouse button to continue";
 
     private bool goNext = false;
@@ -50,7 +52,8 @@ public class EndScreen : ValidatedMonoBehaviour
             yield return new WaitUntil(()=>goNext);
             goNext = false;
         }
-        StartCoroutine(WriteText(casesText + GameManager.instance.level + " events"));
+        if(bossBeaten) StartCoroutine(WriteText(gameDoneText));
+        else StartCoroutine(WriteText(casesText + (GameManager.instance.level + 1) + " events"));
         yield return new WaitUntil(()=>goNext);
         StartCoroutine(WriteText(options));
         canClick = true;

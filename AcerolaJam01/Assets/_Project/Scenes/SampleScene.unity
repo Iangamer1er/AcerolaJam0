@@ -1621,9 +1621,8 @@ MonoBehaviour:
   - In combat remember
   - Point to your own icons
   - They represent the body part you intend to target
-  - They also represent both you and the opponent
+  - They also represent yourself
   - The other icon on the left is to spare their life
-  - The icons also represent yourself
   - The helmet is your armor
   - Vioarr protects you
   - The gauntlet is your power
