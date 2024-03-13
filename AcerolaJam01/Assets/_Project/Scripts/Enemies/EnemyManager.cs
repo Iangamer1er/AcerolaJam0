@@ -137,13 +137,17 @@ public class EnemyManager : MonoBehaviour
 
     public IEnumerator CoSpare(){
         bool spared;
-        if(Random.Range(0f, torsoHealth/info.torsoMaxHealth) <= info.spareAskChance){
-            StartCoroutine(DM.instance.Talk(DM.instance.ESparedTxt));
-            spared = true;
-        }else{
+        float chanceSpare = info.spareAskChance;
+        if(1 - torsoHealth/info.torsoMaxHealth < info.spareAskChance) chanceSpare = info.spareAskChance;
+        Debug.Log(chanceSpare);
+        if(chanceSpare < Random.Range(0f, 1f)){
             StartCoroutine(DM.instance.Talk(DM.instance.ESpareFailTxt));
             spared = false;
-        } 
+        }else{
+            StartCoroutine(DM.instance.Talk(DM.instance.ESparedTxt));
+            spared = true;
+        }
+        Debug.Log(spared);
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         currentState.Spare(this, spared);
     }
