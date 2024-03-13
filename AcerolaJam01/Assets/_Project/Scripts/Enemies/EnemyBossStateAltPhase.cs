@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBossState : EnemyBase{
+public class EnemyBossStateAltPhase : EnemyBase{
     
     public override void InitState(EnemyManager enemy){
         enemy.StartCoroutine(DM.instance.Talk(enemy.info.description));
@@ -53,16 +53,15 @@ public class EnemyBossState : EnemyBase{
         //todo make multi attack a chance of procs
         //todo make the boss swap into 2nd phase at 30% health
         float newRandom = Random.Range(0, 1f);
-        int randomAttack = Random.Range(2, 4);
-        if(newRandom < 0.25) enemy.StartCoroutine(MultiAttack(enemy, damage, randomAttack));
+        int randomAttack = Random.Range(4, 8);
+        if(newRandom < 0.5f) enemy.StartCoroutine(MultiAttack(enemy, damage, randomAttack));
         else enemy.StartCoroutine(Player.instance.CoTakeBossDamage(damage, true));
-        
     }
 
     private IEnumerator MultiAttack(EnemyManager enemy, float damage, int numberAttacks){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         for (int i = 0; i < numberAttacks; i++){
-            enemy.StartCoroutine(Player.instance.CoTakeBossDamage(damage * 0.33f, i == numberAttacks - 1));
+            enemy.StartCoroutine(Player.instance.CoTakeBossDamage(damage * 0.20f, i == numberAttacks - 1));
         }
     }
 

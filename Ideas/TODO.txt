@@ -5,4 +5,3 @@
 - Make encounters (11 / 20)
 - Make boons (2 / 6)
 - Balance the game
-- Make last boss
