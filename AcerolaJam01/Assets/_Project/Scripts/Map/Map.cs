@@ -41,8 +41,9 @@ public class Map : ValidatedMonoBehaviour
     private int nbTiles = 0;
     private bool hadFork = false;
     private bool canContinueRoutine = true;
-    private GameObject prefabTile; 
+    private GameObject prefabTile;
 
+    // public List<Tile> lastTilePaths = new List<Tile>();
     public List<GameObject> startPossiblePaths = new List<GameObject>();
     private List<GameObject> startingLines = new List<GameObject>();
 
@@ -241,6 +242,7 @@ public class Map : ValidatedMonoBehaviour
         }
 
         for (int i = 1; i < maxMapHeight; i++){
+            if(i + Player.instance.levelHeight >= maxTileHeight) continue;
             canContinueRoutine = false;
             foreach (Tile currentTileScript in tilesArrays[targetMapHeight + i]){
                 currentTileScript.transform.position = new Vector3(

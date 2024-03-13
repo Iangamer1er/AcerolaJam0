@@ -257,6 +257,7 @@ public class Player : ValidatedMonoBehaviour
         if(objTile == null || !canChoseMap) return false;
         bool verifyHeight = objTile.height == levelHeight;
         if(!verifyHeight) return false;
+        if(!Map.instance.startPossiblePaths.Contains(objTile.gameObject)) return false;
         Map.instance.startPossiblePaths = objTile.GetComponent<Tile>().possiblePath;
         Map.instance.RemoveStartingPath();
         switch(objHit.tag){

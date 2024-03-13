@@ -82,7 +82,7 @@ public class EnemyManager : MonoBehaviour
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             StartCoroutine(DM.instance.Talk(info.attackTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
-            Attack(info.damage);
+            Attack();
         }else{
             currentState.TakeDamage(this, damage, part);
             AudioManager.instance.PlayEffect(AudioManager.instance.swordHit, true);
@@ -114,7 +114,7 @@ public class EnemyManager : MonoBehaviour
         }else{
             StartCoroutine(DM.instance.Talk(info.attackTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
-            Attack(info.damage);
+            Attack();
         }
     }
 
@@ -124,8 +124,9 @@ public class EnemyManager : MonoBehaviour
         return true;
     }
 
-    public void Attack(float damage){
-        currentState.Attack(this, damage);
+    public void Attack(){
+        float chosenDamage = armsHealth > 0 ? info.damage : info.Brokendamage;
+        currentState.Attack(this, chosenDamage);
     }
 
     public IEnumerator CoSpare(){
