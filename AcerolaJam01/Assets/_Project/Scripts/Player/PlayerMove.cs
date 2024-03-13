@@ -71,9 +71,11 @@ public class PlayerMove : ValidatedMonoBehaviour
         float lookX = 0;
         if(Input.mousePosition.x < Screen.width * screenWidthPercent) lookX = -1;
         else if(Input.mousePosition.x > Screen.width - Screen.width * screenWidthPercent) lookX = 1;
+        else if(Input.GetAxisRaw("Horizontal") != 0) lookX = Input.GetAxisRaw("Horizontal");
         float lookY = 0;
         if(Input.mousePosition.y < Screen.height * screenWidthPercent) lookY = -1;
         else if(Input.mousePosition.y > Screen.height - Screen.height * screenWidthPercent) lookY = 1;
+        else if(Input.GetAxisRaw("Vertical") != 0) lookY = Input.GetAxisRaw("Vertical");
         lookRotation -= new Vector2(lookX, lookY) * lookSpeed * Time.deltaTime;
         lookRotation = new Vector2(
             Mathf.Clamp(lookRotation.x, -lookXClamp, lookXClamp),

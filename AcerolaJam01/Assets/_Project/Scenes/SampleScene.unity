@@ -7283,8 +7283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc365f749ede67b498bf9bf5759e9aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTileHeight: 5
-  nbForks: 2
+  maxTileHeight: 15
+  nbForks: 8
   maxForkSplits: 4
   maxForkLength: 3
   maskInteractable: 6
