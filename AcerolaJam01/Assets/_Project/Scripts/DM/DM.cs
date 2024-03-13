@@ -29,6 +29,7 @@ public class DM : ValidatedMonoBehaviour
 
     [Header("Enemy txt")]
     [SerializeField, TextArea] public List<string> EdodgeTxt;
+    [SerializeField, TextArea] public List<string> EdodgeHeadTxt;
     [SerializeField, TextArea] public List<string> EDeadTxt;
     [SerializeField, TextArea] public List<string> ESparedTxt;
     [SerializeField, TextArea] public List<string> ESpareFailTxt;
@@ -38,7 +39,7 @@ public class DM : ValidatedMonoBehaviour
 
     [Header("Boss txt")]
     [SerializeField, TextArea] public List<string> BFluryAttacks;
-    [SerializeField, TextArea] public List<string> BdodgeTxt;
+    [SerializeField, TextArea] public List<string> BdodgeHeadTxt;
     [SerializeField, TextArea] public List<string> BDeadTxt;
     [SerializeField, TextArea] public List<string> BSparedTxt;
     [SerializeField, TextArea] public List<string> BRemovesFingerTxt;

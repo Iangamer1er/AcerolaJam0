@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
+  m_Name: VioarrSWarrior
+  m_EditorClassIdentifier: 
+  eName: Vioarr's warrior
+  damage: 0.4
+  Brokendamage: 0.2
+  dodgeChance: 0.3
+  armsMaxHealth: 1
+  armsHealthRatio: 1
+  legsMaxHealth: 1
+  legsHealthRatio: 1
+  headChance: 0.7
+  headModif: 2
+  torsoMaxHealth: 4
+  torsoModif: 1
+  spareAskChance: 0
+  description:
+  - Finally
+  - You got to where our warrior stopped you
+  - Where he stopped your madness
+  - "Where he saved you of getting out of Vioarr\u2019s grace"
+  - "\u2026"
+  - "Vioarr\u2019s warrior blocks your path"
+  - He is sublime
+  - Vioarr jugdes you as unworthy
+  attackTxt:
+  - Their attack is precise and heavy
+  behavoir:
+    rid: 4380223735315300352
+  behavoirLowHealth:
+    rid: -2
+  lowHealthThreshhold: 0.33
+  descriptionLowHealthChange:
+  - The warrior is losing blood
+  - Invigorating
+  - His attacks became more viscious
+  lowCombatRewards: []
+  midCombatRewards: []
+  highCombatRewards: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4380223735315300352
+      type: {class: EnemyBossState, ns: , asm: Assembly-CSharp}
+      data: 

@@ -1656,6 +1656,9 @@ MonoBehaviour:
   EdodgeTxt:
   - They are too quick on their feet
   - Your attack missed
+  EdodgeHeadTxt:
+  - Their head was too arduous to hit
+  - You missed
   EDeadTxt:
   - They have succumbed to their injuries
   ESparedTxt:
@@ -1673,6 +1676,26 @@ MonoBehaviour:
   - It is harder for them to put strength into their attacks
   EventSkipTxt:
   - Shameful
+  BFluryAttacks:
+  - The warrior unleashes a flurry of attacks
+  BdodgeHeadTxt:
+  - Your pathetic attempt to hit their head is scoffed
+  - They dodged your attack
+  BDeadTxt:
+  - You bested the warrior
+  - You bested the warrior
+  BSparedTxt:
+  - Vioarr's warrior suggests an alternative
+  - You may go
+  - "It seems part of Vioarr\u2019s favor still resides inside you"
+  - I would wish you a good warrior's rest
+  - But we both know that won't happen
+  - Oh Vioarr, may you bless this lost soul
+  - May you give him your favor once more
+  BRemovesFingerTxt:
+  - Embarassing
+  - Vioarr's warrior is merciful
+  - They offer to resume the fight
   usePitch: 0
   clipsTalk:
   - {fileID: 8300000, guid: bea6f5f428dd4d14abd9c24a65acde83, type: 3}
@@ -2365,6 +2388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   altMapName: Beta
+  infoBoss: {fileID: 0}
   armsHealth: 0
   legsHealth: 0
   torsoHealth: 0
@@ -5288,6 +5312,7 @@ MonoBehaviour:
   canChoseMap: 0
   inCombat: 0
   canInteract: 0
+  isOnBoss: 0
   levelHeight: 0
   cutFingerT: {fileID: 0}
 --- !u!65 &1519638185
@@ -7216,8 +7241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc365f749ede67b498bf9bf5759e9aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTileHeight: 50
-  nbForks: 30
+  maxTileHeight: 6
+  nbForks: 2
   maxForkSplits: 4
   maxForkLength: 3
   maskInteractable: 6

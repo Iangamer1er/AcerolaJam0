@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public string altMapName = "Beta";
+    [SerializeField] InfoEnemies infoBoss;
 
     [Header("Current Stats")]
     public float armsHealth;
@@ -33,6 +34,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     public InfoEnemies ChoseEnemy(){
+        if(Player.instance.isOnBoss) return infoBoss;
         List<InfoEnemies> infos;
         infos = ResoucesScript(GameManager.instance.level.ToString());
         if(infos.Count == 0){
@@ -48,7 +50,7 @@ public class EnemyManager : MonoBehaviour
         damage = info.damage;
     }
 
-    public IEnumerator CheckBrokenArms(){
+    public IEnumerator CoCheckBrokenArms(){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(armsHealth <= 0){
             damage = info.Brokendamage;
@@ -56,7 +58,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public IEnumerator CheckBrokenLegs(){
+    public IEnumerator CoCheckBrokenLegs(){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(legsHealth <= 0){
             StartCoroutine(DM.instance.Talk(DM.instance.ELegsBrokenTxt));

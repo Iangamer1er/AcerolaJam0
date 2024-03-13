@@ -21,11 +21,13 @@ public class EnemyNormalState : EnemyBase{
                 damageInflicted = damage * enemy.info.armsHealthRatio;
                 enemy.armsHealth -= damageInflicted;
                 enemy.torsoHealth -= damageInflicted;
+                enemy.StartCoroutine(enemy.CoCheckBrokenArms());
                 break;
             case BodyParts.Legs : 
                 damageInflicted = damage * enemy.info.legsHealthRatio;
                 enemy.legsHealth -= damageInflicted;
                 enemy.torsoHealth -= damageInflicted;
+                enemy.StartCoroutine(enemy.CoCheckBrokenLegs());
                 break;
             case BodyParts.Head : 
                 if(Random.Range(0, 1) <= enemy.info.headChance){
@@ -33,7 +35,7 @@ public class EnemyNormalState : EnemyBase{
                     enemy.torsoHealth -= damageInflicted;
                     break;
                 }
-                enemy.StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
+                enemy.StartCoroutine(DM.instance.Talk(DM.instance.EdodgeHeadTxt));
                 break;
             case BodyParts.Torso : 
                 damageInflicted = damage * enemy.info.torsoModif;

@@ -34,7 +34,7 @@ public class EnemyBossState : EnemyBase{
                     enemy.torsoHealth -= damageInflicted;
                     break;
                 }
-                enemy.StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));
+                enemy.StartCoroutine(DM.instance.Talk(DM.instance.BdodgeHeadTxt));
                 break;
             case BodyParts.Torso : 
                 damageInflicted = damage * enemy.info.torsoModif;

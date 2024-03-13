@@ -115,9 +115,9 @@ public class Player : ValidatedMonoBehaviour
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         currentHealth = maxHealth;
         UpdateStats();
-        StartCoroutine(DM.instance.Talk(DM.instance.PFingerRemoved));
-        yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(!isOnBoss){
+            StartCoroutine(DM.instance.Talk(DM.instance.PFingerRemoved));
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
             ChangeFavor(-0.5f);
             inCombatEvent.Invoke();
             FinishEncounter();
@@ -381,6 +381,6 @@ public class Player : ValidatedMonoBehaviour
     }
 
     private void MakeBoss(){
-
+        //todo make boss played animation
     }
 }
