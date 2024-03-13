@@ -183,7 +183,7 @@ public class Player : ValidatedMonoBehaviour
         maxHealth = Mathf.Max(maxHealth + MaxhealthChange, 0.01f);
         UpdateStats();
     }
-
+ 
     public void ChangeDodge(float dodgeChange){
         dodgeChance = Mathf.Clamp(maxHealth + dodgeChange, 0, 1);
         UpdateStats();
