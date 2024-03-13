@@ -40,7 +40,7 @@ public class Map : ValidatedMonoBehaviour
     private int currentNbForks = 0;
     private int nbTiles = 0;
     private bool hadFork = false;
-    private bool canContinueRoutine = true;
+    public bool canContinueRoutine = true;
     private GameObject prefabTile;
 
     // public List<Tile> lastTilePaths = new List<Tile>();
@@ -129,6 +129,7 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private void AddPossiblePath(GameObject tile, int posFork, bool isInFork = false){
+        Debug.Log("AddPossiblePath");
         if(currentTileHeight == 0) return;
         if(isInFork && tilesArrays[currentTileHeight-1].Count > 1) tilesArrays[currentTileHeight-1][posFork].possiblePath.Add(tile);
         else if(isInFork) tilesArrays[currentTileHeight-1][0].possiblePath.Add(tile);
@@ -162,7 +163,9 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private IEnumerator CoCreateMap(){
+        Debug.Log("CoCreateMap");
         for(int i = 0; i < maxMapHeight; i++){
+            if(i + Player.instance.levelHeight >= maxTileHeight) continue;
             canContinueRoutine = false;
             StartCoroutine(CoInstantiateTile(startingPoint, i));
             yield return new WaitUntil(()=>canContinueRoutine);
@@ -174,6 +177,7 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private IEnumerator CoInstantiateTile(Transform StartingPos, float heightOnMap){
+        Debug.Log("CoInstantiateTile");
         float spaceBetween = 
             mapWidth /
             (tilesArrays[currentTileHeight].Count + 1)
@@ -205,8 +209,10 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private IEnumerator CoMakePaths(int height){
+        Debug.Log("CoMakePath height : " + height);
         for(int i = 0; i < maxMapHeight - 1; i++){
             canContinueRoutine = false;
+            if(height + i > maxTileHeight) continue;
             StartCoroutine(CoInstantiatePaths(height + i));
             yield return new WaitUntil(()=>canContinueRoutine);
         }
@@ -222,6 +228,7 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private IEnumerator CoInstantiatePaths(int height){
+        Debug.Log("CoInstantiatePaths");
         for(int e = 0; e < tilesArrays[height].Count; e++){
             StartCoroutine(tilesArrays[height][e].CoMakePath(timeNextPoint));
             yield return new WaitForSeconds(timeDoLine);
@@ -236,14 +243,16 @@ public class Map : ValidatedMonoBehaviour
 
     public IEnumerator CoAdvanceOneTile(){
         int targetMapHeight = currentTileHeight - maxMapHeight + 1;
+        Debug.Log("coadvanceTile " +targetMapHeight);
         for (int i = 0; i < tilesArrays[targetMapHeight].Count; i++){
             Destroy(tilesArrays[targetMapHeight][i].gameObject);
             yield return new WaitForSeconds(timeNextPoint);
         }
 
         for (int i = 1; i < maxMapHeight; i++){
-            if(i + Player.instance.levelHeight >= maxTileHeight) continue;
             canContinueRoutine = false;
+            Debug.Log("Last one before bug");;
+            if(targetMapHeight + i > maxTileHeight) continue;
             foreach (Tile currentTileScript in tilesArrays[targetMapHeight + i]){
                 currentTileScript.transform.position = new Vector3(
                     currentTileScript.transform.position.x,
@@ -251,9 +260,11 @@ public class Map : ValidatedMonoBehaviour
                     currentTileScript.transform.position.z + heightBetweenSpaces
                 );
                 if(i  >= maxMapHeight - 1){
+                    Debug.Log("Happened");
                     canContinueRoutine = true;
                     continue;
                 }
+                Debug.Log("True Last one before bug");;
                 StartCoroutine(CoRemovePaths(targetMapHeight + i));
             }
             yield return new WaitUntil(()=>canContinueRoutine);

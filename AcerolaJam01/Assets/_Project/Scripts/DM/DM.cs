@@ -77,6 +77,7 @@ public class DM : ValidatedMonoBehaviour
         yield return new WaitForSeconds(1);
         StartCoroutine(Talk(skipTutoTxt));
         Map.instance.StartGame();
+        yield return new WaitUntil(()=>Map.instance.canContinueRoutine);
         yield return new WaitUntil(()=>doneTalking);
         Player.instance.canChoseMap = true;
         Player.instance.canInteract = true;

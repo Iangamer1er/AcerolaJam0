@@ -264,9 +264,9 @@ public class Player : ValidatedMonoBehaviour
             case "Encounter": 
                 if(objTile.touched) break;
                 encounter.isBoon = false;
+                Map.instance.ChangeStartingTile(TileTypes.Encounter);
                 StartCoroutine(encounter.StartEncounter());
                 objTile.touched = true;
-                Map.instance.ChangeStartingTile(TileTypes.Encounter);
                 break;
             case "Enemy": 
                 if(objTile.touched) break;
@@ -276,8 +276,8 @@ public class Player : ValidatedMonoBehaviour
             case "Boon": 
                 if(objTile.touched) break;
                 encounter.isBoon = true;
-                StartCoroutine(encounter.StartEncounter());
                 Map.instance.ChangeStartingTile(TileTypes.Boon);
+                StartCoroutine(encounter.StartEncounter());
                 objTile.touched = true;
                 break;
             case "Random": 
@@ -285,12 +285,14 @@ public class Player : ValidatedMonoBehaviour
                 switch(Random.Range(0, 3)){
                     case 0 :
                         encounter.isBoon = false;
+                        Map.instance.ChangeStartingTile(TileTypes.Encounter);
                         StartCoroutine(encounter.StartEncounter());
                         break;
                     case 1 :
                         StartCombat();
                         break;
                     case 2 :
+                        Map.instance.ChangeStartingTile(TileTypes.Boon);
                         encounter.isBoon = true;
                         StartCoroutine(encounter.StartEncounter());
                         break;
