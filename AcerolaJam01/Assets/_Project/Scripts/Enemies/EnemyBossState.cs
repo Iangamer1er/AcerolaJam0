@@ -22,11 +22,13 @@ public class EnemyBossState : EnemyBase{
                 damageInflicted = damage * enemy.info.armsHealthRatio;
                 enemy.armsHealth -= damageInflicted;
                 enemy.torsoHealth -= damageInflicted;
+                enemy.StartCoroutine(enemy.CoCheckBrokenArms());
                 break;
             case BodyParts.Legs : 
                 damageInflicted = damage * enemy.info.legsHealthRatio;
                 enemy.legsHealth -= damageInflicted;
                 enemy.torsoHealth -= damageInflicted;
+                enemy.StartCoroutine(enemy.CoCheckBrokenLegs());
                 break;
             case BodyParts.Head : 
                 if(Random.Range(0, 1) <= enemy.info.headChance){

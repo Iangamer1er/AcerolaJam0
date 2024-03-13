@@ -1074,6 +1074,7 @@ Transform:
   - {fileID: 66858807}
   - {fileID: 2046403215}
   - {fileID: 759454557}
+  - {fileID: 1115251458}
   - {fileID: 1155461516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1683,6 +1684,12 @@ MonoBehaviour:
   - It is harder for them to put strength into their attacks
   EventSkipTxt:
   - Shameful
+  BBeforeStartTxt:
+  - Finally
+  - You got to where our warrior stopped you
+  - Where he stopped your madness
+  - "Where he saved you of getting out of Vioarr\u2019s grace"
+  - "\u2026"
   BFluryAttacks:
   - The warrior unleashes a flurry of attacks
   BdodgeHeadTxt:
@@ -2390,7 +2397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   altMapName: Beta
-  infoBoss: {fileID: 0}
+  infoBoss: {fileID: 11400000, guid: 84e403b4e271555498d36eb5ef501fcf, type: 2}
   armsHealth: 0
   legsHealth: 0
   torsoHealth: 0
@@ -3725,6 +3732,37 @@ Transform:
   - {fileID: 1601899259}
   - {fileID: 277226376}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1115251457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1115251458}
+  m_Layer: 0
+  m_Name: TransformBoss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1115251458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115251457}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.8191631, y: 13.2675, z: 14.534}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 370413205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1155461515
 GameObject:
@@ -7243,13 +7281,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc365f749ede67b498bf9bf5759e9aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTileHeight: 6
+  maxTileHeight: 5
   nbForks: 2
   maxForkSplits: 4
   maxForkLength: 3
   maskInteractable: 6
   maxMapHeight: 4
   startingPoint: {fileID: 759454557}
+  BossPoint: {fileID: 1115251458}
   startingPointObj: {fileID: 368309281}
   timeNextPoint: 0.32
   mapWidth: 2.4
@@ -7261,7 +7300,7 @@ MonoBehaviour:
   lineRendererWidth: 0.02
   lineColor: {r: 0, g: 0, b: 0, a: 1}
   timeDoLine: 0.1
-  lastTilePaths: []
+  canContinueRoutine: 1
   startPossiblePaths: []
 --- !u!1 &2090861710
 GameObject:

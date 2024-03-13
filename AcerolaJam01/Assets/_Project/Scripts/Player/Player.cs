@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using TMPro;
 using System.Linq;
 using Cinemachine;
+using Unity.VisualScripting;
 
 public class Player : ValidatedMonoBehaviour
 {
@@ -376,14 +377,23 @@ public class Player : ValidatedMonoBehaviour
         canInteract = true;
         inCombat = false;
         if(levelHeight >= Map.instance.maxTileHeight){
-            MakeBoss();
+            isOnBoss = true;
+            StartCoroutine(CoMakeBoss());
             return;
         }
         StartCoroutine(Map.instance.CoMakeStartingPath());
         GameManager.instance.level++;
     }
 
-    private void MakeBoss(){
+    private IEnumerator CoMakeBoss(){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        Map.instance.startPossiblePaths.Clear();
+        Map.instance.startPossiblePaths.Add(Map.instance.BossPoint.gameObject);
+        DM.instance.Talk(DM.instance.BBeforeStartTxt);
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        StartCoroutine(Map.instance.CoMakeStartingPath());
+        StartCombat();
         //todo make boss played animation
+        yield return null;
     }
 }

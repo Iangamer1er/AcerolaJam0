@@ -40,6 +40,7 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, TextArea] public List<string> EventSkipTxt;
 
     [Header("Boss txt")]
+    [SerializeField, TextArea] public List<string> BBeforeStartTxt;
     [SerializeField, TextArea] public List<string> BFluryAttacks;
     [SerializeField, TextArea] public List<string> BdodgeHeadTxt;
     [SerializeField, TextArea] public List<string> BDeadTxt;

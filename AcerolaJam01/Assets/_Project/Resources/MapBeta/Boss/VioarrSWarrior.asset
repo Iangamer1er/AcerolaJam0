@@ -26,10 +26,6 @@ MonoBehaviour:
   torsoModif: 1
   spareAskChance: 0
   description:
-  - Finally
-  - You got to where our warrior stopped you
-  - Where he stopped your madness
-  - "Where he saved you of getting out of Vioarr\u2019s grace"
   - "\u2026"
   - "Vioarr\u2019s warrior blocks your path"
   - He is sublime
@@ -45,7 +41,9 @@ MonoBehaviour:
   - The warrior is losing blood
   - Invigorating
   - His attacks became more viscious
-  lowCombatRewards: []
+  lowCombatRewards:
+  - baseEvent:
+      rid: 4380223735315300353
   midCombatRewards: []
   highCombatRewards: []
   references:
@@ -56,3 +54,13 @@ MonoBehaviour:
     - rid: 4380223735315300352
       type: {class: EnemyBossState, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 4380223735315300353
+      type: {class: EndGame, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - You can go now
+        - "It seems part of Vioarr\u2019s favor still resides inside you"
+        - I would wish you a good warrior's rest
+        - But we both know that won't happen
+        - Oh Vioarr, may you bless this lost soul
+        - May you give him your favor once more

@@ -43,6 +43,12 @@ public class EnemyManager : MonoBehaviour
         return infos[Random.Range(0, infos.Count)];
     }
 
+    [ContextMenu("Kill")]
+    public void ContextMenu(){
+        torsoHealth =0;
+        StartCoroutine(CoCheckHealth());
+    }
+
     public void InitialiseStats(InfoEnemies info){
         armsHealth = info.armsMaxHealth;
         legsHealth = info.legsMaxHealth;
