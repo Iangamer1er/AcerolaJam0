@@ -92,6 +92,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     public IEnumerator CoCheckHealth(){
+        yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(torsoHealth <= 0){
             AudioManager.instance.PlayEffect(AudioManager.instance.enemyDead, true);

@@ -1598,8 +1598,14 @@ MonoBehaviour:
   dialogue: {fileID: 267916221}
   timeBetweenLetters: 0.06
   timeBetweenSentences: 3
+  skipTutoTxt:
+  - So, the great Vioarr has already judged you
+  - As expected
+  - "You are Vioarr\u2019s warrior"
+  - Never forget that they watch over you
   introTxt0:
-  - So, the great Vioarr has already judged you, as expected
+  - So, the great Vioarr has already judged you
+  - As expected
   - But just in case do you really need an explanation of the rules
   - Oh, right, you can't talk. Here
   introTxt1:
@@ -1609,10 +1615,12 @@ MonoBehaviour:
   - In combat they reveal new intentions
   introTxt2:
   - The X is to valiantly fight
-  - In combat the body part to target will be your choice
+  - In combat remember
+  - Point to your own icons
+  - They represent the body part you intend to target
   - They represent both you and the opponent
-  - The other is to spare thier life
-  - The icons represent yourself
+  - The other icon on the left is to spare their life
+  - The icons also represent yourself
   - The helmet is your armor
   - Vioarr protects you
   - The gauntlet is your power
@@ -2853,7 +2861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c544c42345941a04b8447d2a0b7e6965, type: 3}
       propertyPath: m_TagString
-      value: Legs
+      value: Arms
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: c544c42345941a04b8447d2a0b7e6965, type: 3}
       propertyPath: m_Layer
@@ -6276,7 +6284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalTime: 0
   level: 0
-  didTuto: 0
+  didTuto: 1
   fixedDeltaTime: 0
 --- !u!4 &1865072746
 Transform:

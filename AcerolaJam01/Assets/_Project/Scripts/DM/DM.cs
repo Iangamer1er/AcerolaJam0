@@ -12,6 +12,7 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, Anywhere] private TextMeshProUGUI dialogue;
     [SerializeField, Min(0)] private float timeBetweenLetters = 0.1f;
     [SerializeField, Min(0)] private float timeBetweenSentences = 3f;
+    [SerializeField, TextArea] private List<string> skipTutoTxt;
 
     [Header("Tuto txt")]
     [SerializeField, TextArea] private List<string> introTxt0;
@@ -19,6 +20,7 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, TextArea] private List<string> introTxt2;
     [SerializeField, TextArea] private List<string> makingMapTxt;
     [SerializeField, TextArea] private List<string> firstCombatTxt;
+    
 
     [Header("Player txt")]
     [SerializeField, TextArea] public List<string> PdodgeTxt;
@@ -67,7 +69,17 @@ public class DM : ValidatedMonoBehaviour
     private void Start() {
         timerSentences = new CountdownTimer(timeBetweenSentences);
         timerSentences.OnTimerStop = ()=> timerDone = true;
-        StartCoroutine(Tuto());
+        if(GameManager.instance.didTuto) StartCoroutine(SkipTuto());
+        else StartCoroutine(Tuto());
+    }
+
+    private IEnumerator SkipTuto(){
+        yield return new WaitForSeconds(1);
+        StartCoroutine(Talk(skipTutoTxt));
+        Map.instance.StartGame();
+        yield return new WaitUntil(()=>doneTalking);
+        Player.instance.canChoseMap = true;
+        Player.instance.canInteract = true;
     }
 
     private IEnumerator Tuto(){

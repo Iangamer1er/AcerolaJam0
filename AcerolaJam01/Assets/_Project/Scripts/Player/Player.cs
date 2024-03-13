@@ -294,7 +294,7 @@ public class Player : ValidatedMonoBehaviour
                         StartCoroutine(encounter.StartEncounter());
                         break;
                 }
-                Map.instance.ChangeStartingTile(TileTypes.Random);
+                // Map.instance.ChangeStartingTile(TileTypes.Random);
                 objTile.touched = true;
                 break;
             default :
