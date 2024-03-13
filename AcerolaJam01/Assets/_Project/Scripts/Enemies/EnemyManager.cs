@@ -72,6 +72,8 @@ public class EnemyManager : MonoBehaviour
 
     public IEnumerator CoTakeDamage(float damage, BodyParts part){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
+        StartCoroutine(DM.instance.Talk(DM.instance.PAttackTxt));
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0f, legsHealth/info.legsMaxHealth) > 1 - info.dodgeChance){
             AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss, true);
             StartCoroutine(DM.instance.Talk(DM.instance.EdodgeTxt));

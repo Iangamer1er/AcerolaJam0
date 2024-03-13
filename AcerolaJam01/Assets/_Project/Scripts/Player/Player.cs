@@ -12,7 +12,7 @@ public class Player : ValidatedMonoBehaviour
 {
     [Header("Player stats")]
     [SerializeField, Range(0, 1)] public float maxHealth = 1;
-    [SerializeField, Range(0, 1)] public float attackPower = 0.2f;
+    [SerializeField, Range(0, 1)] public float attackPower = 0.1f;
     [SerializeField, Range(1, 10)] public float attackPowerModifier = 1f;
     [SerializeField, Range(0, 1)] public float dodgeChance = 0.01f;
     [SerializeField, Range(0, 1)] public float armor = 0f;
@@ -139,14 +139,14 @@ public class Player : ValidatedMonoBehaviour
 
     public IEnumerator CoTakeDamage(float damage){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
-        StartCoroutine(DM.instance.Talk(DM.instance.PAttackTxt));
-        yield return new WaitUntil(()=>DM.instance.doneTalking);
         if(Random.Range(0, 1) <= dodgeChance){
             AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);
             StartCoroutine(DM.instance.Talk(DM.instance.PhitTxt));
-            ChangeHealth(-damage + armor);
-            yield return new WaitUntil(()=>DM.instance.doneTalking);
-            canInteract = true;
+            ChangeHealth(-damage  * (1 - armor));
+            if(currentHealth > 0){
+                yield return new WaitUntil(()=>DM.instance.doneTalking);
+                canInteract = true;
+            }
         } else{
             AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss);
             StartCoroutine(DM.instance.Talk(DM.instance.PdodgeTxt));
@@ -174,7 +174,9 @@ public class Player : ValidatedMonoBehaviour
         Debug.Log("Health change : " + healthChange);
         currentHealth = Mathf.Clamp(currentHealth + healthChange, 0, maxHealth);
         UpdateStats();
-        if(currentHealth <= 0) CoRemoveFingerAnim();
+        if(currentHealth <= 0){
+           StartCoroutine(CoRemoveFingerAnim()); 
+        } 
     }
 
     public void ChangeMaxHealth(float MaxhealthChange){
@@ -198,14 +200,14 @@ public class Player : ValidatedMonoBehaviour
     }
 
     public void ChangeDamage(float damageChange){
-        attackPower = Mathf.Clamp(attackPowerModifier + damageChange, 0.3f, 10);
+        attackPowerModifier = Mathf.Clamp(attackPowerModifier + damageChange, 0.3f, 10);
         UpdateStats();
     }
 
     public void ChangeFavor(float favorChange) => Player.instance.vioarrFavor = Mathf.Clamp01(Player.instance.vioarrFavor + favorChange);
 
     private void StartCombat(){
-        targetEnemy.ChoseEnemy();
+        targetEnemy.info = targetEnemy.ChoseEnemy();
         Map.instance.ChangeStartingTile(TileTypes.Enemy);
         inCombat = true;
         targetEnemy.ChangeState(targetEnemy.info.behavoir);

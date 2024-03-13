@@ -7794,6 +7794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartingSpace
       objectReference: {fileID: 0}
+    - target: {fileID: 5770684588001127381, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6583778468118442351, guid: 9011718fb0e09dd4f8474733169484de, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.20320119

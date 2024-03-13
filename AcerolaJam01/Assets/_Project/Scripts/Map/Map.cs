@@ -41,6 +41,7 @@ public class Map : ValidatedMonoBehaviour
     private int nbTiles = 0;
     private bool hadFork = false;
     private bool canContinueRoutine = true;
+    private GameObject prefabTile; 
 
     public List<GameObject> startPossiblePaths = new List<GameObject>();
     private List<GameObject> startingLines = new List<GameObject>();
@@ -265,6 +266,7 @@ public class Map : ValidatedMonoBehaviour
     }
 
     private IEnumerator CoRemovePaths(int tileHeight){
+        RemoveStartingPath();
         for(int e = 0; e < tilesArrays[tileHeight].Count; e++){
             tilesArrays[tileHeight][e].ClearPaths();
             yield return new WaitForSeconds(timeDoLine);
@@ -282,7 +284,7 @@ public class Map : ValidatedMonoBehaviour
     }
 
     public void ChangeStartingTile(TileTypes type){
-        GameObject prefabTile;
+        if(prefabTile != null) Destroy(prefabTile);
         prefabTile = (GameObject)Resources.Load("Spaces/" + type.ToString());
         prefabTile = Instantiate(prefabTile, startingPoint);
         Destroy(startingPointObj);
