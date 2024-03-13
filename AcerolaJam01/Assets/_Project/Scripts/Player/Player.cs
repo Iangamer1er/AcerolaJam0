@@ -215,7 +215,7 @@ public class Player : ValidatedMonoBehaviour
     }
  
     public void ChangeDodge(float dodgeChange){
-        dodgeChance = Mathf.Clamp(maxHealth + dodgeChange, 0, 1);
+        dodgeChance = Mathf.Clamp(dodgeChance + dodgeChange, 0, 1);
         UpdateStats();
     }
 

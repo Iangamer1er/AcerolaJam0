@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
+  m_Name: HobGoblin
+  m_EditorClassIdentifier: 
+  eName: Bandit
+  damage: 0.3
+  Brokendamage: 0.15
+  dodgeChance: 0.01
+  armsMaxHealth: 0.3
+  armsHealthRatio: 1
+  legsMaxHealth: 0.1
+  legsHealthRatio: 1
+  headChance: 1
+  headModif: 3
+  torsoMaxHealth: 1
+  torsoModif: 1
+  spareAskChance: 0
+  description:
+  - A large green creature blocks your path
+  - Vioarr judges them grotesque
+  - They have no armor
+  - Their weapon is a mace
+  - Their large stature makes it hard to dodge
+  attackTxt:
+  - They broadly swing
+  behavoir:
+    rid: 4380223714589671457
+  behavoirLowHealth:
+    rid: -2
+  lowHealthThreshhold: 0.33
+  descriptionLowHealthChange:
+  - Cool
+  lowCombatRewards:
+  - baseEvent:
+      rid: 4380223714589671448
+  - baseEvent:
+      rid: 4380223742937661468
+  midCombatRewards: []
+  highCombatRewards: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4380223714589671448
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - 'The mace can be wielded '
+        - You honor their death and take it
+    - rid: 4380223714589671457
+      type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4380223742937661468
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0.25

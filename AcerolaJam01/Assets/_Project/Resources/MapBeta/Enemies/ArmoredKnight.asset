@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebca64742706b33468429d5d597c5fc8, type: 3}
+  m_Name: ArmoredKnight
+  m_EditorClassIdentifier: 
+  eName: ArmoredKnight
+  damage: 0.2
+  Brokendamage: 0.1
+  dodgeChance: 0.1
+  armsMaxHealth: 0.209
+  armsHealthRatio: 0.701
+  legsMaxHealth: 0.4
+  legsHealthRatio: 0.7
+  headChance: 0.9
+  headModif: 1.5
+  torsoMaxHealth: 0.3
+  torsoModif: 0.7
+  spareAskChance: 0.4
+  description:
+  - An armored knight advances
+  - There is murder behind their eyes
+  - Vioarr juges them as worthy
+  - Their chest, arms and legs are heavily armored
+  attackTxt:
+  - Their greatsword swings in your direction
+  behavoir:
+    rid: 4380223742937661469
+  behavoirLowHealth:
+    rid: -2
+  lowHealthThreshhold: 0.33
+  descriptionLowHealthChange: []
+  lowCombatRewards:
+  - baseEvent:
+      rid: 4380223742937661470
+  - baseEvent:
+      rid: 4380223742937661471
+  midCombatRewards:
+  - baseEvent:
+      rid: 4380223742937661473
+  - baseEvent:
+      rid: 4380223742937661472
+  highCombatRewards: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4380223742937661469
+      type: {class: EnemyNormalState, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4380223742937661470
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - The chest plate is still usable
+        - You honor their death and take it
+    - rid: 4380223742937661471
+      type: {class: ChangeArmor, ns: , asm: Assembly-CSharp}
+      data:
+        armorValue: 0.5
+    - rid: 4380223742937661472
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0.4
+    - rid: 4380223742937661473
+      type: {class: Talk, ns: , asm: Assembly-CSharp}
+      data:
+        dialogue:
+        - Their greatsword is still usable
+        - You honor their death and take it

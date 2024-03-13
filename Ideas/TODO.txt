@@ -2,4 +2,4 @@
 - fix tiles flipping animations
 - Make enemies (11 / 20)
 - Make encounters (20 / 20)
-- Make boons (2 / 6)
+- Make boons (2 / 3)

@@ -6317,7 +6317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalTime: 0
   level: 0
-  didTuto: 1
+  didTuto: 0
   fixedDeltaTime: 0
 --- !u!4 &1865072746
 Transform:

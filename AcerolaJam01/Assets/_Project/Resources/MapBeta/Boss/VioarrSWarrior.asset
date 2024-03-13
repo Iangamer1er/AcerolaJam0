@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: VioarrSWarrior
   m_EditorClassIdentifier: 
   eName: Vioarr's warrior
-  damage: 0.4
+  damage: 0.3
   Brokendamage: 0.2
   dodgeChance: 0.3
   armsMaxHealth: 1
@@ -35,7 +35,7 @@ MonoBehaviour:
   behavoir:
     rid: 4380223735315300352
   behavoirLowHealth:
-    rid: -2
+    rid: 4380223742937661466
   lowHealthThreshhold: 0.33
   descriptionLowHealthChange:
   - The warrior is losing blood
@@ -49,8 +49,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 4380223735315300352
       type: {class: EnemyBossState, ns: , asm: Assembly-CSharp}
       data: 
@@ -64,3 +62,6 @@ MonoBehaviour:
         - But we both know that won't happen
         - Oh Vioarr, may you bless this lost soul
         - May you give him your favor once more
+    - rid: 4380223742937661466
+      type: {class: EnemyBossStateAltPhase, ns: , asm: Assembly-CSharp}
+      data: 
