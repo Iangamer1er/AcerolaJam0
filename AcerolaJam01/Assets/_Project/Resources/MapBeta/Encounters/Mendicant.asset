@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29afd55fa231a7478590a1c405fd31d, type: 3}
+  m_Name: Mendicant
+  m_EditorClassIdentifier: 
+  chance: 0.2
+  DMDescription:
+  - A mendicant sleeps on the road
+  - He has a good looking sword
+  - Do you steal it
+  DMDescriptionFail:
+  - The mendicant woke up
+  - "They don\u2019t know how to fight"
+  - "But you won\u2019t try your luck"
+  - Vioarr resents you
+  DMDescriptionSuccess:
+  - You stole it
+  - Vioarr resents you
+  - The sword was of great value
+  - You equip it
+  eventFail:
+  - baseEvent:
+      rid: 4380223742937661451
+  eventWin:
+  - baseEvent:
+      rid: 4380223742937661452
+  - baseEvent:
+      rid: 4380223742937661453
+  references:
+    version: 2
+    RefIds:
+    - rid: 4380223742937661451
+      type: {class: ChangeVioarrFavor, ns: , asm: Assembly-CSharp}
+      data:
+        vioarrFavorChange: -0.6
+    - rid: 4380223742937661452
+      type: {class: ChangeVioarrFavor, ns: , asm: Assembly-CSharp}
+      data:
+        vioarrFavorChange: -0.6
+    - rid: 4380223742937661453
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0.3

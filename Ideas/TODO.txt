@@ -1,7 +1,5 @@
 // TODO 
-- implement tiles fighting animations
-- implement tile chosing animations
+- fix tiles flipping animations
 - Make enemies (11 / 20)
-- Make encounters (11 / 20)
+- Make encounters (20 / 20)
 - Make boons (2 / 6)
-- Balance the game

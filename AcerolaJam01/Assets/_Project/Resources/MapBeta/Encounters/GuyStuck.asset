@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29afd55fa231a7478590a1c405fd31d, type: 3}
+  m_Name: GuyStuck
+  m_EditorClassIdentifier: 
+  chance: 0.7
+  DMDescription:
+  - You hear a sound coming from a small hole
+  - A human is stuck in it
+  - Will you help them out
+  DMDescriptionFail:
+  - The human stabs you
+  - Then they run away
+  - You feel hurt
+  DMDescriptionSuccess:
+  - The human rewards you with a potion
+  - You feel healtier
+  eventFail:
+  - baseEvent:
+      rid: 4380223742937661444
+  eventWin:
+  - baseEvent:
+      rid: 4380223742937661446
+  references:
+    version: 2
+    RefIds:
+    - rid: 4380223742937661444
+      type: {class: ChangeCurrentHealth, ns: , asm: Assembly-CSharp}
+      data:
+        healthChange: -0.2
+    - rid: 4380223742937661446
+      type: {class: GainMaxHealth, ns: , asm: Assembly-CSharp}
+      data:
+        maxHealthChange: 0.15

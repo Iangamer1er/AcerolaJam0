@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29afd55fa231a7478590a1c405fd31d, type: 3}
+  m_Name: CursedWeapon
+  m_EditorClassIdentifier: 
+  chance: 1
+  DMDescription:
+  - You come across a sword
+  - It has the insignia of the accursed outer god
+  - Will you take it
+  DMDescriptionFail:
+  - 
+  DMDescriptionSuccess:
+  - Vioarr resents you
+  - You lost all favor with Vioarr
+  - You took the weapon
+  eventFail:
+  - baseEvent:
+      rid: 4380223742937661462
+  eventWin:
+  - baseEvent:
+      rid: 4380223742937661463
+  - baseEvent:
+      rid: 4380223742937661464
+  references:
+    version: 2
+    RefIds:
+    - rid: 4380223742937661462
+      type: {class: ChangeCurrentHealth, ns: , asm: Assembly-CSharp}
+      data:
+        healthChange: 0
+    - rid: 4380223742937661463
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0.4
+    - rid: 4380223742937661464
+      type: {class: ChangeVioarrFavor, ns: , asm: Assembly-CSharp}
+      data:
+        vioarrFavorChange: -1

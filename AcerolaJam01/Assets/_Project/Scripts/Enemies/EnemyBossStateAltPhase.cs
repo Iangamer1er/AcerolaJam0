@@ -61,6 +61,7 @@ public class EnemyBossStateAltPhase : EnemyBase{
     private IEnumerator MultiAttack(EnemyManager enemy, float damage, int numberAttacks){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
         for (int i = 0; i < numberAttacks; i++){
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
             enemy.StartCoroutine(Player.instance.CoTakeBossDamage(damage * 0.20f, i == numberAttacks - 1));
         }
     }

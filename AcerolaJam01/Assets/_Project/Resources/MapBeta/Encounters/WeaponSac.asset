@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29afd55fa231a7478590a1c405fd31d, type: 3}
+  m_Name: WeaponSac
+  m_EditorClassIdentifier: 
+  chance: 0.4
+  DMDescription:
+  - You come across a Vioarr pedestal with a weapon painted on it
+  - Will you donate your weapon to Vioarr
+  DMDescriptionFail:
+  - You gain favor with Vioarr
+  - You lost your weapon
+  DMDescriptionSuccess:
+  - Vioarr has blessed you
+  - You feel stronger
+  - You lost your weapon
+  eventFail:
+  - baseEvent:
+      rid: 4380223714589671425
+  - baseEvent:
+      rid: 4380223742937661440
+  eventWin:
+  - baseEvent:
+      rid: 4380223714589671426
+  - baseEvent:
+      rid: 4380223742937661441
+  references:
+    version: 2
+    RefIds:
+    - rid: 4380223714589671425
+      type: {class: ChangeVioarrFavor, ns: , asm: Assembly-CSharp}
+      data:
+        vioarrFavorChange: 0.15
+    - rid: 4380223714589671426
+      type: {class: ChangeAttackModif, ns: , asm: Assembly-CSharp}
+      data:
+        attackModifChange: 0.5
+    - rid: 4380223742937661440
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0
+    - rid: 4380223742937661441
+      type: {class: ChangeWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        weaponChange: 0

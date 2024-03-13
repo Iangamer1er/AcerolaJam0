@@ -1699,7 +1699,6 @@ MonoBehaviour:
   - They dodged your attack
   BDeadTxt:
   - You bested the warrior
-  - You bested the warrior
   BSparedTxt:
   - Vioarr's warrior suggests an alternative
   - You may go
@@ -7283,8 +7282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc365f749ede67b498bf9bf5759e9aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTileHeight: 15
-  nbForks: 8
+  maxTileHeight: 20
+  nbForks: 12
   maxForkSplits: 4
   maxForkLength: 3
   maskInteractable: 6
