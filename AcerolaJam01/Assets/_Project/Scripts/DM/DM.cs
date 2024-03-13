@@ -36,6 +36,13 @@ public class DM : ValidatedMonoBehaviour
     [SerializeField, TextArea] public List<string> EArmsBrokenTxt;
     [SerializeField, TextArea] public List<string> EventSkipTxt;
 
+    [Header("Boss txt")]
+    [SerializeField, TextArea] public List<string> BFluryAttacks;
+    [SerializeField, TextArea] public List<string> BdodgeTxt;
+    [SerializeField, TextArea] public List<string> BDeadTxt;
+    [SerializeField, TextArea] public List<string> BSparedTxt;
+    [SerializeField, TextArea] public List<string> BRemovesFingerTxt;
+
     [Header("Sounds")]
     [SerializeField] private bool usePitch = false;
     [SerializeField] private List<AudioClip> clipsTalk;

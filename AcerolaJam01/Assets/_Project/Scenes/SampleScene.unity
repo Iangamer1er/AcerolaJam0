@@ -5237,8 +5237,8 @@ MonoBehaviour:
   handSpeed: 18
   lookYClamp: 20
   lookXClamp: 20
-  lookSpeed: 10
-  screenWidthPercent: 0.2
+  lookSpeed: 15
+  screenWidthPercent: 0.05
   cam: {fileID: 1285747584}
   controlsCam: 1
   controlsHand: 1

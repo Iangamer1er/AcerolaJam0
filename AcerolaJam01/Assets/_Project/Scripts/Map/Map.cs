@@ -10,7 +10,7 @@ public class Map : ValidatedMonoBehaviour
 {
     
     [Header("Initializing Tiles")]
-    [SerializeField, Range(0, 50)] int maxTileHeight = 10;
+    [SerializeField, Range(0, 50)] public int maxTileHeight = 10;
     [SerializeField, Range(0, 30)] int nbForks = 1;
     [SerializeField, Range(2, 4)] int maxForkSplits = 3;
     [SerializeField, Range(1, 4)] int maxForkLength = 2;

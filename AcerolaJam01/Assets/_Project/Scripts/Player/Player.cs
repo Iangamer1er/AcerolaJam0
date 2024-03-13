@@ -45,6 +45,7 @@ public class Player : ValidatedMonoBehaviour
     public bool canChoseMap = false;
     public bool inCombat = false;
     public bool canInteract = false;
+    public bool isOnBoss = false;
 
     public int levelHeight = 0;
     public Transform cutFingerT;
@@ -115,6 +116,16 @@ public class Player : ValidatedMonoBehaviour
         currentHealth = maxHealth;
         UpdateStats();
         StartCoroutine(DM.instance.Talk(DM.instance.PFingerRemoved));
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(!isOnBoss){
+            ChangeFavor(-0.5f);
+            inCombatEvent.Invoke();
+            FinishEncounter();
+        }else{
+            StartCoroutine(DM.instance.Talk(DM.instance.BRemovesFingerTxt));
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
+            canInteract = true;
+        }
     }
 
     public IEnumerator CoRemoveFingerAnim(){
@@ -152,6 +163,24 @@ public class Player : ValidatedMonoBehaviour
             StartCoroutine(DM.instance.Talk(DM.instance.PdodgeTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             canInteract = true;
+        }
+    }
+
+    public IEnumerator CoTakeBossDamage(float damage, bool lastAttack = true){
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(Random.Range(0, 1) <= dodgeChance){
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordHit);
+            StartCoroutine(DM.instance.Talk(DM.instance.PhitTxt));
+            currentHealth = Mathf.Clamp(currentHealth + -damage  * (1 - armor), 0, maxHealth);
+            UpdateStats();
+        }else{
+            AudioManager.instance.PlayEffect(AudioManager.instance.swordMiss);
+            StartCoroutine(DM.instance.Talk(DM.instance.PdodgeTxt));
+        }
+        yield return new WaitUntil(()=>DM.instance.doneTalking);
+        if(lastAttack){
+            if(currentHealth > 0) canInteract = true;
+            else StartCoroutine(CoRemoveFingerAnim());
         }
     }
 
@@ -343,7 +372,15 @@ public class Player : ValidatedMonoBehaviour
         canChoseMap = true;
         canInteract = true;
         inCombat = false;
+        if(levelHeight >= Map.instance.maxTileHeight){
+            MakeBoss();
+            return;
+        }
         StartCoroutine(Map.instance.CoMakeStartingPath());
         GameManager.instance.level++;
+    }
+
+    private void MakeBoss(){
+
     }
 }
