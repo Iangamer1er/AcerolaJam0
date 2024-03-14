@@ -92,7 +92,6 @@ public class EnemyManager : MonoBehaviour
         }else{
             currentState.TakeDamage(this, damage, part);
             AudioManager.instance.PlayEffect(AudioManager.instance.swordHit, true);
-            if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold) ChangeState(info.behavoirLowHealth);
             yield return null;
         }
     }
@@ -118,6 +117,8 @@ public class EnemyManager : MonoBehaviour
             Player.instance.FinishEncounter();
             Player.instance.inCombatEvent.Invoke();
         }else{
+            if(info.behavoirLowHealth != null && torsoHealth <= info.lowHealthThreshhold && currentState != info.behavoirLowHealth) ChangeState(info.behavoirLowHealth);
+            yield return new WaitUntil(()=>DM.instance.doneTalking);
             StartCoroutine(DM.instance.Talk(info.attackTxt));
             yield return new WaitUntil(()=>DM.instance.doneTalking);
             Attack();

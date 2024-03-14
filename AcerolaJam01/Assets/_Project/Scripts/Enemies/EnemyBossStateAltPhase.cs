@@ -5,14 +5,13 @@ using UnityEngine;
 public class EnemyBossStateAltPhase : EnemyBase{
     
     public override void InitState(EnemyManager enemy){
-        enemy.StartCoroutine(DM.instance.Talk(enemy.info.description));
-        Player.instance.isOnBoss = true;
-        enemy.StartCoroutine(WaitUntil());
+        enemy.StartCoroutine(DM.instance.Talk(enemy.info.descriptionLowHealthChange));
+        // enemy.StartCoroutine(WaitUntil());
     }
 
     private IEnumerator WaitUntil(){
         yield return new WaitUntil(()=>DM.instance.doneTalking);
-        Player.instance.canInteract = true;
+        // Player.instance.canInteract = true;
     }
 
     public override void TakeDamage(EnemyManager enemy, float damage, BodyParts part){
